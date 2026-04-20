@@ -80,13 +80,13 @@ export const socials = [
   },
   {
     label: "GitHub",
-    url: "https://github.com/[TODO]",
+    url: "https://github.com/thisisurk",
     icon: "Github",
     ariaLabel: "Urk on GitHub",
   },
   {
     label: "Email",
-    url: "mailto:[TODO]",
+    url: "mailto:urk@theurknotes.com",
     icon: "Mail",
     ariaLabel: "Email Urk",
   },
