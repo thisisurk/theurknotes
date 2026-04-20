@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { Outfit, Noto_Sans_Thai } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { JsonLd } from "@/components/JsonLd";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import { meta, site } from "@/lib/content";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -17,8 +22,73 @@ const notoThai = Noto_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: "TheUrk",
-  description: "Solo Founder · Systems Designer",
+  metadataBase: new URL(site.url),
+  title: {
+    default: meta.home.title,
+    template: "%s · TheUrk",
+  },
+  description: meta.home.description,
+  applicationName: site.name,
+  authors: [{ name: "Urk", url: site.url }],
+  creator: "Urk",
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/api/rss", title: "TheUrk Notes" }],
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: site.locale,
+    url: site.url,
+    siteName: site.name,
+    title: meta.home.title,
+    description: meta.home.description,
+    images: [
+      {
+        url: site.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "TheUrk",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: meta.home.title,
+    description: meta.home.description,
+    images: [site.ogImage],
+    creator: "@theeark",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${site.url}/#person`,
+  name: "Urk",
+  alternateName: "TheUrk",
+  jobTitle: "Solo Founder, Systems Designer",
+  description:
+    "Solo founder and systems designer from Trat, Thailand. Architect, not builder — designs systems that AI executes.",
+  url: site.url,
+  sameAs: ["https://x.com/theeark"],
+  knowsAbout: [
+    "System design",
+    "AI orchestration",
+    "Solo founding",
+    "Product design",
+    "Trading systems",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Trat",
+    addressCountry: "TH",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +100,17 @@ export default function RootLayout({
       className={`${outfit.variable} ${notoThai.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col antialiased">{children}</body>
+      <head>
+        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content="#0b1120" />
+      </head>
+      <body className="min-h-screen flex flex-col antialiased">
+        <JsonLd data={personJsonLd} id="ld-person" />
+        <Nav />
+        <main className="flex flex-1 flex-col">{children}</main>
+        <Footer />
+        <Analytics />
+      </body>
     </html>
   );
 }
