@@ -19,7 +19,7 @@ export function NoteListItem({ note }: Props) {
         <span>{tagLabels[note.tag]}</span>
       </div>
 
-      <h3
+      <h2
         className="note-row-title text-primary mt-1.5"
         style={{
           fontSize: "1.15rem",
@@ -29,7 +29,7 @@ export function NoteListItem({ note }: Props) {
         }}
       >
         {note.title}
-      </h3>
+      </h2>
 
       {note.summary && (
         <p

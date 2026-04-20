@@ -13,7 +13,7 @@ export function VentureCard({ venture }: Props) {
   return (
     <article className="venture-card flex flex-col">
       <header className="flex items-start justify-between gap-4">
-        <h3
+        <h2
           className="text-primary"
           style={{
             fontSize: "1.15rem",
@@ -22,7 +22,7 @@ export function VentureCard({ venture }: Props) {
           }}
         >
           {venture.title}
-        </h3>
+        </h2>
         <StatusBadge status={venture.status} />
       </header>
 
