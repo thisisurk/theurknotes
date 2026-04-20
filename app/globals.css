@@ -1,26 +1,372 @@
 @import "tailwindcss";
 
+/* ============================================================
+   TheUrk — Midnight Library palette
+   Dark mode is the only mode. No light theme variant.
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  --bg-deep: #0b1120;
+  --bg-primary: #0f1729;
+  --bg-card: #162033;
+  --bg-card-hover: #1b2844;
+
+  --accent-gold: #d4a853;
+  --accent-gold-dim: #d4a85320;
+  --accent-gold-glow: #d4a85340;
+
+  --text-primary: #e8ecf4;
+  --text-secondary: #94a3b8;
+  --text-muted: #7587a8;
+
+  --border: #1e2d4a;
+
+  --success: #4ade80;
+  --error: #f87171;
 }
 
+/* Tailwind v4 theme tokens — register CSS vars as utility classes
+   per brief: bg-card, text-primary, border-border, text-gold all work. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Backgrounds */
+  --color-deep: var(--bg-deep);            /* bg-deep      */
+  --color-card: var(--bg-card);            /* bg-card      */
+  --color-card-hover: var(--bg-card-hover);/* bg-card-hover */
+
+  /* Accents */
+  --color-gold: var(--accent-gold);        /* text-gold, bg-gold, border-gold */
+  --color-gold-dim: var(--accent-gold-dim);
+  --color-gold-glow: var(--accent-gold-glow);
+
+  /* Text */
+  --color-primary: var(--text-primary);    /* text-primary */
+  --color-secondary: var(--text-secondary);/* text-secondary */
+  --color-muted: var(--text-muted);        /* text-muted   */
+
+  /* Border + semantic */
+  --color-border: var(--border);           /* border-border */
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  --font-sans: var(--font-outfit), var(--font-noto-thai), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  background-color: var(--bg-deep);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-outfit), var(--font-noto-thai), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
+
+/* Static star-field — gold + white dots, no animation */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1.2px 1.2px at 25% 18%, rgba(212, 168, 83, 0.4) 50%, transparent 100%),
+    radial-gradient(1px 1px at 72% 12%, rgba(232, 236, 244, 0.3) 50%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 9% 60%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
+    radial-gradient(1px 1px at 53% 47%, rgba(232, 236, 244, 0.28) 50%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 88% 73%, rgba(212, 168, 83, 0.4) 50%, transparent 100%),
+    radial-gradient(1px 1px at 35% 86%, rgba(232, 236, 244, 0.3) 50%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 64% 92%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
+    radial-gradient(1px 1px at 18% 32%, rgba(232, 236, 244, 0.28) 50%, transparent 100%),
+    radial-gradient(1.1px 1.1px at 92% 38%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
+    radial-gradient(1px 1px at 44% 65%, rgba(232, 236, 244, 0.3) 50%, transparent 100%);
+  background-size: 600px 600px;
+  background-repeat: repeat;
+}
+
+/* All app content sits above the star-field */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Thai readability — minimum weight 400, generous line-height */
+:lang(th) {
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-gold-glow);
+  color: var(--text-primary);
+}
+
+/* Scroll anchor offset for sticky nav (72px) */
+:target {
+  scroll-margin-top: 96px;
+}
+
+/* ============================================================
+   Reusable utility-ish helpers
+   ============================================================ */
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.gold-underline {
+  position: relative;
+  display: inline-block;
+  padding: 0 2rem;
+}
+.gold-underline::before,
+.gold-underline::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 1px;
+  background-color: var(--accent-gold);
+}
+.gold-underline::before {
+  left: 0;
+}
+.gold-underline::after {
+  right: 0;
+}
+
+/* Hero stagger fade-up — runs once on load, 80ms apart */
+.hero-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: hero-fade-up 600ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.hero-stagger > *:nth-child(2) { animation-delay: 80ms; }
+.hero-stagger > *:nth-child(3) { animation-delay: 160ms; }
+.hero-stagger > *:nth-child(4) { animation-delay: 240ms; }
+.hero-stagger > *:nth-child(5) { animation-delay: 320ms; }
+.hero-stagger > *:nth-child(6) { animation-delay: 400ms; }
+.hero-stagger > *:nth-child(7) { animation-delay: 480ms; }
+
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Avatar conic ring rotation — slow, subtle */
+@keyframes avatar-ring-spin {
+  to { transform: rotate(360deg); }
+}
+.avatar-ring {
+  animation: avatar-ring-spin 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stagger > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .avatar-ring {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Card hover — used by VentureCard
+   ============================================================ */
+
+.venture-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: transform 200ms ease-out, border-color 200ms ease-out;
+  overflow: hidden;
+}
+.venture-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+.venture-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-gold-glow);
+}
+.venture-card:hover::before {
+  opacity: 1;
+}
+
+/* Note row hover */
+.note-row {
+  transition: background-color 200ms ease-out;
+  border-radius: 8px;
+}
+.note-row:hover {
+  background-color: color-mix(in srgb, var(--bg-card-hover) 50%, transparent);
+}
+.note-row:hover .note-row-title {
+  color: var(--accent-gold);
+}
+.note-row-title {
+  transition: color 150ms ease-out;
+}
+
+/* Generic link hover — gold shift */
+a.link-gold {
+  color: var(--text-secondary);
+  transition: color 150ms ease-out;
+}
+a.link-gold:hover {
+  color: var(--accent-gold);
+}
+
+/* ============================================================
+   MDX prose — explicit per-element styling per brief spec
+   Applied to wrapper class .mdx-prose
+   ============================================================ */
+
+.mdx-prose {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.mdx-prose h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.mdx-prose h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.mdx-prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.mdx-prose p {
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.mdx-prose a {
+  color: var(--accent-gold);
+  text-decoration: none;
+}
+.mdx-prose a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mdx-prose code:not(pre code) {
+  background-color: var(--bg-card);
+  color: var(--accent-gold);
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.mdx-prose pre {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+}
+
+.mdx-prose pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--text-primary);
+}
+
+.mdx-prose blockquote {
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+.mdx-prose ul,
+.mdx-prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.mdx-prose ul { list-style: disc; }
+.mdx-prose ol { list-style: decimal; }
+.mdx-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.mdx-prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 3rem 0;
+}
+
+.mdx-prose figure {
+  margin: 2rem 0;
+}
+.mdx-prose figure img {
+  width: 100%;
+  max-width: 680px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.mdx-prose figcaption {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* Strong / em inside prose */
+.mdx-prose strong { color: var(--text-primary); font-weight: 600; }
+.mdx-prose em { font-style: italic; }
