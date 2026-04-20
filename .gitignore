@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# strategy / identity reference docs (kept local, never published)
+/BRAND-DNA.md
+/PERSONAL-IDENTITY.md
+/claude-code-prompt-v2.md
+/MIGRATION-PLAN.md
+/FIRST-MESSAGE.md
+/TheUrk_Brand_Strategy_Summary_v5.md
+/USER-PREFERENCES.md
+
