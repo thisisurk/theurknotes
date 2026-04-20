@@ -1,0 +1,27 @@
+# TheUrk
+
+Personal hub for Urk — Solo Founder and systems designer based in Trat, Thailand.
+
+## Identity
+
+Urk (เอิ๊ก) is a solo founder who designs systems that AI executes.
+Architect, not builder. Works across digital products, trading systems,
+and future physical ventures.
+
+## Core positioning
+
+In an era where AI can build anything, the edge is judgment — knowing
+what to build and how to design it. AI can build, but AI doesn't know
+what should be designed.
+
+## Current ventures
+
+- GoldLog (goldlog.app) — XAUUSD trading journal, live
+- Vendo — LINE Mini App SaaS for F&B shops in Thailand, near ship
+- Trading system — automated trading system, work in progress
+
+## Links
+
+- Website: https://theurknotes.com
+- Notes: https://theurknotes.com/notes
+- X: https://x.com/theeark
