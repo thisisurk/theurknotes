@@ -39,13 +39,16 @@ export const meta = {
 
 export const nav = {
   brand: { lead: "The", accent: "Urk" },
-  // 4 items per WEB-ARCHITECTURE v0.3 §1 (no Contact — footer email is enough).
-  // Order encodes journey: Identity → Proof → Depth → Frequency.
+  // 5 items per v6 mockup parity (Phase C/4.6).
+  // Order encodes journey: Identity → Proof → Depth → Life → Reach.
+  // Activity points to home anchor so the section is reachable from every page.
+  // Contact uses mailto: — NavShell branches on `href.startsWith("mailto:")`.
   items: [
     { href: "/about", label: "About" },
     { href: "/what-i-do", label: "What I Do" },
     { href: "/notes", label: "Notes" },
-    { href: "/log", label: "Log" },
+    { href: "/#activity", label: "Activity" },
+    { href: "mailto:urk@theurknotes.com", label: "Contact" },
   ],
 };
 
@@ -105,6 +108,42 @@ export const hero = {
   ctas: [
     { label: "EXPLORE PROJECTS", href: "/what-i-do", primary: true },
     { label: "READ NOTES", href: "/notes", primary: false },
+  ],
+
+  // Cockpit top bar — three segments above the avatar/name stack.
+  cockpitBar: {
+    location: "14°N · 102°E · TRAT, TH",
+    fy: "FY2026 · OPUS·SOLO",
+    status: "SYSTEM ACTIVE",
+  },
+
+  // 3 stat cards beneath the circuit divider — each accent matches its node.
+  // `icon` keys map to <StatIcon name=… /> (clock / stack / mesh).
+  proof: [
+    {
+      lbl: "Years Solo",
+      val: "20+",
+      sub: "discipline before AI",
+      accent: "#D4A853",
+      icon: "clock" as const,
+      tag: "TIMELINE_001",
+    },
+    {
+      lbl: "Active Projects",
+      val: "3",
+      sub: "physical & digital",
+      accent: "#60A5FA",
+      icon: "stack" as const,
+      tag: "PORTFOLIO_03",
+    },
+    {
+      lbl: "Team Size",
+      val: "1+AI",
+      sub: "solo + agents",
+      accent: "#A78BFA",
+      icon: "mesh" as const,
+      tag: "AGENTS_INF",
+    },
   ],
 
   // Live-feed ticker — short status lines, scroll horizontally.
@@ -217,9 +256,20 @@ export const footer = {
   brand: { lead: "The", accent: "Urk" },
   tagline: "Solo Founder · architect, not builder",
   taglineTh: "ตราด, Thailand · solo by nature, since forever",
-  // Bottom bar — locale + year. {year} is replaced at render.
-  locale: "ตราด, Thailand",
+  // Bottom bar — mockup pattern: ">connection persistent[blink]" + © year locale.
   cursor: "connection persistent",
+  copy: "TheUrk · ตราด, Thailand",
+
+  // Right-column SYSTEM_STATUS box — SESSION value is computed client-side
+  // (FooterSystemStatus island) so it stays fresh on every page load.
+  systemStatus: {
+    headLabel: "SYSTEM_STATUS",
+    rows: [
+      { k: "REGION", v: "14°N · 102°E · TRAT" },
+      { k: "PROTOCOL", v: "DIRECT" },
+      { k: "NEXT", v: "SHIP_OR_SLEEP" },
+    ],
+  },
 };
 
 export const socials = [
@@ -237,7 +287,7 @@ export const socials = [
   },
   {
     label: "Email",
-    url: "mailto:hi@theurknotes.com",
+    url: "mailto:urk@theurknotes.com",
     icon: "Mail",
     ariaLabel: "Email Urk",
   },

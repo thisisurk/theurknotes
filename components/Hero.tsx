@@ -5,14 +5,31 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { hero } from "@/lib/content";
 import { Ticker } from "./Ticker";
+import { StatIcon } from "./StatIcon";
 
-// Cockpit Hero (Phase C/2) — full-bleed showroom for Home only.
-// Backdrop + manifesto + role rotator + parallax tilt + circuit divider + ticker.
+// Cockpit Hero (Phase C/2 + C/4.6) — full-bleed showroom for Home only.
+// Cockpit top bar + manifesto + role rotator + parallax tilt + circuit divider
+// + 3 stat cards + ticker. Cockpit-bar restored in C/4.6 after C/4.5 cut it.
 
 export function Hero() {
   return (
     <section className="hero-section" aria-labelledby="hero-name">
       <HeroBackdrop />
+
+      {/* Cockpit top bar — location · FY · system status */}
+      <div className="ck-fade ck-d1 cockpit-bar" aria-hidden="true">
+        <span className="cockpit-seg">
+          <span className="dot" />
+          {hero.cockpitBar.location}
+        </span>
+        <span className="cockpit-line" />
+        <span className="cockpit-seg">{hero.cockpitBar.fy}</span>
+        <span className="cockpit-line" />
+        <span className="cockpit-seg cockpit-seg-active">
+          <span className="dot" />
+          {hero.cockpitBar.status}
+        </span>
+      </div>
 
       {/* Avatar + identity stack */}
       <div className="hero-content-row">
@@ -99,6 +116,32 @@ export function Hero() {
 
       <div className="ck-fade ck-d7">
         <HeroCircuitDivider />
+      </div>
+
+      {/* Stat cards — 3 metrics tied to circuit divider node accents */}
+      <div className="ck-fade ck-d8 hero-proof-grid">
+        {hero.proof.map((k) => (
+          <article
+            key={k.lbl}
+            className="stat-card"
+            style={{ ["--stat-accent" as string]: k.accent }}
+          >
+            <span className="stat-accent-line" aria-hidden="true" />
+            <header className="stat-head">
+              <span className="stat-lbl">{k.lbl}</span>
+              <StatIcon name={k.icon} color={k.accent} />
+            </header>
+            <div className="stat-val">{k.val}</div>
+            <div className="stat-sub">{k.sub}</div>
+            <footer className="stat-foot">
+              <span className="stat-tag">{k.tag}</span>
+              <span className="stat-live">
+                <span className="stat-live-dot" aria-hidden="true" />
+                LIVE
+              </span>
+            </footer>
+          </article>
+        ))}
       </div>
 
       <div className="ck-fade-in ck-d8">

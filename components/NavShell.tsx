@@ -11,8 +11,13 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-// Cockpit nav (Phase C/2): brand dot + 4 mono links + sticky blur on scroll.
+// Cockpit nav (Phase C/2 + C/4.6): SVG brand mark + 5 mono links + sticky
+// blur on scroll. Last item is a mailto: contact — rendered as a plain <a>.
 // Mobile: existing Radix Sheet, restyled with `.nav-mobile-link`.
+function isExternal(href: string) {
+  return href.startsWith("mailto:") || href.startsWith("http");
+}
+
 export function NavShell() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -30,17 +35,28 @@ export function NavShell() {
       data-scrolled={scrolled ? "true" : "false"}
     >
       <Link href="/" className="nav-brand" aria-label="TheUrk — home">
-        <span className="dot" aria-hidden="true" />
-        {nav.brand.lead}
-        <span className="accent">{nav.brand.accent}</span>
+        {/* Plain <img> avoids next/image's dangerouslyAllowSVG opt-in.
+            CSS sizes it via .nav-brand-mark. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo/theurk-logo-noBG.svg"
+          alt="TheUrk"
+          className="nav-brand-mark"
+        />
       </Link>
 
       <nav className="nav-list hidden md:flex" aria-label="Primary">
-        {nav.items.map((it) => (
-          <Link key={it.href} href={it.href} className="nav-link">
-            {it.label}
-          </Link>
-        ))}
+        {nav.items.map((it) =>
+          isExternal(it.href) ? (
+            <a key={it.href} href={it.href} className="nav-link">
+              {it.label}
+            </a>
+          ) : (
+            <Link key={it.href} href={it.href} className="nav-link">
+              {it.label}
+            </Link>
+          ),
+        )}
       </nav>
 
       <div className="md:hidden">
@@ -50,13 +66,24 @@ export function NavShell() {
           </SheetTrigger>
           <SheetContent>
             <nav className="mt-12 flex flex-col" aria-label="Primary">
-              {nav.items.map((it) => (
-                <SheetClose key={it.href} asChild>
-                  <Link href={it.href} className="nav-mobile-link">
+              {nav.items.map((it) =>
+                isExternal(it.href) ? (
+                  <a
+                    key={it.href}
+                    href={it.href}
+                    className="nav-mobile-link"
+                    onClick={() => setOpen(false)}
+                  >
                     {it.label}
-                  </Link>
-                </SheetClose>
-              ))}
+                  </a>
+                ) : (
+                  <SheetClose key={it.href} asChild>
+                    <Link href={it.href} className="nav-mobile-link">
+                      {it.label}
+                    </Link>
+                  </SheetClose>
+                ),
+              )}
             </nav>
           </SheetContent>
         </Sheet>

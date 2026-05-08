@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
-import { footer, nav, site, socials } from "@/lib/content";
+import { footer, nav, socials } from "@/lib/content";
 import { TwitterIcon, GithubIcon } from "./BrandIcons";
+import { FooterSystemStatus } from "./FooterSystemStatus";
 
 type IconComp = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
@@ -12,8 +13,13 @@ const iconMap: Record<string, IconComp> = {
   Mail: Mail as unknown as IconComp,
 };
 
-// Cockpit footer (Phase C/2): edge marker + brand/tag/socials + nav mirror
-// + bottom cursor line. Year is rendered fresh, never a stale string.
+function isExternal(href: string) {
+  return href.startsWith("mailto:") || href.startsWith("http");
+}
+
+// Cockpit footer (Phase C/2 + C/4.6): edge marker + 2-col grid.
+// Left: brand · tagline · nav-mirror.  Right: SYSTEM_STATUS · socials.
+// Year is rendered fresh (server) so no stale "© 2026" string ever ships.
 export function Footer() {
   const year = new Date().getFullYear();
   return (
@@ -26,13 +32,30 @@ export function Footer() {
       </div>
 
       <div className="footer-grid">
-        <div>
+        <div className="footer-col footer-col-left">
           <div className="footer-mark">
             {footer.brand.lead}
             <span className="accent">{footer.brand.accent}</span>
           </div>
           <p className="footer-tag">{footer.tagline}</p>
           <p className="footer-tag-th">{footer.taglineTh}</p>
+          <nav className="footer-nav" aria-label="Footer">
+            {nav.items.map((it) =>
+              isExternal(it.href) ? (
+                <a key={it.href} href={it.href} className="footer-link">
+                  {it.label}
+                </a>
+              ) : (
+                <Link key={it.href} href={it.href} className="footer-link">
+                  {it.label}
+                </Link>
+              ),
+            )}
+          </nav>
+        </div>
+
+        <div className="footer-col footer-col-right">
+          <FooterSystemStatus />
           <ul className="footer-socials" aria-label="Social links">
             {socials.map((s) => {
               const Icon = iconMap[s.icon] ?? Mail;
@@ -53,23 +76,15 @@ export function Footer() {
             })}
           </ul>
         </div>
-
-        <nav className="footer-nav" aria-label="Footer">
-          {nav.items.map((it) => (
-            <Link key={it.href} href={it.href} className="footer-link">
-              {it.label}
-            </Link>
-          ))}
-        </nav>
       </div>
 
       <div className="footer-bottom">
         <span className="footer-cursor">
-          <span className="gt">▸</span>
-          {footer.locale} · {year} · {footer.cursor}
+          <span className="gt">&gt;</span>
+          {footer.cursor}
           <span className="blink" aria-hidden="true" />
         </span>
-        <span className="footer-copy">© {year} {site.name}</span>
+        <span className="footer-copy">© {year} {footer.copy}</span>
       </div>
     </footer>
   );

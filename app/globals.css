@@ -2629,6 +2629,229 @@ a.link-gold:hover {
 }
 
 /* ============================================================
+   Phase C/4.6 — Hero cockpit-bar + stat cards · Nav logo · Footer status
+   ============================================================ */
+
+/* ===== HERO COCKPIT TOP BAR ===== */
+.cockpit-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: var(--bg-glass-medium);
+  border: 1px solid var(--border-soft);
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cockpit-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.cockpit-seg .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 6px var(--accent-gold-glow);
+  animation: ck-pulse 2.4s ease-in-out infinite;
+}
+.cockpit-line {
+  width: 1px;
+  height: 10px;
+  background: var(--border);
+}
+.cockpit-seg-active { color: var(--success); }
+.cockpit-seg-active .dot {
+  background: var(--success);
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.55);
+}
+@media (max-width: 768px) {
+  .cockpit-bar {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+  }
+  .cockpit-line { display: none; }
+}
+
+/* ===== HERO STAT CARDS ===== */
+.hero-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  position: relative;
+  z-index: 2;
+}
+.stat-card {
+  position: relative;
+  padding: 22px 22px 18px;
+  background: var(--bg-glass-medium);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  overflow: hidden;
+}
+.stat-card:hover {
+  border-color: color-mix(in srgb, var(--stat-accent) 50%, transparent);
+  transform: translateY(-2px);
+  background: var(--bg-glass-soft);
+}
+.stat-accent-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--stat-accent), transparent);
+}
+.stat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.stat-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.stat-val {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--stat-accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.stat-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.stat-tag { color: var(--text-muted); }
+.stat-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--stat-accent);
+  opacity: 0.85;
+}
+.stat-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--stat-accent);
+  animation: ck-pulse-dot 2.4s infinite;
+}
+
+/* ===== NAV BRAND MARK (logo image) ===== */
+.nav-brand-mark {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 768px) {
+  .nav-brand-mark { height: 44px; }
+}
+
+/* ===== FOOTER COLUMNS — left/right rebalance + SYSTEM_STATUS ===== */
+.footer-col-left { display: flex; flex-direction: column; }
+.footer-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+.footer-col-right .footer-socials { margin-top: 0; }
+
+.footer-status {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-glass-medium);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.footer-status-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border-soft);
+}
+.footer-status-head .pulse {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 6px var(--accent-gold-glow);
+  animation: ck-pulse 2s ease-in-out infinite;
+}
+.footer-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+.footer-status-row .k {
+  color: var(--text-muted);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+}
+.footer-status-row .v {
+  color: var(--text-secondary);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-align: right;
+}
+
+/* Footer-nav lives in the left column now → spacing reset */
+.footer-col-left .footer-nav { margin-top: auto; padding-top: 24px; }
+
+@media (max-width: 768px) {
+  .footer-col-right { gap: 20px; }
+  .footer-status-row .v { font-size: 0.58rem; }
+}
+
+/* ============================================================
    Phase C/4.6 — Global ambient HUD (StarField · scan · CRT · BOOT)
    ============================================================ */
 
@@ -2750,6 +2973,9 @@ a.link-gold:hover {
   .footer-eyebrow .dot,
   .footer-cursor .blink,
   .cockpit-divider-dot,
+  .cockpit-seg .dot,
+  .stat-live-dot,
+  .footer-status-head .pulse,
   .ck-pill[data-kind="green"] .ck-pill-dot,
   .ck-log-head-live-dot,
   .ck-activity-cat-dot,
