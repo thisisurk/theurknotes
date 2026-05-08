@@ -93,6 +93,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Mockup-parity safety net: clip any horizontal overflow at the body
+     edge. Decorative HUD (HeroBackdrop spotlight 800px, SYS_NODE labels,
+     ticker scroll, etc.) intentionally extend beyond container — this
+     prevents them from leaking out and creating page-level horizontal
+     scroll on narrow viewports. Source: index-gemini-v6.html:76. */
+  overflow-x: hidden;
 }
 
 /* Content stack rides above the global ambient layer.
