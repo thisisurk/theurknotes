@@ -382,12 +382,14 @@ a.link-gold:hover {
 }
 
 /* ===== HERO SECTION ===== */
+/* padding-top compensates for our sticky 64px nav (mockup nav is fixed,
+   so its 120px intent = 120-64 = 56px below our nav). */
 .hero-section {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px 40px 80px;
+  padding: 56px 40px 80px;
   max-width: 1120px;
   margin: 0 auto;
   position: relative;
@@ -395,7 +397,7 @@ a.link-gold:hover {
   gap: 32px;
 }
 @media (max-width: 768px) {
-  .hero-section { padding: 100px 24px 60px; gap: 28px; }
+  .hero-section { padding: 40px 24px 60px; gap: 28px; }
 }
 
 /* Hero backdrop layers */
