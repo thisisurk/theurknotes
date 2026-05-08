@@ -14,21 +14,6 @@ export function Hero() {
     <section className="hero-section" aria-labelledby="hero-name">
       <HeroBackdrop />
 
-      {/* Cockpit top bar */}
-      <div className="ck-fade-in ck-d1 cockpit-bar">
-        <span className="cockpit-seg">
-          <span className="dot" />
-          {hero.cockpit.region}
-        </span>
-        <span className="cockpit-line" aria-hidden="true" />
-        <span className="cockpit-seg">{hero.cockpit.framework}</span>
-        <span className="cockpit-line" aria-hidden="true" />
-        <span className="cockpit-seg cockpit-active">
-          <span className="dot" />
-          {hero.cockpit.status}
-        </span>
-      </div>
-
       {/* Avatar + identity stack */}
       <div className="hero-content-row">
         <div className="ck-fade ck-d2">

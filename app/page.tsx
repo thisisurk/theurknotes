@@ -39,20 +39,20 @@ export default function HomePage() {
       <Hero />
 
       <div className="ck-home-flow">
-        <CockpitDivider label="WHAT I DO" tone="gold" />
+        <CockpitDivider label="01 / ABOUT" tone="gold" />
+        <AboutPreview />
+
+        <CockpitDivider label="02 / WHAT I DO" tone="blue" />
         <WhatIDoSection />
 
-        <CockpitDivider label="NOTES" tone="purple" />
+        <CockpitDivider label="03 / NOTES" tone="purple" />
         <NotesPreview />
 
-        <CockpitDivider label="LIVE LOG" tone="blue" />
-        <LiveLog />
-
-        <CockpitDivider label="ACTIVITY" tone="green" />
+        <CockpitDivider label="04 / ACTIVITY" tone="green" />
         <ActivityShowcase />
 
-        <CockpitDivider label="ABOUT" tone="gold" />
-        <AboutPreview />
+        <CockpitDivider label="05 / LIVE LOG" tone="gold" />
+        <LiveLog />
       </div>
 
       {ventureJsonLd.map((data, i) => (

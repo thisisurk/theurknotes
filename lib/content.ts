@@ -64,13 +64,6 @@ export const hero = {
   tagline: "ARCHITECT",
   microLine: "Architect ไม่ใช่ Builder",
 
-  // Cockpit top bar — three short mono segments above identity stack.
-  cockpit: {
-    region: "14°N · 102°E · TRAT, TH",
-    framework: "FY2026 · OPUS·SOLO",
-    status: "SYSTEM ACTIVE",
-  },
-
   // Avatar — temporary asset per consolidation decision (replace later).
   avatar: {
     src: "/avatars/PB1_9757.jpg",

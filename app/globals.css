@@ -415,51 +415,6 @@ a.link-gold:hover {
   .hero-section { padding: 100px 24px 60px; gap: 28px; }
 }
 
-/* Cockpit top bar */
-.cockpit-bar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 2;
-}
-.cockpit-seg {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-.cockpit-seg .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); }
-.cockpit-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border) 50%, transparent);
-  min-width: 20px;
-}
-.cockpit-active {
-  color: var(--success);
-  padding: 4px 11px;
-  border: 1px solid rgba(74, 222, 128, 0.3);
-  border-radius: 100px;
-  background: rgba(74, 222, 128, 0.06);
-}
-.cockpit-active .dot {
-  background: var(--success);
-  animation: ck-pulse-dot 2s infinite;
-  box-shadow: 0 0 6px var(--success);
-}
-@media (max-width: 1024px) {
-  .cockpit-bar { gap: 10px; }
-  .cockpit-seg { font-size: 0.5rem; letter-spacing: 0.2em; }
-  .cockpit-line { display: none; }
-}
-
 /* Hero backdrop layers */
 .hero-backdrop {
   position: absolute;
@@ -2709,7 +2664,6 @@ a.link-gold:hover {
   .footer-eyebrow .dot,
   .footer-cursor .blink,
   .cockpit-divider-dot,
-  .cockpit-active .dot,
   .ck-pill[data-kind="green"] .ck-pill-dot,
   .ck-log-head-live-dot,
   .ck-activity-cat-dot,
