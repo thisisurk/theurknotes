@@ -112,6 +112,27 @@ body > footer {
   z-index: 5;
 }
 
+/* Flex items default to `min-width: auto` which resolves to min-content.
+   Intrinsic-width descendants (SVG backdrops with viewBox, nowrap mono
+   segments, etc.) pushed `.hero-section` min-content up to ~1120px,
+   preventing it from shrinking with the viewport. Setting `min-width: 0`
+   on main and hero-section unlocks shrink, and width:100% makes the
+   section take parent width up to its max-width cap. */
+body > main {
+  min-width: 0;
+}
+.hero-section {
+  width: 100%;
+  min-width: 0;
+}
+.hero-text-wrap,
+.cockpit-bar,
+.hero-content-row,
+.hero-name {
+  min-width: 0;
+  max-width: 100%;
+}
+
 /* Thai readability — minimum weight 400, generous line-height.
    Scoped to body so descendants inherit naturally; components with
    explicit line-height (.hero-name, .hero-punch, etc.) propagate to
