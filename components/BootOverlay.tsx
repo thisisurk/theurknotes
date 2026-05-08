@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 
 // Phase C/4.6 — port of v6 mockup BootOverlay.
-// Boot sequence (6 lines × 140ms + 450ms fade) shown once per session.
-// Gated by sessionStorage so revisits during the same session skip the boot.
-// prefers-reduced-motion: skip animation entirely.
+// Plays on every full page load (mockup parity — no session gate).
+// Internal Next.js Link nav doesn't re-render the root layout, so the
+// boot only fires on cold visits, hard reloads, and new tabs.
+// prefers-reduced-motion: skip the sequence entirely (no flash).
 
 const SEQ = [
   "INIT · SYSTEM CORE",
@@ -16,21 +17,13 @@ const SEQ = [
   "READY · COMMAND_CENTER",
 ];
 
-const STORAGE_KEY = "theurk-booted";
-
 export function BootOverlay() {
   const [show, setShow] = useState(false);
   const [lines, setLines] = useState<string[]>([]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     setShow(true);
     let i = 0;
@@ -39,10 +32,7 @@ export function BootOverlay() {
       i++;
       if (i >= SEQ.length) {
         clearInterval(iv);
-        setTimeout(() => {
-          sessionStorage.setItem(STORAGE_KEY, "1");
-          setShow(false);
-        }, 450);
+        setTimeout(() => setShow(false), 450);
       }
     }, 140);
 
