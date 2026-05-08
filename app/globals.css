@@ -2836,54 +2836,56 @@ a.link-gold:hover {
 
 /* ===== HERO COCKPIT TOP BAR ===== */
 .cockpit-bar {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 14px;
-  align-self: flex-start;
-  padding: 6px 14px;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.24em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  background: var(--bg-glass-medium);
-  border: 1px solid var(--border-soft);
-  border-radius: 100px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
 }
 .cockpit-seg {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
   white-space: nowrap;
 }
 .cockpit-seg .dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--accent-gold);
-  box-shadow: 0 0 6px var(--accent-gold-glow);
-  animation: ck-pulse 2.4s ease-in-out infinite;
+  background: var(--text-muted);
 }
 .cockpit-line {
-  width: 1px;
-  height: 10px;
-  background: var(--border);
+  flex: 1;
+  height: 1px;
+  min-width: 20px;
+  background: linear-gradient(90deg, transparent, var(--border) 50%, transparent);
 }
-.cockpit-seg-active { color: var(--success); }
+.cockpit-seg-active {
+  color: var(--success);
+  padding: 4px 11px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 100px;
+  background: rgba(74, 222, 128, 0.06);
+}
 .cockpit-seg-active .dot {
   background: var(--success);
-  box-shadow: 0 0 6px rgba(74, 222, 128, 0.55);
+  box-shadow: 0 0 6px var(--success);
+  animation: ck-pulse-dot 2s infinite;
+}
+@media (max-width: 1024px) {
+  .cockpit-bar { gap: 10px; }
+  .cockpit-seg { font-size: 0.5rem; letter-spacing: 0.2em; }
+  .cockpit-line { display: none; }
 }
 @media (max-width: 768px) {
-  .cockpit-bar {
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-  }
-  .cockpit-line { display: none; }
+  .cockpit-bar { gap: 8px; }
 }
 
 /* ===== HERO STAT CARDS ===== */
@@ -3175,7 +3177,7 @@ a.link-gold:hover {
   .footer-eyebrow .dot,
   .footer-cursor .blink,
   .cockpit-divider-dot,
-  .cockpit-seg .dot,
+  .cockpit-seg-active .dot,
   .stat-live-dot,
   .footer-status-head .pulse,
   .ck-hologram-pill .dot,
