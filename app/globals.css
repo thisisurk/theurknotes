@@ -839,7 +839,11 @@ a.link-gold:hover {
   animation: ck-gold-pulse 8s ease-in-out infinite;
 }
 
-.nav-list { display: flex; align-items: center; gap: 28px; }
+/* No `display` here — Tailwind `hidden md:flex` on the JSX controls
+   responsive visibility. Setting display:flex unconditionally would
+   override `.hidden` (same specificity, later in source) and the mobile
+   nav would leak through alongside the hamburger. */
+.nav-list { align-items: center; gap: 28px; }
 .nav-link {
   position: relative;
   font-family: var(--font-mono);
@@ -850,6 +854,7 @@ a.link-gold:hover {
   color: var(--text-secondary);
   text-decoration: none;
   padding: 6px 0;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 .nav-link:hover { color: var(--accent-gold); }
