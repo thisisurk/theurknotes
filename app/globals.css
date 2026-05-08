@@ -706,6 +706,18 @@ a.link-gold:hover {
 .avatar-frame .pip.br { bottom: -3px; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
 .avatar-frame .pip.l  { top: 50%; left: -5px; transform: translateY(-50%); animation-delay: 0.75s; }
 .avatar-frame .pip.r  { top: 50%; right: -5px; transform: translateY(-50%); animation-delay: 2.25s; }
+
+/* Holographic hover — intensifies existing rings without adding DOM */
+.avatar-frame { transition: filter 0.4s ease; }
+.avatar-frame:hover { filter: drop-shadow(0 0 28px rgba(212, 168, 83, 0.35)); }
+.avatar-frame:hover .ring-arc { opacity: 1; animation-duration: 7s; }
+.avatar-frame:hover .ring-outer { opacity: 1; animation-duration: 16s; }
+.avatar-frame:hover .ring-inner { animation-duration: 5s; }
+.avatar-frame:hover .pip {
+  animation-duration: 1.5s;
+  box-shadow: 0 0 14px var(--accent-gold-glow);
+}
+
 @media (max-width: 1024px) and (min-width: 769px) {
   .avatar-frame { width: 180px; height: 180px; }
 }
