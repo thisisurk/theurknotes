@@ -4,7 +4,7 @@ import { WhatIDoSection } from "@/components/sections/WhatIDoSection";
 import { NotesPreview } from "@/components/sections/NotesPreview";
 import { LiveLog } from "@/components/sections/LiveLog";
 import { ActivityShowcase } from "@/components/sections/ActivityShowcase";
-import { AboutPreview } from "@/components/sections/AboutPreview";
+import { AboutSection } from "@/components/sections/AboutSection";
 import { JsonLd } from "@/components/JsonLd";
 import { ventures } from "@/lib/ventures";
 import { site } from "@/lib/content";
@@ -40,7 +40,7 @@ export default function HomePage() {
 
       <div className="ck-home-flow">
         <CockpitDivider label="01 / ABOUT" tone="gold" />
-        <AboutPreview />
+        <AboutSection />
 
         <CockpitDivider label="02 / WHAT I DO" tone="blue" />
         <WhatIDoSection />
