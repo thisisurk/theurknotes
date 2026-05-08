@@ -2219,6 +2219,477 @@ a.link-gold:hover {
   .ck-about-preview { padding: 24px 22px; }
 }
 
+/* ============================================================
+   Phase C/4 · Dedicated pages (utility-density)
+   /about · /what-i-do · /log — plain dark, content-first.
+   No backdrop scene · no scanlines · static motion.
+   ============================================================ */
+
+/* Page wrapper — narrower than Home cockpit (980 vs 1080) so prose breathes */
+.ck-page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 96px 40px 120px;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .ck-page { padding: 80px 24px 96px; }
+}
+
+/* Header — eyebrow + h1 + intro */
+.ck-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.ck-page-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin: 0;
+}
+.ck-page-title .accent { color: var(--accent-gold); }
+.ck-page-intro {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .ck-page-title { font-size: 1.85rem; }
+}
+
+/* Controls strip — filter pills · sort · count */
+.ck-page-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--border);
+}
+.ck-page-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ck-page-controls-right {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ck-page-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ck-page-controls-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.ck-page-select {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 28px 6px 12px;
+  background: var(--bg-glass-medium);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-primary);
+  cursor: pointer;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+                    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 14px) calc(50% - 1px), calc(100% - 9px) calc(50% - 1px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ck-page-select:hover,
+.ck-page-select:focus-visible {
+  border-color: var(--accent-gold-soft);
+  color: var(--accent-gold);
+  outline: none;
+}
+.ck-page-count {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.ck-page-count-num {
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+/* ===== /about · long-form ===== */
+
+.ck-about-bio {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.ck-about-bio-para {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin: 0;
+  text-wrap: pretty;
+}
+@media (max-width: 600px) {
+  .ck-about-bio { padding: 24px 22px; }
+}
+
+.ck-about-block { margin-bottom: 48px; }
+.ck-about-block:last-of-type { margin-bottom: 0; }
+.ck-about-block-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* About — Operating Principles */
+.ck-about-principles { display: flex; flex-direction: column; gap: 4px; }
+.ck-about-ap-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0 8px 12px;
+  border-left: 2px solid var(--accent-gold-line);
+  transition: border-color 0.3s ease, padding-left 0.3s ease;
+}
+.ck-about-ap-row:hover {
+  border-left-color: var(--accent-gold);
+  padding-left: 16px;
+}
+.ck-about-ap-en {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  min-width: 168px;
+  flex-shrink: 0;
+}
+.ck-about-ap-th {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .ck-about-ap-row { flex-direction: column; align-items: flex-start; gap: 4px; padding-left: 10px; }
+  .ck-about-ap-en { min-width: 0; }
+}
+
+/* About — Runtime Config (4 stat-mini cards · top-accent rule) */
+.ck-about-runtime {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.ck-about-rc-card {
+  position: relative;
+  padding: 14px 14px 13px;
+  background: rgba(11, 17, 32, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.ck-about-rc-card:hover {
+  border-color: var(--accent-gold-soft);
+  background: rgba(212, 168, 83, 0.04);
+}
+.ck-about-rc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--accent-gold), transparent);
+  opacity: 0.7;
+}
+.ck-about-rc-label {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.ck-about-rc-value {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+@media (max-width: 540px) {
+  .ck-about-runtime { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* About — Solo Timeline (4-phase journey) */
+.ck-about-st-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.ck-about-st-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  color: var(--accent-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.ck-about-st-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-gold-soft), transparent);
+  min-width: 40px;
+}
+.ck-about-st-meta {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.ck-about-st-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  position: relative;
+  padding: 32px 0 0;
+  list-style: none;
+  margin: 0;
+}
+.ck-about-st-track::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border) 0%, var(--accent-gold-soft) 70%, var(--accent-gold) 95%);
+  z-index: 0;
+}
+.ck-about-st-phase { position: relative; }
+.ck-about-st-dot {
+  position: absolute;
+  top: -19px;
+  left: 8px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  border: 1.5px solid var(--accent-gold-soft);
+  z-index: 1;
+}
+.ck-about-st-phase[data-state="done"] .ck-about-st-dot {
+  background: var(--text-muted);
+  border-color: var(--text-muted);
+  opacity: 0.6;
+}
+.ck-about-st-phase[data-state="partial"] .ck-about-st-dot {
+  background: var(--bg-deep);
+  border-color: var(--accent-gold-soft);
+}
+.ck-about-st-phase[data-state="active"] .ck-about-st-dot {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 12px var(--accent-gold-glow);
+  animation: ck-st-pulse 2s infinite ease-in-out;
+}
+.ck-about-st-phase[data-state="active"] .ck-about-st-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50%;
+  animation: ck-st-ring 2.4s ease-out infinite;
+}
+@keyframes ck-st-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-gold-glow); }
+  50%      { box-shadow: 0 0 22px var(--accent-gold); }
+}
+@keyframes ck-st-ring {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to   { transform: scale(2.0); opacity: 0; }
+}
+.ck-about-st-tag {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.ck-about-st-phase[data-state="partial"] .ck-about-st-tag { color: var(--accent-gold-soft); }
+.ck-about-st-phase[data-state="active"]  .ck-about-st-tag { color: var(--accent-gold); }
+.ck-about-st-en {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.ck-about-st-phase[data-state="done"]   .ck-about-st-en { color: var(--text-secondary); }
+.ck-about-st-phase[data-state="active"] .ck-about-st-en { color: var(--accent-gold); }
+.ck-about-st-th {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.ck-about-st-phase[data-state="active"] .ck-about-st-th { color: var(--text-secondary); }
+
+@media (max-width: 768px) {
+  .ck-about-st-track {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 0;
+    padding-left: 28px;
+  }
+  .ck-about-st-track::before {
+    top: 8px;
+    left: 11px;
+    right: auto;
+    bottom: 8px;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, var(--border) 0%, var(--accent-gold-soft) 70%, var(--accent-gold) 95%);
+  }
+  .ck-about-st-dot { top: 4px; left: -22px; }
+}
+
+/* ===== /what-i-do · archive grid ===== */
+.ck-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* ===== /log · timeline archive ===== */
+.ck-log-archive {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0 0;
+  position: relative;
+}
+.ck-log-archive::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 7px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent-gold-soft) 0%, var(--border) 80%, transparent 100%);
+  opacity: 0.55;
+}
+.ck-log-archive-entry {
+  position: relative;
+  padding: 10px 0 22px 32px;
+}
+.ck-log-archive-entry:last-child { padding-bottom: 0; }
+.ck-log-archive-dot {
+  position: absolute;
+  top: 14px;
+  left: 1px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  border: 1.5px solid var(--cd-accent, var(--accent-gold));
+  box-shadow: 0 0 10px var(--cd-glow, var(--accent-gold-glow));
+  z-index: 1;
+}
+.ck-log-archive-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 18px;
+  align-items: baseline;
+}
+.ck-log-archive-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ck-log-archive-when {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.ck-log-archive-cat {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--cd-accent, var(--accent-gold));
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ck-log-archive-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .ck-log-archive-row { grid-template-columns: 1fr; gap: 6px; }
+}
+
+.ck-log-archive-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+.ck-log-archive-empty {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+.ck-log-archive-empty-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.ck-log-archive-empty-body {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
 /* Reduced motion — flatten all cockpit ambient motion */
 @media (prefers-reduced-motion: reduce) {
   .ck-fade,
@@ -2241,6 +2712,8 @@ a.link-gold:hover {
   .cockpit-active .dot,
   .ck-pill[data-kind="green"] .ck-pill-dot,
   .ck-log-head-live-dot,
-  .ck-activity-cat-dot { animation: none !important; }
+  .ck-activity-cat-dot,
+  .ck-about-st-phase[data-state="active"] .ck-about-st-dot,
+  .ck-about-st-phase[data-state="active"] .ck-about-st-dot::after { animation: none !important; }
   .role-word { opacity: 1; }
 }

@@ -20,6 +20,21 @@ export const meta = {
     description:
       "บันทึกความคิด การออกแบบ การตัดสินใจ และชีวิตนอกจอ",
   },
+  about: {
+    title: "About — TheUrk",
+    description:
+      "ตัวตน · Solo OS · operating principles · timeline จาก solo by nature → solo + AI",
+  },
+  whatIDo: {
+    title: "What I Do — TheUrk",
+    description:
+      "Archive ของสามเสา — Businesses · Tools · Creations. Built solo, leveraged by tech.",
+  },
+  log: {
+    title: "Live Log — TheUrk",
+    description:
+      "Field log · ของที่เพิ่งทำ ของที่กำลังคิด — training · build · read · travel",
+  },
 };
 
 export const nav = {
@@ -503,3 +518,135 @@ export const LOG_ENTRIES: LogEntry[] = [
     text: "เดินป่าเขาคิชฌกูฏ — reset operating system เก็บ 3 idea กลับมา ยังไม่ได้ ship",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// /about page — full bio + Solo OS principles + runtime config + timeline.
+// Mirrors v6 mockup §AboutSection (lines 1148-1187, 3120-3389).
+// ---------------------------------------------------------------------------
+
+export type AboutPrinciple = { en: string; th: string };
+
+export const ABOUT_PRINCIPLES: AboutPrinciple[] = [
+  { en: "SOLO BY NATURE",  th: "ชอบอยู่คนเดียวตั้งแต่จำความได้ — นิสัยพื้นฐาน" },
+  { en: "JUDGMENT > CODE", th: "เลือกถูก สำคัญกว่าเขียนเร็ว" },
+  { en: "CASUAL · DIRECT", th: "ตรงๆ ชิลๆ ไม่ทางการ" },
+  { en: "TECH = LEVERAGE", th: "AI/agents/automation = เครื่องมือทำงานให้ผม" },
+];
+
+export type RuntimeConfigRow = { label: string; value: string };
+
+export const RUNTIME_CONFIG: RuntimeConfigRow[] = [
+  { label: "MODE",     value: "AUTONOMOUS" },
+  { label: "TARGET",   value: "FREEDOM" },
+  { label: "RUNTIME",  value: "24 / 7" },
+  { label: "PROTOCOL", value: "DIRECT" },
+];
+
+export type SoloPhaseState = "done" | "partial" | "active";
+
+export type SoloPhase = {
+  tag: string;
+  en: string;
+  th: string;
+  state: SoloPhaseState;
+};
+
+export const SOLO_TIMELINE: SoloPhase[] = [
+  {
+    tag: "PHASE_00",
+    en: "SOLO_NATURE",
+    th: "ชอบอยู่คนเดียว ตั้งแต่จำความได้ — solo by default",
+    state: "done",
+  },
+  {
+    tag: "PHASE_01",
+    en: "DISCIPLINE",
+    th: "20+ ปี · running · gaming · martial arts · travel",
+    state: "done",
+  },
+  {
+    tag: "PHASE_02",
+    en: "EXPERIMENTS",
+    th: "ลอง SaaS, trading เป็น side — ยังไม่ได้เป็นอาชีพหลัก",
+    state: "partial",
+  },
+  {
+    tag: "PHASE_03 · NOW",
+    en: "SOLO + AI",
+    th: "solo เป็นหลัก + tech (AI · automation · IoT) เป็นเครื่องมือ",
+    state: "active",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Dedicated page chrome — utility-density per WEB-ARCHITECTURE v0.3 §1.
+// Plain dark + page header + filter/sort controls (no full Hero, no scanlines).
+// Each page imports `pageHeaders[name]` and `pageControls[name]`.
+// ---------------------------------------------------------------------------
+
+export const pageHeaders = {
+  about: {
+    label: "ABOUT",
+    eyebrow: "Identity · Long-form",
+    titleLead: "The Casual ",
+    titleAccent: "Ronin",
+    intro:
+      "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
+    principlesLabel: "// OPERATING_PRINCIPLES",
+    runtimeLabel: "// RUNTIME_CONFIG",
+    timelineLabel: "▸ SOLO_TIMELINE",
+    timelineMeta: "solo by nature → solo + tech",
+  },
+  whatIDo: {
+    label: "WHAT I DO",
+    eyebrow: "Proof · Archive",
+    title: "What I Do",
+    intro:
+      "ของที่อยากแชร์ — businesses · tools · creations. Built solo, leveraged by tech.",
+    filterAllLabel: "All",
+    sortLabel: "// SORT",
+    countLabel: "// COUNT",
+  },
+  log: {
+    label: "LIVE LOG",
+    eyebrow: "Field log · Archive",
+    title: "Live Log",
+    intro:
+      "Field log · ของที่เพิ่งทำ ของที่กำลังคิด — training · build · read · travel.",
+    filterAllLabel: "All",
+    countLabel: "// ENTRIES",
+    emptyTitle: "ยังไม่มี entry ในหมวดนี้",
+    emptyBody: "เลือก category อื่น หรือดู All",
+    loadMoreLabel: "LOAD MORE →",
+  },
+};
+
+// What I Do — kind filter + sort options.
+export type WhatIDoKindFilter = "all" | "business" | "tool" | "creation";
+
+export const WHAT_I_DO_FILTERS: Array<{ id: WhatIDoKindFilter; label: string }> = [
+  { id: "all",      label: "All" },
+  { id: "business", label: "Businesses" },
+  { id: "tool",     label: "Tools" },
+  { id: "creation", label: "Creations" },
+];
+
+export type WhatIDoSort = "status" | "name" | "kind";
+
+export const WHAT_I_DO_SORTS: Array<{ id: WhatIDoSort; label: string }> = [
+  { id: "status", label: "Status" },
+  { id: "kind",   label: "Kind"   },
+  { id: "name",   label: "Name"   },
+];
+
+// Status sort priority — drives "sort by status" on /what-i-do.
+// FLAGSHIP first, then live/near-launch, then internal/wip.
+export const STATUS_PRIORITY: Record<string, number> = {
+  FLAGSHIP: 0,
+  "NEAR LAUNCH": 1,
+  BUILDING: 2,
+  LIVE: 3,
+  RELEASED: 4,
+  PERSONAL: 5,
+  WIP: 6,
+};

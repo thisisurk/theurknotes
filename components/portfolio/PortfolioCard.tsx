@@ -7,12 +7,16 @@ import { ChannelPills } from "./ChannelPills";
 
 type Props = {
   item: PortfolioItem;
+  // Archive view forces every card to render compact for visual rhythm.
+  forceCompact?: boolean;
 };
 
 // PortfolioCard — `featured: true` items get the 2-col Featured layout,
-// everything else renders as the Compact 1-col card.
-export function PortfolioCard({ item }: Props) {
-  return item.featured ? <Featured item={item} /> : <Compact item={item} />;
+// everything else renders as the Compact 1-col card. The /what-i-do archive
+// passes `forceCompact` so the grid stays uniform.
+export function PortfolioCard({ item, forceCompact }: Props) {
+  if (forceCompact || !item.featured) return <Compact item={item} />;
+  return <Featured item={item} />;
 }
 
 function Featured({ item }: Props) {
