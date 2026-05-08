@@ -38,6 +38,9 @@ export function ActivityShowcase() {
           </h2>
           <p className="ck-section-intro">{c.intro}</p>
         </div>
+        <a className="ck-btn" href={c.allLink.href}>
+          {c.allLink.label}
+        </a>
       </header>
 
       <div className="ck-activity-filter" role="tablist" aria-label="Filter by category">

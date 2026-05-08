@@ -1693,128 +1693,224 @@ a.link-gold:hover {
   transform: rotate(90deg);
 }
 
-/* ===== Notes preview — timeline + thumbnail ===== */
-.ck-notes-list {
+/* ===== Notes preview — hero + mini grid (Phase C/4.6) ===== */
+.ck-notes-hero { margin-top: 14px; transition: opacity 0.25s, filter 0.25s; }
+.ck-notes-hero[data-dim="true"] { opacity: 0.22; filter: saturate(0.6); }
+
+.ck-note-hero-link,
+.ck-note-mini-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.ck-note-mini-link { transition: opacity 0.25s, filter 0.25s; }
+.ck-note-mini-link[data-dim="true"] { opacity: 0.22; filter: saturate(0.6); }
+
+.ck-note-hero-card,
+.ck-note-mini-card {
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 14px;
 }
-.ck-note-row {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 18px;
-  text-decoration: none;
-  align-items: stretch;
-}
-.ck-note-row-time {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  padding-top: 18px;
-  position: relative;
-}
-.ck-note-row-time::before {
-  content: "";
-  position: absolute;
-  top: 22px;
-  bottom: -16px;
-  left: 0;
-  width: 1px;
-  background: linear-gradient(180deg, var(--accent-gold-soft), var(--border) 60%, transparent);
-  opacity: 0.6;
-}
-.ck-note-row:last-child .ck-note-row-time::before { background: linear-gradient(180deg, var(--accent-gold-soft), transparent 80%); }
-.ck-note-row-time::after {
-  content: "";
-  position: absolute;
-  left: -3px;
-  top: 22px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--bg-deep);
-  border: 1.5px solid var(--accent-gold-soft);
-}
-.ck-note-row:hover .ck-note-row-time::after {
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 8px var(--accent-gold-glow);
-}
-.ck-note-card {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  align-items: stretch;
-  overflow: hidden;
-}
-.ck-note-thumb {
-  position: relative;
-  background: var(--bg-card);
-  border-right: 1px solid var(--border);
-  overflow: hidden;
-}
-.ck-note-thumb-grid {
+.ck-note-hero-cover { position: relative; height: 240px; overflow: hidden; }
+.ck-note-mini-cover { position: relative; height: 134px; overflow: hidden; }
+
+/* Cover fallback — gridded background + ghost ordinal */
+.ck-note-cover {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(212, 168, 83, 0.18) 1px, transparent 1px);
-  background-size: 12px 12px;
-  opacity: 0.55;
+  background: var(--bg-card);
+  overflow: hidden;
 }
-.ck-note-thumb-mono {
+.ck-note-cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg,  transparent, transparent 29px, rgba(212, 168, 83, 0.08) 29px, rgba(212, 168, 83, 0.08) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(212, 168, 83, 0.08) 29px, rgba(212, 168, 83, 0.08) 30px);
+}
+.ck-note-cover-num {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 1.4rem;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 800;
+  color: rgba(212, 168, 83, 0.07);
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+.ck-note-hero-cover .ck-note-cover-num { font-size: clamp(7rem, 14vw, 10rem); }
+.ck-note-cover-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(11, 17, 32, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* Tag badge (top-left) */
+.ck-note-tag-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   font-weight: 700;
   color: var(--accent-gold);
-  letter-spacing: -0.04em;
+  padding: 3px 9px;
+  background: rgba(11, 17, 32, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-gold-line);
+  border-radius: 2px;
 }
-.ck-note-body {
-  padding: 14px 18px;
+.ck-note-tag-badge-sm {
+  top: 10px;
+  left: 10px;
+  font-size: 0.46rem;
+  padding: 2px 7px;
+}
+
+/* Status pill (top-right on hero, inline on mini) */
+.ck-note-status-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 3px 9px;
+  background: rgba(11, 17, 32, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid;
+  border-radius: 2px;
+}
+.ck-note-status-pill .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.ck-note-status-pill[data-state="live"] {
+  color: var(--success);
+  border-color: rgba(74, 222, 128, 0.55);
+}
+.ck-note-status-pill[data-state="live"] .dot {
+  background: var(--success);
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.55);
+  animation: ck-pulse-dot 2s infinite;
+}
+.ck-note-status-pill[data-state="draft"] {
+  color: var(--text-muted);
+  border-color: rgba(117, 135, 168, 0.45);
+}
+.ck-note-status-pill[data-state="draft"] .dot {
+  background: var(--text-muted);
+}
+.ck-note-status-pill-sm {
+  position: static;
+  padding: 2px 7px;
+  font-size: 0.46rem;
+}
+
+/* Hero card body */
+.ck-note-hero-body {
+  padding: 24px 28px 26px;
+  border-top: 1px solid var(--accent-gold-line);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-width: 0;
+  gap: 14px;
 }
-.ck-note-body-title {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
+.ck-note-hero-title {
+  font-size: clamp(1.1rem, 2.2vw, 1.38rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
-  transition: color 0.2s;
+  line-height: 1.4;
+  transition: color 0.2s ease;
 }
-.ck-note-row:hover .ck-note-body-title { color: var(--accent-gold); }
-.ck-note-body-summary {
-  font-size: 0.85rem;
+.ck-note-hero-link:hover .ck-note-hero-title { color: var(--accent-gold); }
+.ck-note-hero-summary {
+  font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.65;
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.ck-note-body-tag {
-  margin-top: auto;
-  display: inline-flex;
-  width: fit-content;
+.ck-note-hero-meta {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Mini grid */
+.ck-notes-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.ck-note-mini-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border-soft);
+}
+.ck-note-mini-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+.ck-note-mini-link:hover .ck-note-mini-title { color: var(--accent-gold); }
+.ck-note-mini-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
   color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ===== LiveLog entry image thumb ===== */
+.ck-log-entry-image {
+  width: 96px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid var(--border-soft);
+  margin-left: auto;
+  flex-shrink: 0;
 }
 @media (max-width: 600px) {
-  .ck-note-row { grid-template-columns: 1fr; gap: 8px; }
-  .ck-note-row-time { padding-top: 0; }
-  .ck-note-row-time::before, .ck-note-row-time::after { display: none; }
-  .ck-note-card { grid-template-columns: 64px 1fr; }
+  .ck-log-entry-image { width: 72px; height: 52px; }
 }
 
 /* Notes empty state */
@@ -3083,6 +3179,7 @@ a.link-gold:hover {
   .stat-live-dot,
   .footer-status-head .pulse,
   .ck-hologram-pill .dot,
+  .ck-note-status-pill[data-state="live"] .dot,
   .ck-pill[data-kind="green"] .ck-pill-dot,
   .ck-log-head-live-dot,
   .ck-activity-cat-dot,

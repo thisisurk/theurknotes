@@ -63,6 +63,15 @@ export function LiveLog() {
                   <div className="ck-log-entry-cat">{cat.label}</div>
                 </div>
                 <p className="ck-log-entry-text">{entry.text}</p>
+                {entry.image && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={entry.image}
+                    alt=""
+                    className="ck-log-entry-image"
+                    aria-hidden="true"
+                  />
+                )}
               </div>
             </li>
           );

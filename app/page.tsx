@@ -8,8 +8,13 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { JsonLd } from "@/components/JsonLd";
 import { ventures } from "@/lib/ventures";
 import { site } from "@/lib/content";
+import { getAllNotes } from "@/lib/notes";
 
 export default function HomePage() {
+  // Notes are read server-side and passed to the client NotesPreview so its
+  // filter-pill state can run without dragging fs into the bundle.
+  const notes = getAllNotes();
+
   // Emit SoftwareApplication JSON-LD only for live + near-ship ventures —
   // backed by the lib/ventures shim that adapts from lib/portfolio.
   const venturesForSchema = ventures.filter(
@@ -46,7 +51,7 @@ export default function HomePage() {
         <WhatIDoSection />
 
         <CockpitDivider label="03 / NOTES" tone="purple" />
-        <NotesPreview />
+        <NotesPreview notes={notes} />
 
         <CockpitDivider label="04 / ACTIVITY" tone="green" />
         <ActivityShowcase />

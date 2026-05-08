@@ -195,6 +195,7 @@ export const sections = {
     intro:
       "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ. ไม่เน้นวิชาการ เน้นความจริงใจ",
     allLink: { label: "All notes →", href: "/notes" },
+    filterAllLabel: "All",
     emptyTitle: "ยังไม่มีอะไรให้อ่าน — ช่วงนี้โฟกัส ship ก่อน",
     emptyBody:
       "เขียนเมื่อมีอะไรจะพูดจริงๆ ไม่ใช่เพื่อ update feed",
@@ -205,6 +206,9 @@ export const sections = {
     title: "Activity",
     intro: "กิจกรรมต่างๆที่ผมทำครับ!",
     filterAllLabel: "All",
+    // /activity dedicated archive doesn't exist yet — link self-anchors to
+    // the home section as a placeholder. Update when /activity ships.
+    allLink: { label: "All activity →", href: "/#activity" },
   },
   log: {
     label: "LIVE LOG",
