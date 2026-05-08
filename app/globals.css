@@ -464,7 +464,7 @@ a.link-gold:hover {
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  margin-bottom: 14px;
+  margin: 0 0 14px 0;
   color: var(--text-primary);
 }
 .hero-name .accent { color: var(--accent-gold); }
@@ -476,7 +476,7 @@ a.link-gold:hover {
   color: var(--text-primary);
   line-height: 1.3;
   letter-spacing: -0.01em;
-  margin-bottom: 18px;
+  margin: 0 0 18px 0;
   max-width: 560px;
 }
 .hero-punch .accent { color: var(--accent-gold); }
