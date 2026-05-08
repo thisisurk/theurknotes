@@ -106,7 +106,7 @@ export default async function NotePage({
             #{note.tag}
           </Link>
           <Link href="/notes" className="link-gold text-sm">
-            {sections.notes.allLink}
+            {sections.notes.allLink.label}
           </Link>
         </div>
       </div>

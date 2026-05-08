@@ -112,38 +112,78 @@ export const hero = {
   ],
 };
 
+// Section copy — every section reads from here. Do not inline strings in JSX.
+// `eyebrow` = small mono caption above title. `title` = h2 text.
+// `intro` = short blurb beneath title. `allLink` = nav to dedicated page.
 export const sections = {
-  ventures: {
-    label: "VENTURES",
-    intro: "ของที่ผมสร้าง — หรือกำลังสร้าง",
-  },
-  about: {
-    label: "ABOUT",
+  whatido: {
+    label: "WHAT I DO",
+    eyebrow: "Showcase · Curated",
+    title: "What I Do",
+    intro:
+      "ของที่อยากแชร์ — businesses · tools · creations. Built solo, leveraged by tech.",
+    allLink: { label: "All works →", href: "/what-i-do" },
+    pillars: {
+      business: {
+        tag: "PILLAR_01",
+        label: "BUSINESSES",
+        note: "· revenue · brands · ventures",
+      },
+      tool: {
+        tag: "PILLAR_02",
+        label: "TOOLS",
+        note: "· built by me · used by me",
+      },
+      creation: {
+        tag: "PILLAR_03",
+        label: "CREATIONS",
+        note: "· video · game · art · music",
+      },
+    },
   },
   notes: {
     label: "NOTES",
-    intro: "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ",
+    eyebrow: "Notes & Thoughts",
+    title: "Notes",
+    intro:
+      "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ. ไม่เน้นวิชาการ เน้นความจริงใจ",
+    allLink: { label: "All notes →", href: "/notes" },
     emptyTitle: "ยังไม่มีอะไรให้อ่าน — ช่วงนี้โฟกัส ship ก่อน",
-    emptyBody: "เขียนเมื่อมีอะไรจะพูดจริงๆ ไม่ใช่เพื่อ update feed",
-    allLink: "← All notes",
-  },
-  whatido: {
-    label: "WHAT I DO",
-    intro: "Businesses · Tools · Creations — สามขาที่ผมเดินอยู่",
+    emptyBody:
+      "เขียนเมื่อมีอะไรจะพูดจริงๆ ไม่ใช่เพื่อ update feed",
   },
   activity: {
     label: "ACTIVITY",
+    eyebrow: "Life & Activity",
+    title: "Activity",
     intro: "กิจกรรมต่างๆที่ผมทำครับ!",
+    filterAllLabel: "All",
   },
   log: {
     label: "LIVE LOG",
+    eyebrow: "Field log",
+    title: "Live Log",
     intro: "Field log · ของที่เพิ่งทำ ของที่กำลังคิด",
-    allLink: "View full log →",
+    allLink: { label: "View full log →", href: "/log" },
+    headerLabel: "system / log",
+    liveLabel: "live",
+    nowLabel: "NOW",
+    footerPrompt: "$_",
+    footerNote:
+      "log updates เมื่อมีอะไรน่าบันทึก — ไม่ต้อง daily",
+  },
+  about: {
+    label: "ABOUT",
+    eyebrow: "About",
+    titleLead: "The Casual ",
+    titleAccent: "Ronin",
+    intro:
+      "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
+    allLink: { label: "Read full About →", href: "/about" },
   },
 };
 
-// About is an array. Each element is one paragraph.
-// Blank line between paragraphs is rendered automatically.
+// About — full bio used by /about (Phase C/5). Each element = one paragraph.
 export const about: string[] = [
   "ผมชื่อเอิ๊ก (ไม่ใช่เอิร์ก เอิร์ธ 555)",
   "Solo Founder จากตราด ที่ออกแบบระบบให้ AI ทำงานแทน ไม่ได้เขียน code เองทุกบรรทัด — แต่ออกแบบทั้งระบบให้มันเดินได้ คิด 70% Build 30%",
@@ -151,6 +191,17 @@ export const about: string[] = [
   "นอกจอ — เป็นประธาน YEC ตราด (หอการค้ารุ่นใหม่) ฝึก Bujinkan สายดำและมวยไทยมาหลายปี สนใจฟิสิกส์ ดาราศาสตร์ และพุทธปรัชญาแบบแก่นแท้ เวลาว่างเล่นเกม ดูคลิปหมาแมว ไม่ได้ลึกซึ้งตลอดเวลา 555",
   "ที่นี่คือที่ที่ผมบันทึก journey — ของที่สร้าง ระบบที่ออกแบบ และสิ่งที่เรียนรู้ระหว่างทาง ถ้าแนวทางตรงกัน ยินดีต้อนรับ",
 ];
+
+// About preview — 2 short paragraphs shown on Home (slim version of `about`).
+// Keep in sync with the lead of /about when Phase C/5 ships.
+export const aboutPreview = {
+  intro:
+    "สวัสดีครับ ผมชื่อเอิ๊ก บ้านอยู่ตราด — Solo Founder ที่ออกแบบระบบให้ AI เป็น execution layer ครอบคลุมทุก venture ตั้งแต่ digital products, trading, ไปจนถึง physical ที่กำลังจะเกิด",
+  body: "ยุคที่ AI build ได้ทุกอย่าง — คนที่ชนะคือคนที่รู้ว่า",
+  accent: "ควรสร้างอะไร",
+  bodyAfter:
+    ". Edge อยู่ที่ judgment + system design ไม่ใช่ code. Solo เป็นนิสัยพื้นฐาน — discipline สะสมมา 20+ ปีคือ moat ที่ AI agents ไม่ได้ทดแทน",
+};
 
 // Footer cockpit — uses the year at render time (no stale "© 2026" string).
 export const footer = {

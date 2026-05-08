@@ -1,12 +1,17 @@
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { VentureCard } from "@/components/VentureCard";
+import { CockpitDivider } from "@/components/CockpitDivider";
+import { WhatIDoSection } from "@/components/sections/WhatIDoSection";
+import { NotesPreview } from "@/components/sections/NotesPreview";
+import { LiveLog } from "@/components/sections/LiveLog";
+import { ActivityShowcase } from "@/components/sections/ActivityShowcase";
+import { AboutPreview } from "@/components/sections/AboutPreview";
 import { JsonLd } from "@/components/JsonLd";
 import { ventures } from "@/lib/ventures";
-import { sections, site } from "@/lib/content";
+import { site } from "@/lib/content";
 
 export default function HomePage() {
-  // Emit SoftwareApplication JSON-LD only for live + near-ship ventures.
+  // Emit SoftwareApplication JSON-LD only for live + near-ship ventures —
+  // backed by the lib/ventures shim that adapts from lib/portfolio.
   const venturesForSchema = ventures.filter(
     (v) => v.status === "live" || v.status === "near-ship",
   );
@@ -33,34 +38,22 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Ventures */}
-      <section
-        id="ventures"
-        className="px-6 py-24 md:py-32"
-        aria-labelledby="ventures-label"
-      >
-        <div className="mx-auto max-w-[960px]">
-          <header className="mb-10 flex flex-col gap-2">
-            <p id="ventures-label" className="section-label">
-              {sections.ventures.label}
-            </p>
-            <p
-              className="text-secondary"
-              style={{ fontSize: "1rem", lineHeight: 1.7 }}
-            >
-              {sections.ventures.intro}
-            </p>
-          </header>
+      <div className="ck-home-flow">
+        <CockpitDivider label="WHAT I DO" tone="gold" />
+        <WhatIDoSection />
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {ventures.map((v) => (
-              <VentureCard key={v.id} venture={v} />
-            ))}
-          </div>
-        </div>
-      </section>
+        <CockpitDivider label="NOTES" tone="purple" />
+        <NotesPreview />
 
-      <About />
+        <CockpitDivider label="LIVE LOG" tone="blue" />
+        <LiveLog />
+
+        <CockpitDivider label="ACTIVITY" tone="green" />
+        <ActivityShowcase />
+
+        <CockpitDivider label="ABOUT" tone="gold" />
+        <AboutPreview />
+      </div>
 
       {ventureJsonLd.map((data, i) => (
         <JsonLd key={`ld-venture-${i}`} data={data} id={`ld-venture-${i}`} />
