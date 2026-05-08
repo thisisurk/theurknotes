@@ -95,32 +95,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Static star-field — gold + white dots, no animation */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    radial-gradient(1.2px 1.2px at 25% 18%, rgba(212, 168, 83, 0.4) 50%, transparent 100%),
-    radial-gradient(1px 1px at 72% 12%, rgba(232, 236, 244, 0.3) 50%, transparent 100%),
-    radial-gradient(1.4px 1.4px at 9% 60%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
-    radial-gradient(1px 1px at 53% 47%, rgba(232, 236, 244, 0.28) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 88% 73%, rgba(212, 168, 83, 0.4) 50%, transparent 100%),
-    radial-gradient(1px 1px at 35% 86%, rgba(232, 236, 244, 0.3) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 64% 92%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
-    radial-gradient(1px 1px at 18% 32%, rgba(232, 236, 244, 0.28) 50%, transparent 100%),
-    radial-gradient(1.1px 1.1px at 92% 38%, rgba(212, 168, 83, 0.35) 50%, transparent 100%),
-    radial-gradient(1px 1px at 44% 65%, rgba(232, 236, 244, 0.3) 50%, transparent 100%);
-  background-size: 600px 600px;
-  background-repeat: repeat;
-}
-
-/* All app content sits above the star-field */
-body > * {
+/* Content stack rides above the global ambient layer.
+   Ambient z-index map: StarField 0 · scan 2 · CRT noise 3 · BootOverlay 1000.
+   Scoped to direct body children that actually render (header/main/footer) so
+   the ambient canvas + scan + crt are not pushed up by a blanket `body > *`. */
+body > header,
+body > main,
+body > footer {
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 
 /* Thai readability — minimum weight 400, generous line-height */
@@ -2645,6 +2628,109 @@ a.link-gold:hover {
   margin: 0;
 }
 
+/* ============================================================
+   Phase C/4.6 — Global ambient HUD (StarField · scan · CRT · BOOT)
+   ============================================================ */
+
+/* StarField canvas — rendered by <StarField/>. Sits at the very back. */
+.ck-starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sliding gold scan line across the top edge */
+.ck-scan-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent, rgba(212, 168, 83, 0.04), transparent);
+  pointer-events: none;
+  z-index: 2;
+  animation: ck-scan-line 9s linear infinite;
+}
+@keyframes ck-scan-line {
+  from { transform: translateY(-120px); }
+  to   { transform: translateY(100vh); }
+}
+
+/* CRT noise — fractal-noise SVG, blended for film-grain feel */
+.ck-crt-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* Boot overlay — covers viewport while the boot sequence prints */
+.ck-boot-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-deep);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  animation: ck-fade-in 0.3s ease;
+}
+.ck-boot-brand {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.ck-boot-brand .accent { color: var(--accent-gold); }
+.ck-boot-brand-tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+}
+.ck-boot-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 360px;
+}
+.ck-boot-line {
+  display: flex;
+  justify-content: space-between;
+  animation: ck-boot-type 0.25s ease forwards;
+}
+.ck-boot-ok { color: var(--success); }
+.ck-boot-line-cursor { opacity: 0.8; }
+.ck-boot-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--accent-gold);
+  animation: ck-blink 1s step-end infinite;
+  vertical-align: middle;
+}
+@keyframes ck-boot-type {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
 /* Reduced motion — flatten all cockpit ambient motion */
 @media (prefers-reduced-motion: reduce) {
   .ck-fade,
@@ -2670,4 +2756,11 @@ a.link-gold:hover {
   .ck-about-st-phase[data-state="active"] .ck-about-st-dot,
   .ck-about-st-phase[data-state="active"] .ck-about-st-dot::after { animation: none !important; }
   .role-word { opacity: 1; }
+
+  /* Phase C/4.6 ambient — disable continuous animation, hide the noisier layers */
+  .ck-scan-overlay { animation: none !important; opacity: 0; }
+  .ck-crt-noise { opacity: 0; }
+  .ck-boot-overlay { animation: none !important; }
+  .ck-boot-line { animation: none !important; opacity: 1; transform: none !important; }
+  .ck-boot-cursor { animation: none !important; opacity: 0; }
 }

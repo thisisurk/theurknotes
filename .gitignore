@@ -42,10 +42,18 @@ next-env.d.ts
 
 # strategy / identity reference docs (kept local, never published)
 /BRAND-DNA.md
+/BRAND-STRATEGY.md
 /PERSONAL-IDENTITY.md
+/PERSONAL-IDENTITY-v2.2.md
+/WEB-ARCHITECTURE.md
+/CONTEXT-HANDOFF.md
+/PROJECT-WORKFLOW.md
+/CLAUDE-DESIGN-BRIEF.md
+/CLAUDE-DESIGN-BRIEF-v2.md
 /claude-code-prompt-v2.md
 /MIGRATION-PLAN.md
 /FIRST-MESSAGE.md
 /TheUrk_Brand_Strategy_Summary_v5.md
 /USER-PREFERENCES.md
+/CHANGELOG.md
 

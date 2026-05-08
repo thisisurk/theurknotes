@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { AmbientLayer } from "@/components/AmbientLayer";
+import { BootOverlay } from "@/components/BootOverlay";
 import { meta, site } from "@/lib/content";
 import "./globals.css";
 
@@ -106,6 +108,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <JsonLd data={personJsonLd} id="ld-person" />
+        <AmbientLayer />
+        <BootOverlay />
         <Nav />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
