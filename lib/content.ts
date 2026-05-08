@@ -25,18 +25,52 @@ export const meta = {
 export const nav = {
   brand: "TheUrk",
   links: {
+    // Phase C/2 will rewrite NavShell to render: about / whatido / notes / log.
+    // Existing JSX still reads `ventures` + `about` — kept here until that swap.
     ventures: "Ventures",
     notes: "Notes",
     about: "About",
+    whatido: "What I Do",
+    log: "Log",
   },
+};
+
+// Annual theme — Layer B "Current Era Subtitle" per BRAND-DNA §5.
+// Permanent identity ("Solo Founder จากตราด") lives in `hero.identity`.
+export const annualTheme = {
+  year: "2026",
+  text: "สร้างระบบให้ AI Agents ทำงานให้ผม",
 };
 
 export const hero = {
   wordmark: "TheUrk",
   name: "Urk",
   identity: "Solo Founder จากตราด — ออกแบบระบบให้ AI ทำงานแทน",
-  tagline: "THINK · DESIGN · SHIP",
+  // Phase C/1 placeholder — Phase C/2 wires Hero.tsx to `roles` rotator.
+  // Was "THINK · DESIGN · SHIP" — demoted to private mantra per BRAND-DNA §5.
+  tagline: "ARCHITECT",
   microLine: "Architect ไม่ใช่ Builder",
+
+  // Role rotator (Phase C/2) — cycle through these in cockpit chrome.
+  roles: ["ARCHITECT", "OPERATOR", "BUILDER", "OBSERVER"] as const,
+
+  // 3 bilingual operating principles, shown vertically below identity.
+  manifesto: [
+    { en: "ARCHITECT FIRST", th: "ออกแบบระบบก่อนลงมือ" },
+    { en: "SYSTEMS > EFFORT", th: "ระบบสำคัญกว่าแรงงาน" },
+    { en: "COMPOUND > RUSH", th: "สะสมสำคัญกว่าเร่งรีบ" },
+  ],
+
+  // Live-feed ticker — short status lines, scroll horizontally.
+  ticker: [
+    "2026-05-06 · Vendo dashboard refactor",
+    "Note 089 · Solo Founder Mental Models",
+    "Ayu — beta deploy scheduled",
+    "Field log · Muay Thai 5/5 morning",
+    "2026-05-05 · Stripe webhook verified",
+    "Reading · Antifragile (re-read)",
+    "theurknotes.com · design v6 in progress",
+  ],
 };
 
 export const sections = {
@@ -53,6 +87,19 @@ export const sections = {
     emptyTitle: "ยังไม่มีอะไรให้อ่าน — ช่วงนี้โฟกัส ship ก่อน",
     emptyBody: "เขียนเมื่อมีอะไรจะพูดจริงๆ ไม่ใช่เพื่อ update feed",
     allLink: "← All notes",
+  },
+  whatido: {
+    label: "WHAT I DO",
+    intro: "Businesses · Tools · Creations — สามขาที่ผมเดินอยู่",
+  },
+  activity: {
+    label: "ACTIVITY",
+    intro: "กิจกรรมต่างๆที่ผมทำครับ!",
+  },
+  log: {
+    label: "LIVE LOG",
+    intro: "Field log · ของที่เพิ่งทำ ของที่กำลังคิด",
+    allLink: "View full log →",
   },
 };
 
@@ -101,3 +148,262 @@ export const tagLabels: Record<Tag, string> = {
   thoughts: "Thoughts",
   life: "Life",
 };
+
+// ---------------------------------------------------------------------------
+// Activity (Home section 04 · LIFE_CAT — 5 categories) — showcase, not tracker
+// Per WEB-ARCHITECTURE §2: Longevity · Mind · Food · Travel · Events
+// ---------------------------------------------------------------------------
+
+export const LIFE_CAT_KEYS = [
+  "longevity",
+  "mind",
+  "food",
+  "travel",
+  "events",
+] as const;
+export type LifeCategory = (typeof LIFE_CAT_KEYS)[number];
+
+export type LifeCatStyle = {
+  label: string;     // Audience-friendly Thai label
+  accent: string;
+  gradient: string;
+  ghost: string;
+  grid: string;
+  icon: string;      // lucide-react name — components map to <Icon />
+};
+
+export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
+  longevity: {
+    label: "สุขภาพ + การออกกำลัง",
+    accent: "#34D399",
+    gradient: "linear-gradient(135deg, #04140C 0%, #0A3020 45%, #10B981 100%)",
+    ghost: "rgba(52,211,153,0.07)",
+    grid: "rgba(52,211,153,0.06)",
+    icon: "activity",
+  },
+  mind: {
+    label: "ความคิด + หนังสือ",
+    accent: "#A78BFA",
+    gradient: "linear-gradient(135deg, #100820 0%, #2D1060 45%, #6D28D9 100%)",
+    ghost: "rgba(167,139,250,0.07)",
+    grid: "rgba(167,139,250,0.06)",
+    icon: "brain",
+  },
+  food: {
+    label: "อาหาร + กาแฟ",
+    accent: "#FB923C",
+    gradient: "linear-gradient(135deg, #1F0A02 0%, #4A1F08 45%, #C2410C 100%)",
+    ghost: "rgba(251,146,60,0.07)",
+    grid: "rgba(251,146,60,0.06)",
+    icon: "utensils",
+  },
+  travel: {
+    label: "ท่องเที่ยว",
+    accent: "#60A5FA",
+    gradient: "linear-gradient(135deg, #050E1F 0%, #0F2550 45%, #1D4ED8 100%)",
+    ghost: "rgba(96,165,250,0.07)",
+    grid: "rgba(96,165,250,0.06)",
+    icon: "compass",
+  },
+  events: {
+    label: "งาน + community",
+    accent: "#D4A853",
+    gradient: "linear-gradient(135deg, #2A1500 0%, #6B3010 45%, #C17820 100%)",
+    ghost: "rgba(212,168,83,0.07)",
+    grid: "rgba(212,168,83,0.06)",
+    icon: "trophy",
+  },
+};
+
+export type ActivitySize = "tall" | "wide" | "normal";
+
+export type ActivityItem = {
+  id: number;
+  category: LifeCategory;
+  label: string;
+  when: string;
+  image: string | null;
+  size: ActivitySize;
+  snippet: string;
+  recent?: boolean;
+};
+
+// Magazine-grid order is intentional — first item gets `recent: true`
+// and `size: 'tall'` so the visual lead-in works.
+export const ACTIVITY_ITEMS: ActivityItem[] = [
+  {
+    id: 1,
+    category: "events",
+    label: "พิธีเปิดงาน YEC",
+    when: "2d ago",
+    image: null,
+    size: "tall",
+    snippet: "เปิดงานในฐานะประธาน YEC — ภูมิใจที่ได้เป็นส่วนหนึ่ง",
+    recent: true,
+  },
+  {
+    id: 2,
+    category: "longevity",
+    label: "ซ้อมมวยไทย",
+    when: "4d ago",
+    image: null,
+    size: "tall",
+    snippet: "Round 5 รับนานเกิน — guard ต้องสูงกว่านี้ ครูมวยเตือนแล้ว",
+  },
+  {
+    id: 3,
+    category: "food",
+    label: "คาเฟ่ใหม่ในจันท์",
+    when: "1w ago",
+    image: null,
+    size: "normal",
+    snippet: "เจอร้านลับๆ — กาแฟดี บรรยากาศใช้ได้",
+  },
+  {
+    id: 4,
+    category: "mind",
+    label: "จบ Hollow Knight",
+    when: "1w ago",
+    image: null,
+    size: "normal",
+    snippet: "112 ชั่วโมง · Pantheon of Hallownest ผ่านสุดท้าย",
+  },
+  {
+    id: 5,
+    category: "travel",
+    label: "เลาะชายหาดตราด",
+    when: "1mo ago",
+    image: null,
+    size: "tall",
+    snippet: "กลับบ้าน recharge — ทะเลฝั่งตะวันออกเงียบกว่าที่คิด",
+  },
+  {
+    id: 6,
+    category: "longevity",
+    label: "วิ่งตอนเช้า",
+    when: "3w ago",
+    image: null,
+    size: "normal",
+    snippet: "5km ก่อนตี 6 — รู้สึกสมองโล่งขึ้นเยอะ",
+  },
+  {
+    id: 7,
+    category: "events",
+    label: "ประชุม CSR ผู้ว่า",
+    when: "5d ago",
+    image: null,
+    size: "normal",
+    snippet: "นั่งโต๊ะกับผู้ว่า · CSR project ปีหน้าเริ่มไตรมาส 1",
+  },
+  {
+    id: 8,
+    category: "food",
+    label: "Cafe coding",
+    when: "2w ago",
+    image: null,
+    size: "normal",
+    snippet: "นั่งจด 4 ชม. · เจ้าของร้านชะโงกดูจอ — โน้ตเบ้อเริ่ม",
+  },
+  {
+    id: 9,
+    category: "mind",
+    label: "ดูจบ Frieren",
+    when: "3d ago",
+    image: null,
+    size: "normal",
+    snippet: "Episode 28 — ทำใจ 30 นาทีหลังจบ · จะอ่านมังงะต่อ",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// LIVE LOG (Home section 05 + /log page · LOG_CAT — 4 categories)
+// Per WEB-ARCHITECTURE §2: Training · Build · Read · Travel
+// Distinct from Activity: high-frequency builder signal, work-progress vocab.
+// ---------------------------------------------------------------------------
+
+export const LOG_CAT_KEYS = ["training", "build", "read", "travel"] as const;
+export type LogCategory = (typeof LOG_CAT_KEYS)[number];
+
+export type LogCatStyle = {
+  label: string;
+  accent: string;
+  gradient: string;
+  ghost: string;
+  grid: string;
+  icon: string;
+};
+
+export const LOG_CAT: Record<LogCategory, LogCatStyle> = {
+  training: {
+    label: "Training",
+    accent: "#D4A853",
+    gradient: "linear-gradient(135deg, #2A1500 0%, #6B3010 45%, #C17820 100%)",
+    ghost: "rgba(212,168,83,0.07)",
+    grid: "rgba(212,168,83,0.06)",
+    icon: "swords",
+  },
+  build: {
+    label: "Build",
+    accent: "#60A5FA",
+    gradient: "linear-gradient(135deg, #050E1F 0%, #0F2550 45%, #1D4ED8 100%)",
+    ghost: "rgba(96,165,250,0.07)",
+    grid: "rgba(96,165,250,0.06)",
+    icon: "code",
+  },
+  read: {
+    label: "Read",
+    accent: "#A78BFA",
+    gradient: "linear-gradient(135deg, #100820 0%, #2D1060 45%, #6D28D9 100%)",
+    ghost: "rgba(167,139,250,0.07)",
+    grid: "rgba(167,139,250,0.06)",
+    icon: "book-open",
+  },
+  travel: {
+    label: "Travel",
+    accent: "#4ADE80",
+    gradient: "linear-gradient(135deg, #041410 0%, #0A3020 45%, #15803D 100%)",
+    ghost: "rgba(74,222,128,0.07)",
+    grid: "rgba(74,222,128,0.06)",
+    icon: "tent-tree",
+  },
+};
+
+export type LogEntry = {
+  id: number;
+  when: string;
+  category: LogCategory;
+  image: string | null;
+  text: string;
+};
+
+// LIVE LOG entries — image: null = text-only fallback, image set = photo card.
+export const LOG_ENTRIES: LogEntry[] = [
+  {
+    id: 1,
+    when: "2d ago",
+    category: "training",
+    image: null,
+    text: "มวยไทย session — round 5 รับนานเกิน guard ต้องสูงกว่านี้ ครูมวยเตือนแล้ว",
+  },
+  {
+    id: 2,
+    when: "5d ago",
+    category: "build",
+    image: null,
+    text: "Vendo queue v0.7 — 11/13 tasks closed ที่เหลือคือ edge cases ของ LINE webhook",
+  },
+  {
+    id: 3,
+    when: "1w ago",
+    category: "read",
+    image: null,
+    text: "\"Book of Five Rings\" — re-read เล่ม Earth ตรงกับงานออกแบบระบบมากกว่าครั้งแรกที่อ่าน",
+  },
+  {
+    id: 4,
+    when: "2w ago",
+    category: "travel",
+    image: null,
+    text: "เดินป่าเขาคิชฌกูฏ — reset operating system เก็บ 3 idea กลับมา ยังไม่ได้ ship",
+  },
+];

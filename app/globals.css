@@ -10,21 +10,33 @@
 
   --bg-deep: #0b1120;
   --bg-primary: #0f1729;
-  --bg-card: #162033;
+  --bg-card: #131e33;
   --bg-card-hover: #1b2844;
+
+  /* Glass HUD layers — translucent surfaces for cockpit chrome (v6 mockup) */
+  --bg-glass-soft: rgba(19, 30, 51, 0.55);
+  --bg-glass-medium: rgba(19, 30, 51, 0.35);
+  --bg-glass-deep: rgba(11, 17, 32, 0.65);
 
   --accent-gold: #d4a853;
   --accent-gold-dim: #d4a85320;
-  --accent-gold-glow: #d4a85340;
+  --accent-gold-glow: rgba(212, 168, 83, 0.28);
+  --accent-gold-soft: rgba(212, 168, 83, 0.55);
+  --accent-gold-line: rgba(212, 168, 83, 0.2);
 
   --text-primary: #e8ecf4;
   --text-secondary: #94a3b8;
   --text-muted: #7587a8;
 
   --border: #1e2d4a;
+  --border-soft: rgba(30, 45, 74, 0.5);
 
   --success: #4ade80;
   --error: #f87171;
+
+  /* Status accents — used by portfolio statusKind pills */
+  --status-blue: #60a5fa;
+  --status-amber: #fbbf24;
 }
 
 /* Tailwind v4 theme tokens — register CSS vars as utility classes
@@ -35,10 +47,17 @@
   --color-card: var(--bg-card);            /* bg-card      */
   --color-card-hover: var(--bg-card-hover);/* bg-card-hover */
 
+  /* Glass HUD layers */
+  --color-glass-soft: var(--bg-glass-soft);
+  --color-glass-medium: var(--bg-glass-medium);
+  --color-glass-deep: var(--bg-glass-deep);
+
   /* Accents */
   --color-gold: var(--accent-gold);        /* text-gold, bg-gold, border-gold */
   --color-gold-dim: var(--accent-gold-dim);
   --color-gold-glow: var(--accent-gold-glow);
+  --color-gold-soft: var(--accent-gold-soft);
+  --color-gold-line: var(--accent-gold-line);
 
   /* Text */
   --color-primary: var(--text-primary);    /* text-primary */
@@ -47,10 +66,16 @@
 
   /* Border + semantic */
   --color-border: var(--border);           /* border-border */
+  --color-border-soft: var(--border-soft);
   --color-success: var(--success);
   --color-error: var(--error);
 
+  /* Status */
+  --color-blue: var(--status-blue);
+  --color-amber: var(--status-amber);
+
   --font-sans: var(--font-outfit), var(--font-noto-thai), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 /* ============================================================

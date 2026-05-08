@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Noto_Sans_Thai } from "next/font/google";
+import { Outfit, Noto_Sans_Thai, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
@@ -18,6 +18,13 @@ const notoThai = Noto_Sans_Thai({
   variable: "--font-noto-thai",
   subsets: ["thai"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -90,7 +97,7 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${outfit.variable} ${notoThai.variable}`}
+      className={`${outfit.variable} ${notoThai.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>

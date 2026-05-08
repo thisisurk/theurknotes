@@ -1,6 +1,13 @@
-// Each venture is one card on the homepage.
-// To add a new venture: append an object to the array.
-// To change a status: edit the `status` field.
+// DEPRECATED — replaced by lib/portfolio.ts in Phase C/1 (2026-05-08).
+//
+// This file is a backward-compat shim so existing JSX components
+// (app/page.tsx, components/VentureCard.tsx, components/StatusBadge.tsx)
+// keep compiling while the redesign is in flight.
+//
+// To be removed in Phase C/2 once Hero + Home sections migrate to
+// reading directly from `@/lib/portfolio`.
+
+import { businesses, tools, type PortfolioItem, type StatusKind } from "./portfolio";
 
 export type VentureStatus = "live" | "near-ship" | "wip" | "coming";
 
@@ -12,65 +19,59 @@ export type Venture = {
   body: string;
   link: {
     label: string;
-    url: string | null; // null = muted, no hyperlink
+    url: string | null;
   };
 };
 
-export const ventures: Venture[] = [
-  {
-    id: "goldlog",
-    title: "GoldLog",
-    status: "live",
-    subtitle: "XAUUSD trading journal",
-    body: "ผมเทรดทอง แล้วไม่มี tool ไหน cover workflow ที่ต้องการ เลยออกแบบของตัวเองขึ้นมา ใครที่เทรดแบบเดียวกันก็ใช้ได้",
-    link: {
-      label: "goldlog.app",
-      url: "https://goldlog.app",
-    },
-  },
-  {
-    id: "vendo",
-    title: "Vendo",
-    status: "near-ship",
-    subtitle: "LINE Mini App SaaS สำหรับร้าน F&B",
-    body: "เริ่มจากร้านน้ำเต้าหู้ของแฟน ที่ใช้ LINE คุยลูกค้าอยู่แล้ว ไม่ต้องให้ลูกค้าโหลดแอปใหม่ — ออกออเดอร์ผ่าน LINE เลย",
-    link: {
-      label: "Coming soon",
-      url: null,
-    },
-  },
-  {
-    id: "trading",
-    title: "Trading System",
-    status: "wip",
-    subtitle: "ออกแบบระบบเทรดอัตโนมัติ",
-    body: "ยังอยู่ระหว่างสอบ prop firm + ออกแบบระบบใหม่ ของเก่าพังแล้ว (บทเรียน) กำลังคิดจากศูนย์",
-    link: {
-      label: "ยังไม่มีอะไรให้ดู",
-      url: null,
-    },
-  },
-  {
-    id: "next",
-    title: "—",
-    status: "coming",
-    subtitle: "Venture ถัดไป",
-    body: "ยังอยู่ในหัว ยังไม่บอก",
-    link: {
-      label: "",
-      url: null,
-    },
-  },
-];
+function mapStatus(kind: StatusKind): VentureStatus {
+  switch (kind) {
+    case "green":
+      return "live";
+    case "gold":
+      return "near-ship";
+    case "blue":
+    case "amber":
+      return "wip";
+    case "neutral":
+    default:
+      return "coming";
+  }
+}
 
-// Badge styling per status. Components read from here.
+function splitDesc(desc: string): { subtitle: string; body: string } {
+  const i = desc.indexOf("—");
+  if (i === -1) return { subtitle: desc, body: desc };
+  return {
+    subtitle: desc.slice(0, i).trim(),
+    body: desc.slice(i + 1).trim(),
+  };
+}
+
+function adapt(item: PortfolioItem): Venture {
+  const { subtitle, body } = splitDesc(item.desc);
+  const web = item.channels?.find((c) => c.type === "web");
+  return {
+    id: item.id,
+    title: item.name,
+    status: mapStatus(item.statusKind),
+    subtitle,
+    body,
+    link: {
+      label: web?.label ?? "",
+      url: web?.href ?? null,
+    },
+  };
+}
+
+export const ventures: Venture[] = [...businesses, ...tools].map(adapt);
+
 export const statusBadge: Record<
   VentureStatus,
   { label: string; bg: string; text: string }
 > = {
   live: {
     label: "Live",
-    bg: "rgb(74 222 128 / 0.15)", // --success at 15%
+    bg: "rgb(74 222 128 / 0.15)",
     text: "var(--success)",
   },
   "near-ship": {
