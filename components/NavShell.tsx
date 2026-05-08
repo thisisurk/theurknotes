@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { nav } from "@/lib/content";
-import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,
@@ -12,13 +11,9 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-type Props = {
-  showNotes: boolean;
-};
-
-type LinkItem = { href: string; label: string };
-
-export function NavShell({ showNotes }: Props) {
+// Cockpit nav (Phase C/2): brand dot + 4 mono links + sticky blur on scroll.
+// Mobile: existing Radix Sheet, restyled with `.nav-mobile-link`.
+export function NavShell() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -29,69 +24,42 @@ export function NavShell({ showNotes }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links: LinkItem[] = [
-    { href: "/#ventures", label: nav.links.ventures },
-    ...(showNotes ? [{ href: "/notes", label: nav.links.notes }] : []),
-    { href: "/#about", label: nav.links.about },
-  ];
-
   return (
     <header
-      className={cn(
-        "sticky top-0 z-40 w-full transition-colors duration-200",
-        scrolled
-          ? "bg-deep/70 backdrop-blur-md border-b border-border/60"
-          : "bg-transparent",
-      )}
-      style={{ height: 72 }}
+      className="nav-cockpit"
+      data-scrolled={scrolled ? "true" : "false"}
     >
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
-        <Link
-          href="/"
-          className="text-primary font-semibold"
-          style={{ fontSize: "1rem", letterSpacing: "-0.02em" }}
-        >
-          {nav.brand}
-        </Link>
+      <Link href="/" className="nav-brand" aria-label="TheUrk — home">
+        <span className="dot" aria-hidden="true" />
+        {nav.brand.lead}
+        <span className="accent">{nav.brand.accent}</span>
+      </Link>
 
-        {/* Desktop links */}
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="link-gold text-sm font-medium"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
+      <nav className="nav-list hidden md:flex" aria-label="Primary">
+        {nav.items.map((it) => (
+          <Link key={it.href} href={it.href} className="nav-link">
+            {it.label}
+          </Link>
+        ))}
+      </nav>
 
-        {/* Mobile hamburger */}
-        <div className="md:hidden">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger
-              aria-label="Open menu"
-              className="link-gold inline-flex items-center justify-center p-1"
-            >
-              <Menu size={22} strokeWidth={1.75} />
-            </SheetTrigger>
-            <SheetContent>
-              <nav className="mt-12 flex flex-col gap-2">
-                {links.map((l) => (
-                  <SheetClose key={l.href} asChild>
-                    <Link
-                      href={l.href}
-                      className="link-gold py-3 text-base"
-                    >
-                      {l.label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+      <div className="md:hidden">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger aria-label="Open menu" className="nav-burger">
+            <Menu size={20} strokeWidth={1.75} />
+          </SheetTrigger>
+          <SheetContent>
+            <nav className="mt-12 flex flex-col" aria-label="Primary">
+              {nav.items.map((it) => (
+                <SheetClose key={it.href} asChild>
+                  <Link href={it.href} className="nav-mobile-link">
+                    {it.label}
+                  </Link>
+                </SheetClose>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );

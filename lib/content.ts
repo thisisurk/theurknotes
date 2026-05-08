@@ -23,16 +23,15 @@ export const meta = {
 };
 
 export const nav = {
-  brand: "TheUrk",
-  links: {
-    // Phase C/2 will rewrite NavShell to render: about / whatido / notes / log.
-    // Existing JSX still reads `ventures` + `about` — kept here until that swap.
-    ventures: "Ventures",
-    notes: "Notes",
-    about: "About",
-    whatido: "What I Do",
-    log: "Log",
-  },
+  brand: { lead: "The", accent: "Urk" },
+  // 4 items per WEB-ARCHITECTURE v0.3 §1 (no Contact — footer email is enough).
+  // Order encodes journey: Identity → Proof → Depth → Frequency.
+  items: [
+    { href: "/about", label: "About" },
+    { href: "/what-i-do", label: "What I Do" },
+    { href: "/notes", label: "Notes" },
+    { href: "/log", label: "Log" },
+  ],
 };
 
 // Annual theme — Layer B "Current Era Subtitle" per BRAND-DNA §5.
@@ -46,12 +45,45 @@ export const hero = {
   wordmark: "TheUrk",
   name: "Urk",
   identity: "Solo Founder จากตราด — ออกแบบระบบให้ AI ทำงานแทน",
-  // Phase C/1 placeholder — Phase C/2 wires Hero.tsx to `roles` rotator.
-  // Was "THINK · DESIGN · SHIP" — demoted to private mantra per BRAND-DNA §5.
+  // "THINK · DESIGN · SHIP" demoted to private mantra per BRAND-DNA §5.
   tagline: "ARCHITECT",
   microLine: "Architect ไม่ใช่ Builder",
 
-  // Role rotator (Phase C/2) — cycle through these in cockpit chrome.
+  // Cockpit top bar — three short mono segments above identity stack.
+  cockpit: {
+    region: "14°N · 102°E · TRAT, TH",
+    framework: "FY2026 · OPUS·SOLO",
+    status: "SYSTEM ACTIVE",
+  },
+
+  // Avatar — temporary asset per consolidation decision (replace later).
+  avatar: {
+    src: "/avatars/PB1_9757.jpg",
+    alt: "Urk",
+  },
+
+  // Eyebrow above the wordmark — permanent identity (no tech coupling).
+  eyebrow: "Solo Founder · ตราด, Thailand",
+
+  // h1 wordmark split — "The" + gold "Urk".
+  headline: { lead: "The", accent: "Urk" },
+
+  // Headline punch — lead Thai sentence with one gold-accented fragment.
+  punch: {
+    before: "ลุยเดี่ยว. ",
+    accent: "สร้างอิสรภาพ",
+    after: "ด้วยเทคโนโลยี.",
+  },
+
+  // Focus block — annual theme (Layer B subtitle, current era).
+  focus: {
+    label: "Focus · 2026",
+    body: "สร้างระบบให้ AI Agents ทำงานให้ผม",
+    accent: "AI Agents",
+  },
+
+  // Role rotator — 4 facets cycle every 2.2s. Reduced-motion safe.
+  roleLabel: "ROLE_",
   roles: ["ARCHITECT", "OPERATOR", "BUILDER", "OBSERVER"] as const,
 
   // 3 bilingual operating principles, shown vertically below identity.
@@ -61,7 +93,14 @@ export const hero = {
     { en: "COMPOUND > RUSH", th: "สะสมสำคัญกว่าเร่งรีบ" },
   ],
 
+  // CTA pair below identity stack.
+  ctas: [
+    { label: "EXPLORE PROJECTS", href: "/what-i-do", primary: true },
+    { label: "READ NOTES", href: "/notes", primary: false },
+  ],
+
   // Live-feed ticker — short status lines, scroll horizontally.
+  tickerLabel: "▸ LIVE_FEED",
   ticker: [
     "2026-05-06 · Vendo dashboard refactor",
     "Note 089 · Solo Founder Mental Models",
@@ -113,9 +152,15 @@ export const about: string[] = [
   "ที่นี่คือที่ที่ผมบันทึก journey — ของที่สร้าง ระบบที่ออกแบบ และสิ่งที่เรียนรู้ระหว่างทาง ถ้าแนวทางตรงกัน ยินดีต้อนรับ",
 ];
 
+// Footer cockpit — uses the year at render time (no stale "© 2026" string).
 export const footer = {
-  copyright: "© 2026 TheUrk",
-  easterEgg: "Think. Design. Ship. — ที่เหลือ AI จัดการ",
+  eyebrow: "SHUTDOWN_SEQUENCE",
+  brand: { lead: "The", accent: "Urk" },
+  tagline: "Solo Founder · architect, not builder",
+  taglineTh: "ตราด, Thailand · solo by nature, since forever",
+  // Bottom bar — locale + year. {year} is replaced at render.
+  locale: "ตราด, Thailand",
+  cursor: "connection persistent",
 };
 
 export const socials = [
@@ -133,7 +178,7 @@ export const socials = [
   },
   {
     label: "Email",
-    url: "mailto:urk@theurknotes.com",
+    url: "mailto:hi@theurknotes.com",
     icon: "Mail",
     ariaLabel: "Email Urk",
   },

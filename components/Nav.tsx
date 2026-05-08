@@ -1,9 +1,7 @@
-import { getPublishedCount } from "@/lib/notes";
 import { NavShell } from "./NavShell";
 
-// Server component — reads published note count at build time
-// to decide whether to show the "Notes" link in the nav.
+// Thin wrapper kept so `layout.tsx` import path stays stable.
+// Per v0.3 spec the nav is always 4 items (no `getPublishedCount` gate).
 export function Nav() {
-  const showNotes = getPublishedCount() >= 3;
-  return <NavShell showNotes={showNotes} />;
+  return <NavShell />;
 }
