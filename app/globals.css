@@ -2910,14 +2910,6 @@ a.link-gold:hover {
   .cockpit-bar { gap: 8px; }
 }
 
-/* Stat-grid: stack to 1-column at <=1024 (mobile + tablet portrait).
-   Above 1024, auto-fit gives 3 columns at desktop. Matches design intent
-   where narrow viewports show full-width stacked cards instead of squeezed
-   3-up. */
-@media (max-width: 1024px) {
-  .hero-proof-grid { grid-template-columns: 1fr; }
-}
-
 /* ===== HERO STAT CARDS ===== */
 .hero-proof-grid {
   display: grid;
@@ -2925,6 +2917,12 @@ a.link-gold:hover {
   gap: 14px;
   position: relative;
   z-index: 2;
+}
+/* Stack to 1-column at <=1024 (mobile + tablet portrait). Above 1024,
+   auto-fit above gives 3 columns at desktop. Must follow the base rule
+   so cascade order picks 1fr over auto-fit at this viewport. */
+@media (max-width: 1024px) {
+  .hero-proof-grid { grid-template-columns: 1fr; }
 }
 .stat-card {
   position: relative;
