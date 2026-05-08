@@ -2995,12 +2995,12 @@ a.link-gold:hover {
 
 /* ===== NAV BRAND MARK (logo image) ===== */
 .nav-brand-mark {
-  height: 56px;
+  height: 72px;
   width: auto;
   display: block;
 }
 @media (max-width: 768px) {
-  .nav-brand-mark { height: 44px; }
+  .nav-brand-mark { height: 56px; }
 }
 
 /* ===== FOOTER COLUMNS — left/right rebalance + SYSTEM_STATUS ===== */
