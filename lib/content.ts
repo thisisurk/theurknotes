@@ -228,8 +228,12 @@ export const sections = {
     eyebrow: "About",
     titleLead: "The Casual ",
     titleAccent: "Ronin",
-    intro:
-      "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
+    // Structured so the home section can insert a responsive break between
+    // the two halves on mobile (mockup .ronin-dot / .ronin-break pattern).
+    intro: {
+      ronin: "Ronin = ลุยเดี่ยว ไร้สังกัด",
+      casual: "Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
+    },
     allLink: { label: "Read full About →", href: "/about" },
   },
 };

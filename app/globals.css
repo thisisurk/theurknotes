@@ -931,6 +931,7 @@ a.link-gold:hover {
 /* ===== FOOTER (cockpit) ===== */
 .footer-cockpit {
   position: relative;
+  width: 100%;
   max-width: 1080px;
   margin: 120px auto 0;
   padding: 0 40px 56px;
@@ -989,10 +990,10 @@ a.link-gold:hover {
 }
 .footer-mark {
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 2.2rem;
   letter-spacing: -0.025em;
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .footer-mark .accent { color: var(--accent-gold); }
 .footer-tag {
@@ -1083,7 +1084,7 @@ a.link-gold:hover {
 @media (max-width: 768px) {
   .footer-cockpit { padding: 0 24px 40px; margin-top: 80px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .footer-mark { font-size: 1.4rem; }
+  .footer-mark { font-size: 1.8rem; }
 }
 
 /* ===== COCKPIT DIVIDER (between sections — exported for C/3-5) ===== */
@@ -2278,17 +2279,77 @@ a.link-gold:hover {
   .ck-activity-grid { grid-auto-rows: 120px; }
 }
 
-/* ===== Home About section (Phase C/4.6 — full mockup parity) ===== */
+/* ===== Home About section (Phase D/1 — mockup parity drift fix) ===== */
 .ck-about-section { position: relative; }
 
+/* Ambient backdrop — gold radial spot + dashed circuit SVG (mockup parity). */
+.ck-about-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.ck-about-bg-spot {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  left: -250px;
+  top: 0;
+  background: radial-gradient(
+    circle,
+    rgba(212, 168, 83, 0.07) 0%,
+    rgba(212, 168, 83, 0.02) 35%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: ck-about-bg-pulse 11s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes ck-about-bg-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+.ck-about-bg-corner {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  width: 180px;
+  height: 100px;
+  opacity: 0.45;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-about-bg-spot { animation: none !important; }
+}
+
+/* Header — block layout (mockup) rather than the section-wide flex pattern */
+.ck-about-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+.ck-about-header .eyebrow { margin-bottom: 14px; }
+.ck-about-header .ck-section-title { margin-top: 0; }
+.ck-about-header .ck-section-intro { max-width: 640px; }
+
+/* Responsive break inside the About intro — mockup .ronin-dot/.ronin-break. */
+.ronin-dot { display: inline; color: var(--accent-gold); opacity: 0.55; }
+.ronin-break { display: none; }
+@media (max-width: 768px) {
+  .ronin-dot { display: none; }
+  .ronin-break { display: block; height: 4px; }
+}
+
 .ck-about-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1.18fr 1fr;
-  gap: 28px;
+  grid-template-columns: 1fr 270px;
+  gap: 20px;
   align-items: stretch;
   margin-top: 36px;
 }
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .ck-about-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
@@ -2296,8 +2357,11 @@ a.link-gold:hover {
   padding: 32px 36px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 18px;
 }
+.ck-about-glass-top { display: flex; flex-direction: column; gap: 18px; }
+.ck-about-glass-bot { display: flex; flex-direction: column; }
 @media (max-width: 600px) {
   .ck-about-glass-bio { padding: 24px 22px; }
 }
@@ -2319,24 +2383,26 @@ a.link-gold:hover {
 .ck-about-foot {
   display: flex;
   justify-content: flex-end;
-  margin-top: auto;
   padding-top: 18px;
 }
 
 /* Solo timeline lives below the 2-col grid */
-.ck-about-timeline-block { margin-top: 56px; }
+.ck-about-timeline-block { position: relative; z-index: 1; margin-top: 56px; }
 
-/* ===== Hologram panel ===== */
+/* ===== Hologram panel — fixed 270px portrait on desktop, full-width on mobile ===== */
 .ck-hologram-wrap {
   position: relative;
-  min-height: 460px;
-  height: 100%;
+  width: 270px;
+  aspect-ratio: 9 / 16;
   border-radius: 6px;
   overflow: hidden;
   background: var(--bg-glass-deep);
   border: 1px solid var(--border-soft);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+@media (max-width: 960px) {
+  .ck-hologram-wrap { width: 100%; order: -1; }
 }
 .ck-hologram-canvas {
   position: absolute;
@@ -3052,52 +3118,70 @@ a.link-gold:hover {
 
 .footer-status {
   width: 100%;
-  padding: 14px 16px;
-  background: var(--bg-glass-medium);
-  border: 1px solid var(--border-soft);
-  border-radius: 4px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: 16px 18px;
+  background: rgba(11, 17, 32, 0.55);
+  border: 1px solid var(--border);
+  position: relative;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+}
+/* Gold L-brackets at top-left and bottom-right corners (mockup parity) */
+.footer-status::before,
+.footer-status::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-style: solid;
+  border-color: var(--accent-gold-soft);
+  border-width: 0;
+}
+.footer-status::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.footer-status::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
 }
 .footer-status-head {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-size: 0.55rem;
-  letter-spacing: 0.24em;
-  color: var(--accent-gold);
+  letter-spacing: 0.26em;
+  color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed var(--border-soft);
 }
 .footer-status-head .pulse {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--accent-gold);
-  box-shadow: 0 0 6px var(--accent-gold-glow);
-  animation: ck-pulse 2s ease-in-out infinite;
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.7);
+  animation: ck-pulse 1.6s ease-in-out infinite;
 }
 .footer-status-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--border-soft);
+  gap: 12px;
   text-transform: uppercase;
 }
+.footer-status-row:last-child { border-bottom: 0; }
 .footer-status-row .k {
   color: var(--text-muted);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
 }
 .footer-status-row .v {
-  color: var(--text-secondary);
-  font-size: 0.6rem;
-  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   text-align: right;
 }
 
@@ -3106,7 +3190,8 @@ a.link-gold:hover {
 
 @media (max-width: 768px) {
   .footer-col-right { gap: 20px; }
-  .footer-status-row .v { font-size: 0.58rem; }
+  .footer-status-row .k,
+  .footer-status-row .v { font-size: 0.62rem; }
 }
 
 /* ============================================================

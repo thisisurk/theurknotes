@@ -23,52 +23,85 @@ export function AboutSection() {
       className="ck-section ck-about-section"
       aria-labelledby="about-section-title"
     >
-      <header className="ck-section-header">
+      <div className="ck-about-bg" aria-hidden="true">
+        <div className="ck-about-bg-spot" />
+        <svg
+          className="ck-about-bg-corner"
+          viewBox="0 0 180 100"
+          fill="none"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <path
+            d="M 0 80 L 50 80 L 50 50 L 100 50 L 100 20 L 180 20"
+            stroke="rgba(212,168,83,0.55)"
+            strokeWidth="0.6"
+            strokeDasharray="3 4"
+            opacity="0.5"
+          />
+          <circle cx="50" cy="80" r="2" fill="#D4A853" opacity="0.65" />
+          <circle cx="50" cy="50" r="1.5" fill="#D4A853" opacity="0.5" />
+          <circle cx="100" cy="50" r="2" fill="#D4A853" opacity="0.65" />
+          <circle cx="100" cy="20" r="1.5" fill="#D4A853" opacity="0.5" />
+        </svg>
+      </div>
+
+      <header className="ck-about-header">
         <span className="eyebrow">{c.eyebrow}</span>
         <h2 id="about-section-title" className="ck-section-title">
           {c.titleLead}
           <span className="accent">{c.titleAccent}</span>
         </h2>
-        <p className="ck-section-intro">{c.intro}</p>
+        <p className="ck-section-intro">
+          <span>{c.intro.ronin}</span>
+          <span className="ronin-dot" aria-hidden="true"> · </span>
+          <span className="ronin-break" aria-hidden="true" />
+          <span>{c.intro.casual}</span>
+        </p>
       </header>
 
       <div className="ck-about-grid">
         <Glass className="ck-about-glass-bio">
-          <p className="ck-about-bio-para">{aboutPreview.intro}</p>
-          <p className="ck-about-bio-para">
-            {aboutPreview.body}
-            <span className="accent"> {aboutPreview.accent}</span>
-            {aboutPreview.bodyAfter}
-          </p>
+          <div className="ck-about-glass-top">
+            <p className="ck-about-bio-para">{aboutPreview.intro}</p>
+            <p className="ck-about-bio-para">
+              {aboutPreview.body}
+              <span className="accent"> {aboutPreview.accent}</span>
+              {aboutPreview.bodyAfter}
+            </p>
 
-          <div className="ck-about-block">
-            <div className="ck-about-block-label">{labels.principlesLabel}</div>
-            <div className="ck-about-principles">
-              {ABOUT_PRINCIPLES.map((p) => (
-                <div key={p.en} className="ck-about-ap-row">
-                  <span className="ck-about-ap-en">▸ {p.en}</span>
-                  <span className="ck-about-ap-th">{p.th}</span>
-                </div>
-              ))}
+            <div className="ck-about-block">
+              <div className="ck-about-block-label">
+                {labels.principlesLabel}
+              </div>
+              <div className="ck-about-principles">
+                {ABOUT_PRINCIPLES.map((p) => (
+                  <div key={p.en} className="ck-about-ap-row">
+                    <span className="ck-about-ap-en">▸ {p.en}</span>
+                    <span className="ck-about-ap-th">{p.th}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="ck-about-block ck-about-block-runtime">
-            <div className="ck-about-block-label">{labels.runtimeLabel}</div>
-            <div className="ck-about-runtime">
-              {RUNTIME_CONFIG.map((r) => (
-                <div key={r.label} className="ck-about-rc-card">
-                  <div className="ck-about-rc-label">{r.label}</div>
-                  <div className="ck-about-rc-value">{r.value}</div>
-                </div>
-              ))}
+          <div className="ck-about-glass-bot">
+            <div className="ck-about-block ck-about-block-runtime">
+              <div className="ck-about-block-label">{labels.runtimeLabel}</div>
+              <div className="ck-about-runtime">
+                {RUNTIME_CONFIG.map((r) => (
+                  <div key={r.label} className="ck-about-rc-card">
+                    <div className="ck-about-rc-label">{r.label}</div>
+                    <div className="ck-about-rc-value">{r.value}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="ck-about-foot">
-            <Link className="ck-btn" href={c.allLink.href}>
-              {c.allLink.label}
-            </Link>
+            <div className="ck-about-foot">
+              <Link className="ck-btn" href={c.allLink.href}>
+                {c.allLink.label}
+              </Link>
+            </div>
           </div>
         </Glass>
 
