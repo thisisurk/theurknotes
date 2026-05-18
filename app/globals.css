@@ -1077,9 +1077,8 @@ a.link-gold:hover {
   font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.22em;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
-  opacity: 0.65;
 }
 @media (max-width: 768px) {
   .footer-cockpit { padding: 0 24px 40px; margin-top: 80px; }
@@ -2739,7 +2738,7 @@ a.link-gold:hover {
   text-transform: uppercase;
   margin-bottom: 7px;
 }
-.ck-about-st-phase[data-state="partial"] .ck-about-st-tag { color: var(--accent-gold-soft); }
+.ck-about-st-phase[data-state="partial"] .ck-about-st-tag { color: rgba(212, 168, 83, 0.82); }
 .ck-about-st-phase[data-state="active"]  .ck-about-st-tag { color: var(--accent-gold); }
 .ck-about-st-en {
   font-family: var(--font-mono);

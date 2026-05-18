@@ -105,6 +105,13 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#0b1120" />
+        <link
+          rel="preload"
+          as="image"
+          href="/logo/theurk-logo-noBG.svg"
+          type="image/svg+xml"
+          fetchPriority="high"
+        />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <JsonLd data={personJsonLd} id="ld-person" />

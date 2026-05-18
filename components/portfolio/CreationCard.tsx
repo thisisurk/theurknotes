@@ -50,9 +50,16 @@ export function CreationCard({ item, index, onPlay }: Props) {
         onClick={handlePlay}
         disabled={!playable}
         aria-label={
-          playable
-            ? `Play ${item.name}`
-            : `${item.name} — preview not yet available`
+          [
+            `CREATION_${idx}`,
+            medium,
+            item.status ?? "",
+            playable
+              ? `: play ${item.name}`
+              : `: ${item.name} — preview not yet available`,
+          ]
+            .filter(Boolean)
+            .join(" ")
         }
       >
         <div className="ck-creation-thumb" style={thumbStyle}>

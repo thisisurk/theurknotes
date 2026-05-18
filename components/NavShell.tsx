@@ -42,6 +42,10 @@ export function NavShell() {
           src="/logo/theurk-logo-noBG.svg"
           alt="TheUrk"
           className="nav-brand-mark"
+          width={72}
+          height={72}
+          fetchPriority="high"
+          decoding="async"
         />
       </Link>
 
