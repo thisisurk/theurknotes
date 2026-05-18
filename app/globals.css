@@ -611,8 +611,12 @@ a.link-gold:hover {
   border-radius: 100px;
   background: var(--accent-gold-dim);
   margin-bottom: 12px;
-  align-self: flex-start;
 }
+/* Phase D/2.1: removed `align-self: flex-start` so the badge stretches to
+   the column flex parent's width (default align-items: stretch). Matches
+   mockup which uses `display: inline-flex` without align-self override —
+   the badge reads as a horizontal section header, not a tag/metadata pill.
+   Reinforces the cockpit/HUD visual language used elsewhere in the hero. */
 .hero-focus-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-gold); }
 .hero-focus-label {
   font-family: var(--font-mono);
