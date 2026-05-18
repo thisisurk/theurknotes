@@ -426,9 +426,9 @@ a.link-gold:hover {
   z-index: 1;
   gap: 32px;
 }
-@media (max-width: 768px) {
-  .hero-section { padding: 40px 24px 60px; gap: 28px; }
-}
+/* Phase D/2: removed mobile padding/gap override. Mockup uses one set of
+   values across all viewports — keeping universal padding closes the
+   cockpit-bar-overlaps-nav drift at 375/768. */
 
 /* Hero backdrop layers */
 .hero-backdrop {
@@ -3010,10 +3010,10 @@ a.link-gold:hover {
   position: relative;
   z-index: 2;
 }
-/* Stack to 1-column at <=1024 (mobile + tablet portrait). Above 1024,
-   auto-fit above gives 3 columns at desktop. Must follow the base rule
-   so cascade order picks 1fr over auto-fit at this viewport. */
-@media (max-width: 1024px) {
+/* Stack to 1-column only at small mobile. Above 640px, auto-fit picks 3 (≥720)
+   or 2 (640–719) columns naturally — matches mockup which has no override and
+   relies on minmax(220, 1fr). Phase D/2: was <=1024, narrowed per mockup parity. */
+@media (max-width: 640px) {
   .hero-proof-grid { grid-template-columns: 1fr; }
 }
 .stat-card {

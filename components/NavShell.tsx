@@ -49,7 +49,7 @@ export function NavShell() {
         />
       </Link>
 
-      <nav className="nav-list hidden md:flex" aria-label="Primary">
+      <nav className="nav-list hidden min-[769px]:flex" aria-label="Primary">
         {nav.items.map((it) =>
           isExternal(it.href) ? (
             <a key={it.href} href={it.href} className="nav-link">
@@ -63,7 +63,7 @@ export function NavShell() {
         )}
       </nav>
 
-      <div className="md:hidden">
+      <div className="min-[769px]:hidden">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger aria-label="Open menu" className="nav-burger">
             <Menu size={20} strokeWidth={1.75} />

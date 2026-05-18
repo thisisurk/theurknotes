@@ -15,9 +15,12 @@ const TARGETS = [
   { name: "mockup", url: "file:///Users/theurk/Workspace/Personal/theurknotes/index-gemini-v6.html" },
 ];
 
+// `selector` may be a string (same for both targets) or a fn(targetName) → string
+// because the mockup's hero <section> has no id/className while impl does.
 const CROPS = [
-  { name: "about",  selector: "#about" },
-  { name: "footer", selector: "footer.footer-cockpit" },
+  { name: "hero",   selector: (t) => t === "mockup" ? "section" : "section.hero-section" },
+  { name: "about",  selector: () => "#about" },
+  { name: "footer", selector: () => "footer.footer-cockpit" },
 ];
 
 const browser = await chromium.launch();
@@ -45,12 +48,18 @@ for (const t of TARGETS) {
       console.log(`! ${t.name} ${vp.name}: #about did not appear`);
     }
 
-    // Hide overlays via CSS injection (don't remove nodes — React may try to reconcile)
+    // Hide overlays + ambient canvases via CSS injection (don't remove nodes —
+    // React may try to reconcile). `canvas` hides StarField in BOTH impl
+    // (.ck-starfield) and mockup (unclassed inline-styled canvas) symmetrically,
+    // plus the About Hologram canvas in both — keeps drift diff layout-focused.
+    // `nextjs-portal` removes the Next.js dev-mode compile indicator from
+    // dev-server captures so impl/mockup screenshots are comparable.
     await page.addStyleTag({
       content: `
         .ck-boot-overlay, .boot-overlay, [data-boot-overlay],
         .scan-overlay, .crt-noise, .ck-scan-overlay, .ck-crt-noise,
-        .ck-starfield, canvas.starfield { display: none !important; }
+        nextjs-portal,
+        canvas { display: none !important; }
       `,
     });
     await page.waitForTimeout(400);
@@ -58,8 +67,9 @@ for (const t of TARGETS) {
     await page.screenshot({ path: `${OUT}/${t.name}-${vp.name}-full.png`, fullPage: true });
 
     for (const c of CROPS) {
-      const el = await page.$(c.selector);
-      if (!el) { console.log(`! ${t.name} ${vp.name}: missing ${c.selector}`); continue; }
+      const sel = typeof c.selector === "function" ? c.selector(t.name) : c.selector;
+      const el = await page.$(sel);
+      if (!el) { console.log(`! ${t.name} ${vp.name}: missing ${sel}`); continue; }
       try {
         await el.scrollIntoViewIfNeeded();
         await page.waitForTimeout(300);
