@@ -605,6 +605,34 @@ export type SoloPhase = {
   state: SoloPhaseState;
 };
 
+export type ExperienceRow = {
+  label: string; // mono tag — e.g. "FAMILY_BUSINESS"
+  when: string;  // duration / era — e.g. "50 ปี · หยุดแล้ว"
+  body: string;  // 1-2 sentence story line (Thai)
+};
+
+// EXPERIENCE — 3-row narrative arc: origin → mistake → present.
+// Public version of PERSONAL-IDENTITY §3 — curated for credibility moat,
+// not exhaustive CV. "เจ๊งหมดตัว" stays direct (Casual Ronin self-deprecation
+// = failure as credibility).
+export const EXPERIENCE_ROWS: ExperienceRow[] = [
+  {
+    label: "FAMILY_BUSINESS",
+    when: "50 ปี · หยุดแล้ว",
+    body: "\"อัครเค็ม\" — ปลาอินทรีเค็มของครอบครัว end-to-end (หั่น ทอด แพ็ค ส่ง). ทำเองตั้งแต่เด็ก ก่อน \"founder\" จะเป็นคำ trendy",
+  },
+  {
+    label: "CRYPTO_WEB3",
+    when: "~3 ปี · ออกแล้ว ~2 ปี",
+    body: "Martingale bot · NFT 50x · airdrop farming · private rounds. เจ๊งหมดตัวจาก futures ที่ไม่มีหลักการ — บทเรียนที่ทำให้ discipline > opportunity",
+  },
+  {
+    label: "CURRENT_VENTURES",
+    when: "2026 → ",
+    body: "หลาย ventures ขนานกัน — digital ล้วน + hybrid (digital × physical). Vehicle เลือกตามโอกาส · automation-first ทุกตัว. First ship: Vendo/TofuQ — LINE Mini App + ร้านน้ำเต้าหู้ปั่นของแฟน (first real customer)",
+  },
+];
+
 export const SOLO_TIMELINE: SoloPhase[] = [
   {
     tag: "PHASE_00",
@@ -647,6 +675,7 @@ export const pageHeaders = {
     intro:
       "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
     principlesLabel: "// OPERATING_PRINCIPLES",
+    experienceLabel: "// EXPERIENCE",
     runtimeLabel: "// RUNTIME_CONFIG",
     timelineLabel: "▸ SOLO_TIMELINE",
     timelineMeta: "solo by nature → solo + tech",

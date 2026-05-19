@@ -1,5 +1,6 @@
 import {
   ABOUT_PRINCIPLES,
+  EXPERIENCE_ROWS,
   RUNTIME_CONFIG,
   SOLO_TIMELINE,
   about,
@@ -8,8 +9,10 @@ import {
 import { Glass } from "../portfolio/Glass";
 
 // /about · full long-form. Utility-density chrome — no hero backdrop, no
-// scanlines. Four blocks: bio · operating principles · runtime config · solo
-// timeline. Mirrors v6 mockup AboutSection (lines 3120-3389).
+// scanlines. Five blocks: bio · operating principles · experience · solo
+// timeline · runtime config. Phase F/3 — Runtime moved to closing,
+// Experience added between Principles and Timeline (narrative arc:
+// identity → operating system → origins → arc → current state).
 export function AboutFull() {
   const c = pageHeaders.about;
 
@@ -50,14 +53,17 @@ export function AboutFull() {
         </div>
       </div>
 
-      {/* Block 03 · Runtime Config */}
+      {/* Block 03 · Experience — origin → mistake → present */}
       <div className="ck-about-block">
-        <div className="ck-about-block-label">{c.runtimeLabel}</div>
-        <div className="ck-about-runtime">
-          {RUNTIME_CONFIG.map((r) => (
-            <div key={r.label} className="ck-about-rc-card">
-              <div className="ck-about-rc-label">{r.label}</div>
-              <div className="ck-about-rc-value">{r.value}</div>
+        <div className="ck-about-block-label">{c.experienceLabel}</div>
+        <div className="ck-about-experience">
+          {EXPERIENCE_ROWS.map((row) => (
+            <div key={row.label} className="ck-about-exp-row">
+              <div className="ck-about-exp-head">
+                <span className="ck-about-exp-label">▸ {row.label}</span>
+                <span className="ck-about-exp-when">{row.when}</span>
+              </div>
+              <p className="ck-about-exp-body">{row.body}</p>
             </div>
           ))}
         </div>
@@ -84,6 +90,19 @@ export function AboutFull() {
             </li>
           ))}
         </ol>
+      </div>
+
+      {/* Block 05 · Runtime Config — closing punch (current state) */}
+      <div className="ck-about-block">
+        <div className="ck-about-block-label">{c.runtimeLabel}</div>
+        <div className="ck-about-runtime">
+          {RUNTIME_CONFIG.map((r) => (
+            <div key={r.label} className="ck-about-rc-card">
+              <div className="ck-about-rc-label">{r.label}</div>
+              <div className="ck-about-rc-value">{r.value}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
