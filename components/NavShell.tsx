@@ -11,8 +11,9 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-// Cockpit nav (Phase C/2 + C/4.6): SVG brand mark + 5 mono links + sticky
-// blur on scroll. Last item is a mailto: contact — rendered as a plain <a>.
+// Cockpit nav (Phase C/2 + C/4.6): brand mark + 5 mono links + sticky blur
+// on scroll. All items are internal routes since F/2; `isExternal()` still
+// branches for any future mailto:/http href that may appear in nav.items.
 // Mobile: existing Radix Sheet, restyled with `.nav-mobile-link`.
 function isExternal(href: string) {
   return href.startsWith("mailto:") || href.startsWith("http");

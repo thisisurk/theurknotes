@@ -35,6 +35,11 @@ export const meta = {
     description:
       "Life feed · ทุก activity ที่ผมทำและบันทึก — สุขภาพ · ความคิด · อาหาร · ท่องเที่ยว · events",
   },
+  contact: {
+    title: "Contact — TheUrk",
+    description:
+      "ช่องทางติดต่อ Urk — email, X, GitHub. เปิดสำหรับ ventures · collaborations · YEC · community.",
+  },
 };
 
 export const nav = {
@@ -42,13 +47,14 @@ export const nav = {
   // 5 items per v6 mockup parity (Phase C/4.6).
   // Order encodes journey: Identity → Proof → Depth → Life → Reach.
   // Activity → /activity dedicated archive (shipped Phase F/1).
-  // Contact uses mailto: — NavShell branches on `href.startsWith("mailto:")`.
+  // Contact → /contact dedicated page (shipped Phase F/2). Footer keeps a
+  // direct mailto: shortcut via the socials column for quick-action UX.
   items: [
     { href: "/about", label: "About" },
     { href: "/what-i-do", label: "What I Do" },
     { href: "/notes", label: "Notes" },
     { href: "/activity", label: "Activity" },
-    { href: "mailto:urk@theurknotes.com", label: "Contact" },
+    { href: "/contact", label: "Contact" },
   ],
 };
 
@@ -666,6 +672,42 @@ export const pageHeaders = {
     emptyTitle: "ยังไม่มี item ในหมวดนี้",
     emptyBody: "เลือก category อื่น หรือดู All",
     loadMoreLabel: "LOAD MORE →",
+  },
+  contact: {
+    label: "CONTACT",
+    eyebrow: "Reach · Direct",
+    title: "Contact",
+    intro:
+      "เปิดประตูสำหรับ ventures · collaborations · YEC · งาน community. ไม่มี newsletter, ไม่มี form — ส่งตรงครับ.",
+    channels: [
+      {
+        key: "email",
+        label: "EMAIL",
+        handle: "urk@theurknotes.com",
+        href: "mailto:urk@theurknotes.com",
+        note: "Reply ภายใน 1-3 วัน · Thai-first",
+      },
+      {
+        key: "x",
+        label: "X · TWITTER",
+        handle: "@theeark",
+        href: "https://x.com/theeark",
+        note: "DM open · ตอบช้ากว่า email",
+      },
+      {
+        key: "github",
+        label: "GITHUB",
+        handle: "thisisurk",
+        href: "https://github.com/thisisurk",
+        note: "Code only · ไม่ใช่ช่องสนทนา",
+      },
+    ],
+    meta: [
+      { label: "BASED IN",     value: "ตราด, Thailand · UTC+7" },
+      { label: "AVAILABILITY", value: "Selective · ventures > consulting" },
+      { label: "BEST FOR",     value: "ventures · collab · YEC · community" },
+      { label: "NOT FOR",      value: "spam · cold sales · job offers" },
+    ],
   },
 };
 
