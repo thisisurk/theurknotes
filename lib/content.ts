@@ -30,10 +30,10 @@ export const meta = {
     description:
       "Archive ของสามเสา — Businesses · Tools · Creations. Built solo, leveraged by tech.",
   },
-  log: {
-    title: "Live Log — TheUrk",
+  activity: {
+    title: "Activity — TheUrk",
     description:
-      "Field log · ของที่เพิ่งทำ ของที่กำลังคิด — training · build · read · travel",
+      "Life feed · ทุก activity ที่ผมทำและบันทึก — สุขภาพ · ความคิด · อาหาร · ท่องเที่ยว · events",
   },
 };
 
@@ -41,13 +41,13 @@ export const nav = {
   brand: { lead: "The", accent: "Urk" },
   // 5 items per v6 mockup parity (Phase C/4.6).
   // Order encodes journey: Identity → Proof → Depth → Life → Reach.
-  // Activity points to home anchor so the section is reachable from every page.
+  // Activity → /activity dedicated archive (shipped Phase F/1).
   // Contact uses mailto: — NavShell branches on `href.startsWith("mailto:")`.
   items: [
     { href: "/about", label: "About" },
     { href: "/what-i-do", label: "What I Do" },
     { href: "/notes", label: "Notes" },
-    { href: "/#activity", label: "Activity" },
+    { href: "/activity", label: "Activity" },
     { href: "mailto:urk@theurknotes.com", label: "Contact" },
   ],
 };
@@ -206,16 +206,13 @@ export const sections = {
     title: "Activity",
     intro: "กิจกรรมต่างๆที่ผมทำครับ!",
     filterAllLabel: "All",
-    // /activity dedicated archive doesn't exist yet — link self-anchors to
-    // the home section as a placeholder. Update when /activity ships.
-    allLink: { label: "All activity →", href: "/#activity" },
+    allLink: { label: "All activity →", href: "/activity" },
   },
   log: {
     label: "LIVE LOG",
     eyebrow: "Field log",
     title: "Live Log",
     intro: "Field log · ของที่เพิ่งทำ ของที่กำลังคิด",
-    allLink: { label: "View full log →", href: "/log" },
     headerLabel: "system / log",
     liveLabel: "live",
     nowLabel: "NOW",
@@ -658,15 +655,15 @@ export const pageHeaders = {
     sortLabel: "// SORT",
     countLabel: "// COUNT",
   },
-  log: {
-    label: "LIVE LOG",
-    eyebrow: "Field log · Archive",
-    title: "Live Log",
+  activity: {
+    label: "ACTIVITY",
+    eyebrow: "Life · Archive",
+    title: "Activity",
     intro:
-      "Field log · ของที่เพิ่งทำ ของที่กำลังคิด — training · build · read · travel.",
+      "Life feed · ทุก activity ที่บันทึกไว้ — สุขภาพ · ความคิด · อาหาร · ท่องเที่ยว · events.",
     filterAllLabel: "All",
-    countLabel: "// ENTRIES",
-    emptyTitle: "ยังไม่มี entry ในหมวดนี้",
+    countLabel: "// ITEMS",
+    emptyTitle: "ยังไม่มี item ในหมวดนี้",
     emptyBody: "เลือก category อื่น หรือดู All",
     loadMoreLabel: "LOAD MORE →",
   },

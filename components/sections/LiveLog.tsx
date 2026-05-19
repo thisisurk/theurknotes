@@ -81,10 +81,6 @@ export function LiveLog() {
       <div className="ck-log-foot">
         <span className="ck-log-foot-prompt">{c.footerPrompt}</span>
         <span>{c.footerNote}</span>
-        <span style={{ flex: 1 }} aria-hidden="true" />
-        <a className="ck-btn" href={c.allLink.href}>
-          {c.allLink.label}
-        </a>
       </div>
     </section>
   );

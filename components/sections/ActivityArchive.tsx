@@ -2,41 +2,41 @@
 
 import { useMemo, useState, type CSSProperties } from "react";
 import {
-  LOG_CAT,
-  LOG_CAT_KEYS,
+  LIFE_CAT,
+  LIFE_CAT_KEYS,
   pageHeaders,
-  type LogCategory,
-  type LogEntry,
+  type ActivityItem,
+  type LifeCategory,
 } from "@/lib/content";
 
 type Props = {
-  entries: LogEntry[];
+  items: ActivityItem[];
 };
 
-type Filter = "all" | LogCategory;
+type Filter = "all" | LifeCategory;
 
 const PAGE_SIZE = 12;
 
-// /log archive — filter by category · paginated load-more · timeline rail.
-// Pagination kicks in when entries > PAGE_SIZE; with the current 4 entries
-// the rail simply renders the full list.
-export function LogArchive({ entries }: Props) {
-  const c = pageHeaders.log;
+// /activity archive — filter by life category · paginated load-more · timeline rail.
+// Mirrors the (deleted) /log archive pattern, scoped to LIFE_CAT instead of LOG_CAT.
+// Reuses .ck-log-archive-* CSS by literal class name — historical name, generic semantics.
+export function ActivityArchive({ items }: Props) {
+  const c = pageHeaders.activity;
   const [filter, setFilter] = useState<Filter>("all");
   const [page, setPage] = useState(1);
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: c.filterAllLabel },
-    ...LOG_CAT_KEYS.map((key) => ({
+    ...LIFE_CAT_KEYS.map((key) => ({
       id: key as Filter,
-      label: LOG_CAT[key].label,
+      label: LIFE_CAT[key].label,
     })),
   ];
 
   const filtered = useMemo(
     () =>
-      filter === "all" ? entries : entries.filter((e) => e.category === filter),
-    [entries, filter],
+      filter === "all" ? items : items.filter((i) => i.category === filter),
+    [items, filter],
   );
   const visible = filtered.slice(0, page * PAGE_SIZE);
   const hasMore = visible.length < filtered.length;
@@ -86,25 +86,38 @@ export function LogArchive({ entries }: Props) {
       ) : (
         <>
           <ol className="ck-log-archive">
-            {visible.map((entry) => {
-              const cat = LOG_CAT[entry.category];
+            {visible.map((item) => {
+              const cat = LIFE_CAT[item.category];
               const styleVars = {
                 "--cd-accent": cat.accent,
                 "--cd-glow": `${cat.accent}55`,
               } as CSSProperties;
               return (
                 <li
-                  key={entry.id}
+                  key={item.id}
                   className="ck-log-archive-entry"
                   style={styleVars}
                 >
                   <span className="ck-log-archive-dot" aria-hidden="true" />
                   <div className="ck-log-archive-row">
                     <div className="ck-log-archive-meta">
-                      <div className="ck-log-archive-when">{entry.when}</div>
+                      <div className="ck-log-archive-when">{item.when}</div>
                       <div className="ck-log-archive-cat">{cat.label}</div>
                     </div>
-                    <p className="ck-log-archive-text">{entry.text}</p>
+                    <div>
+                      <div
+                        className="ck-log-archive-text"
+                        style={{ fontWeight: 600 }}
+                      >
+                        {item.label}
+                      </div>
+                      <p
+                        className="ck-log-archive-text"
+                        style={{ opacity: 0.78, marginTop: 4 }}
+                      >
+                        {item.snippet}
+                      </p>
+                    </div>
                   </div>
                 </li>
               );
