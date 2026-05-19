@@ -18,6 +18,7 @@ const TARGETS = [
 // `selector` may be a string (same for both targets) or a fn(targetName) → string
 // because the mockup's hero <section> has no id/className while impl does.
 const CROPS = [
+  { name: "nav",    selector: (t) => t === "mockup" ? "header" : "header.nav-cockpit" },
   { name: "hero",   selector: (t) => t === "mockup" ? "section" : "section.hero-section" },
   { name: "about",  selector: () => "#about" },
   { name: "footer", selector: () => "footer.footer-cockpit" },

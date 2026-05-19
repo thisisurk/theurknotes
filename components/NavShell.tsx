@@ -35,18 +35,19 @@ export function NavShell() {
       data-scrolled={scrolled ? "true" : "false"}
     >
       <Link href="/" className="nav-brand" aria-label="TheUrk — home">
-        {/* Plain <img> avoids next/image's dangerouslyAllowSVG opt-in.
-            CSS sizes it via .nav-brand-mark. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo/theurk-logo-noBG.svg"
-          alt="TheUrk"
-          className="nav-brand-mark"
-          width={72}
-          height={72}
-          fetchPriority="high"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet="/logo/theurk-logo-mark-144.webp" type="image/webp" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo/theurk-logo-mark-144.png"
+            alt="TheUrk"
+            className="nav-brand-mark"
+            width={144}
+            height={144}
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </Link>
 
       <nav className="nav-list hidden min-[769px]:flex" aria-label="Primary">

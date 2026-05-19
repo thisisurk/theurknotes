@@ -108,8 +108,8 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/logo/theurk-logo-noBG.svg"
-          type="image/svg+xml"
+          href="/logo/theurk-logo-mark-144.webp"
+          type="image/webp"
           fetchPriority="high"
         />
       </head>

@@ -21,7 +21,7 @@ export function HologramPanel({ videoSrc }: { videoSrc: string }) {
       ([entry]) => {
         if (entry.isIntersecting && !played) {
           const v = videoRef.current;
-          if (v && v.readyState >= 2) {
+          if (v && v.readyState >= 1) {
             v.currentTime = 0;
             v.play().catch(() => {});
             setPlayed(true);
@@ -42,7 +42,7 @@ export function HologramPanel({ videoSrc }: { videoSrc: string }) {
         src={videoSrc}
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         className="ck-hologram-video"
         data-loaded={loaded ? "true" : "false"}
         onLoadedMetadata={() => {
