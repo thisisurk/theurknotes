@@ -8,7 +8,7 @@ import {
   sections,
 } from "@/lib/content";
 import { Glass } from "../portfolio/Glass";
-import { HologramPanel } from "../HologramPanel";
+import { HologramPanelClient } from "../HologramPanelClient";
 
 // Phase C/4.6 — Home About section, full v6 mockup parity.
 // 2-col grid (bio Glass + HologramPanel video) + Solo Timeline strip.
@@ -105,7 +105,7 @@ export function AboutSection() {
           </div>
         </Glass>
 
-        <HologramPanel videoSrc="/videos/ronin-transition.mp4" />
+        <HologramPanelClient videoSrc="/videos/ronin-transition.mp4" />
       </div>
 
       <div className="ck-about-block ck-about-timeline-block">
