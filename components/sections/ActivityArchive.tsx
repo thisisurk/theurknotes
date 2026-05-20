@@ -15,15 +15,14 @@ type Props = {
 
 type Filter = "all" | LifeCategory;
 
-const PAGE_SIZE = 12;
-
-// /activity archive — filter by life category · paginated load-more · timeline rail.
-// Mirrors the (deleted) /log archive pattern, scoped to LIFE_CAT instead of LOG_CAT.
-// Reuses .ck-log-archive-* CSS by literal class name — historical name, generic semantics.
+// /activity archive — image-grid magazine layout matching home
+// ActivityShowcase. Phase F/audit-1: replaced log-timeline pattern (text rows
+// + timeline rail) with the home pattern because /activity is a visual life
+// archive, not a developer log. Hard-filter (vs home's dim) differentiates
+// archive UX from showcase UX.
 export function ActivityArchive({ items }: Props) {
   const c = pageHeaders.activity;
   const [filter, setFilter] = useState<Filter>("all");
-  const [page, setPage] = useState(1);
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: c.filterAllLabel },
@@ -38,14 +37,7 @@ export function ActivityArchive({ items }: Props) {
       filter === "all" ? items : items.filter((i) => i.category === filter),
     [items, filter],
   );
-  const visible = filtered.slice(0, page * PAGE_SIZE);
-  const hasMore = visible.length < filtered.length;
   const isEmpty = filtered.length === 0;
-
-  const onFilter = (id: Filter) => {
-    setFilter(id);
-    setPage(1);
-  };
 
   return (
     <>
@@ -61,7 +53,7 @@ export function ActivityArchive({ items }: Props) {
               type="button"
               className="ck-act-pill"
               data-active={filter === f.id}
-              onClick={() => onFilter(f.id)}
+              onClick={() => setFilter(f.id)}
               role="tab"
               aria-selected={filter === f.id}
             >
@@ -79,63 +71,64 @@ export function ActivityArchive({ items }: Props) {
       </div>
 
       {isEmpty ? (
-        <div className="ck-log-archive-empty">
-          <div className="ck-log-archive-empty-title">{c.emptyTitle}</div>
-          <p className="ck-log-archive-empty-body">{c.emptyBody}</p>
+        <div className="ck-notes-empty">
+          <div className="ck-notes-empty-title">{c.emptyTitle}</div>
+          <p className="ck-notes-empty-body">{c.emptyBody}</p>
         </div>
       ) : (
-        <>
-          <ol className="ck-log-archive">
-            {visible.map((item) => {
-              const cat = LIFE_CAT[item.category];
-              const styleVars = {
-                "--cd-accent": cat.accent,
-                "--cd-glow": `${cat.accent}55`,
-              } as CSSProperties;
-              return (
-                <li
-                  key={item.id}
-                  className="ck-log-archive-entry"
-                  style={styleVars}
-                >
-                  <span className="ck-log-archive-dot" aria-hidden="true" />
-                  <div className="ck-log-archive-row">
-                    <div className="ck-log-archive-meta">
-                      <div className="ck-log-archive-when">{item.when}</div>
-                      <div className="ck-log-archive-cat">{cat.label}</div>
-                    </div>
-                    <div>
-                      <div
-                        className="ck-log-archive-text"
-                        style={{ fontWeight: 600 }}
-                      >
-                        {item.label}
-                      </div>
-                      <p
-                        className="ck-log-archive-text"
-                        style={{ opacity: 0.78, marginTop: 4 }}
-                      >
-                        {item.snippet}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-
-          {hasMore && (
-            <div className="ck-log-archive-foot">
-              <button
-                type="button"
-                className="ck-btn"
-                onClick={() => setPage((p) => p + 1)}
+        <div className="ck-activity-grid">
+          {filtered.map((item) => {
+            const cat = LIFE_CAT[item.category];
+            const isTall = item.size === "tall";
+            const cardStyle: CSSProperties = {
+              borderTopColor: cat.accent,
+            };
+            return (
+              <article
+                key={item.id}
+                className="ck-activity-card"
+                data-tall={isTall}
+                style={cardStyle}
               >
-                {c.loadMoreLabel}
-              </button>
-            </div>
-          )}
-        </>
+                <div
+                  className="ck-activity-bg"
+                  style={{ background: cat.gradient }}
+                  aria-hidden="true"
+                />
+                <div className="ck-activity-fade" aria-hidden="true" />
+
+                <div className="ck-activity-when">{item.when}</div>
+
+                <div className="ck-activity-label">
+                  <div
+                    className="ck-activity-cat"
+                    style={{ color: cat.accent }}
+                  >
+                    {item.category}
+                    {item.recent && (
+                      <span
+                        className="ck-activity-cat-dot"
+                        style={{ background: cat.accent }}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  <div className="ck-activity-name">{item.label}</div>
+                </div>
+
+                <div className="ck-activity-snippet">
+                  <div
+                    className="ck-activity-snippet-head"
+                    style={{ color: cat.accent }}
+                  >
+                    {item.category} · {item.when}
+                  </div>
+                  <p className="ck-activity-snippet-text">{item.snippet}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       )}
     </>
   );
