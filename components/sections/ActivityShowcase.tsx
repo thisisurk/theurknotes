@@ -7,21 +7,35 @@ import {
   LIFE_CAT,
   LIFE_CAT_KEYS,
   sections,
+  type ActivitySize,
   type LifeCategory,
 } from "@/lib/content";
 
 type Filter = "all" | LifeCategory;
 
 const HOME_PREVIEW_COUNT = 5;
+// Home grid pattern: 1 tall featured (recent) + 4 normal cards in 2×2 to the
+// right — fills a 3-col grid perfectly with no orphan row. Overrides each
+// item's stored `size` for home-only; /activity archive uses natural sizes.
+const HOME_SIZE_PATTERN: ActivitySize[] = [
+  "tall",
+  "normal",
+  "normal",
+  "normal",
+  "normal",
+];
 
-// Section 05 · Activity — magazine grid + filter pills.
+// Section 04 · Activity — magazine grid + filter pills.
 // Filter dims non-matching cards (visual cue, not removal) so the grid
 // keeps its rhythm even when one category is highlighted.
 // Home shows first 5 (one per LIFE_CAT category) — full archive on /activity.
 export function ActivityShowcase() {
   const c = sections.activity;
   const [active, setActive] = useState<Filter>("all");
-  const items = ACTIVITY_ITEMS.slice(0, HOME_PREVIEW_COUNT);
+  const items = ACTIVITY_ITEMS.slice(0, HOME_PREVIEW_COUNT).map((item, i) => ({
+    ...item,
+    size: HOME_SIZE_PATTERN[i],
+  }));
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: c.filterAllLabel },
