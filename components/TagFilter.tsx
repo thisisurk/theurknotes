@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { TAGS, tagLabels, type Tag } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 type Props = {
   activeTag?: Tag | "all";
 };
 
-const pillBase =
-  "inline-flex items-center rounded-full transition-colors text-sm";
-
+// Tag filter — Link-based SSR navigation (each tag = its own /notes/tag/[tag]
+// route). Styled as .ck-act-pill to match the controls bar pattern used on
+// /activity and /what-i-do. F/5 chrome unify.
 export function TagFilter({ activeTag = "all" }: Props) {
   const pills: Array<{ key: Tag | "all"; href: string; label: string }> = [
     { key: "all", href: "/notes", label: "All" },
@@ -20,36 +19,21 @@ export function TagFilter({ activeTag = "all" }: Props) {
   ];
 
   return (
-    <ul className="flex flex-wrap items-center gap-2" aria-label="Filter notes by tag">
+    <nav className="ck-page-filter" aria-label="Filter notes by tag">
       {pills.map((p) => {
         const active = p.key === activeTag;
         return (
-          <li key={p.key}>
-            <Link
-              href={p.href}
-              className={cn(pillBase, "border")}
-              style={
-                active
-                  ? {
-                      backgroundColor: "var(--accent-gold-dim)",
-                      borderColor: "var(--accent-gold)",
-                      color: "var(--accent-gold)",
-                      padding: "0.4rem 1rem",
-                      fontSize: "0.85rem",
-                    }
-                  : {
-                      borderColor: "var(--border)",
-                      color: "var(--text-secondary)",
-                      padding: "0.4rem 1rem",
-                      fontSize: "0.85rem",
-                    }
-              }
-            >
-              {p.label}
-            </Link>
-          </li>
+          <Link
+            key={p.key}
+            href={p.href}
+            className="ck-act-pill"
+            data-active={active}
+            aria-current={active ? "page" : undefined}
+          >
+            {p.label}
+          </Link>
         );
       })}
-    </ul>
+    </nav>
   );
 }

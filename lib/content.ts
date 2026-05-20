@@ -199,7 +199,7 @@ export const sections = {
     eyebrow: "Notes & Thoughts",
     title: "Notes",
     intro:
-      "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ. ไม่เน้นวิชาการ เน้นความจริงใจ",
+      "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ. ไม่เน้นวิชาการ",
     allLink: { label: "All notes →", href: "/notes" },
     filterAllLabel: "All",
     emptyTitle: "ยังไม่มีอะไรให้อ่าน — ช่วงนี้โฟกัส ship ก่อน",
@@ -701,6 +701,17 @@ export const pageHeaders = {
     emptyTitle: "ยังไม่มี item ในหมวดนี้",
     emptyBody: "เลือก category อื่น หรือดู All",
     loadMoreLabel: "LOAD MORE →",
+  },
+  notes: {
+    label: "NOTES",
+    eyebrow: "Notes · Archive",
+    title: "Notes",
+    intro:
+      "บันทึกความคิด — การออกแบบ, การตัดสินใจ, ชีวิตนอกจอ. ไม่เน้นวิชาการ",
+    filterAllLabel: "All",
+    emptyTitle: "ยังไม่มีอะไรให้อ่าน — ช่วงนี้โฟกัส ship ก่อน",
+    emptyBody:
+      "เขียนเมื่อมีอะไรจะพูดจริงๆ ไม่ใช่เพื่อ update feed",
   },
   contact: {
     label: "CONTACT",
