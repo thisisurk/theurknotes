@@ -118,10 +118,11 @@ export function WhatIDoArchive({ items }: Props) {
                 item={item}
                 index={i + 1}
                 onPlay={setLightbox}
+                showLesson
               />
             );
           }
-          return <PortfolioCard key={item.id} item={item} forceCompact />;
+          return <PortfolioCard key={item.id} item={item} showLesson />;
         })}
       </div>
 

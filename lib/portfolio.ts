@@ -36,6 +36,7 @@ export type PortfolioItem = {
   channels?: Channel[];
   video?: string | null;   // creation-specific
   ctaLabel?: string;       // creation-specific · WATCH · PLAY · LISTEN · VIEW · READ
+  lesson?: string;         // F/4: 1-line specific learning/outcome · only rendered on /what-i-do (showLesson prop), hidden on home
 };
 
 // ---------------------------------------------------------------------------
@@ -63,6 +64,7 @@ export const businesses: PortfolioItem[] = [
       { type: "facebook", label: "Mongtaam", href: "https://facebook.com/Mongtaam" },
       { type: "web", label: "OTOP 5-star", href: null },
     ],
+    lesson: "ครอบครัวทำมานาน · รุ่นผมเข้ามาในบทบาท digital + automation lead. Heritage scale ได้โดยไม่เสีย craft — automation จัดการหลังบ้าน ผู้ก่อตั้งทำของไป",
   },
   {
     id: "vendo",
@@ -79,6 +81,7 @@ export const businesses: PortfolioItem[] = [
     ],
     tag: "SaaS · Track 2",
     channels: [{ type: "web", label: "vendo.app", href: null }],
+    lesson: "First real customer = ร้านน้ำเต้าหู้ปั่นของแฟน. Build → ship → ใช้จริง → iterate. ไม่ทำ POC สำหรับ market ที่สมมติขึ้น",
   },
   {
     id: "ayu",
@@ -94,6 +97,7 @@ export const businesses: PortfolioItem[] = [
       { label: "MODEL", value: "Brand · Franchise-ready" },
     ],
     tag: "F&B · Track 3",
+    lesson: "ออกแบบหลังบ้านก่อนเปิดร้าน — ระบบสำคัญกว่าหน้าร้าน. Franchise-ready ตั้งแต่ store แรก ไม่ retrofit ทีหลัง",
   },
 ];
 
@@ -117,6 +121,7 @@ export const tools: PortfolioItem[] = [
     ],
     tag: "Journal · Built",
     channels: [{ type: "web", label: "goldlog.app", href: "https://goldlog.app" }],
+    lesson: "เครื่องมือที่ผมใช้ทุกวัน — discipline ใน trading เริ่มที่บันทึก ไม่ใช่ที่ strategy. Build for self first ก็พอ",
   },
   {
     id: "agents",
@@ -132,6 +137,7 @@ export const tools: PortfolioItem[] = [
       { label: "STACK", value: "Claude · n8n · custom" },
     ],
     tag: "Stack · Internal",
+    lesson: "Stack เดียวที่รันทุก venture — Claude + n8n + custom. ของผมไม่ใช่ product · เป็น operating layer",
   },
 ];
 
@@ -158,6 +164,7 @@ export const creations: PortfolioItem[] = [
     featured: true,
     video: null, // TODO: drop file under /public/videos/ then set path
     ctaLabel: "WATCH",
+    lesson: "AI video pipeline ทำให้คนเดียว ship short film cinematic-grade ในวันเดียว — ของที่ก่อนหน้านี้ต้องทีม",
   },
   {
     id: "thai-no-war",
@@ -175,6 +182,7 @@ export const creations: PortfolioItem[] = [
     tag: "Short film · 2026",
     video: null,
     ctaLabel: "WATCH",
+    lesson: "Run 2 ของ pipeline เดิม — same tools, different angle. Iteration ที่ยืนยันว่าของแรกไม่ใช่ลูกหลง",
   },
   {
     id: "next-drop",
@@ -192,6 +200,7 @@ export const creations: PortfolioItem[] = [
     tag: "Game · Prototype",
     video: null,
     ctaLabel: "PLAY",
+    lesson: "Solo indie prototype — ทดลอง procedural narrative ใน Godot. ของที่ไม่ commercial = lab สำหรับ skill cross-domain",
   },
 ];
 

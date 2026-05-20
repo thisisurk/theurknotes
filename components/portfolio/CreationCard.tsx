@@ -10,11 +10,13 @@ type Props = {
   item: PortfolioItem;
   index: number;
   onPlay: (payload: { src: string; title: string; tag: string }) => void;
+  // /what-i-do passes true to surface the per-item `lesson` line.
+  showLesson?: boolean;
 };
 
 // Creation card — video / game / art. Plays inline if `video` is set;
 // otherwise the CTA button is disabled.
-export function CreationCard({ item, index, onPlay }: Props) {
+export function CreationCard({ item, index, onPlay, showLesson }: Props) {
   const accent = item.accent;
   const playable = !!item.video;
   const idx = String(index).padStart(2, "0");
@@ -110,6 +112,13 @@ export function CreationCard({ item, index, onPlay }: Props) {
         <p className="ck-card-desc" style={{ marginBottom: 14 }}>
           {item.desc}
         </p>
+
+        {showLesson && item.lesson && (
+          <div className="ck-pf-lesson" style={{ marginBottom: 14 }}>
+            <span className="ck-pf-lesson-label">▸ LESSON</span>
+            <p className="ck-pf-lesson-body">{item.lesson}</p>
+          </div>
+        )}
 
         <div style={{ marginTop: "auto", marginBottom: 12 }}>
           <MetaBlock rows={item.meta} accent={accent} />

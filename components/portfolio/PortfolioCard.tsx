@@ -9,17 +9,21 @@ type Props = {
   item: PortfolioItem;
   // Archive view forces every card to render compact for visual rhythm.
   forceCompact?: boolean;
+  // /what-i-do passes true to surface the per-item `lesson` line.
+  // Home WhatIDoSection omits the prop so home cards stay teaser-only.
+  showLesson?: boolean;
 };
 
 // PortfolioCard — `featured: true` items get the 2-col Featured layout,
 // everything else renders as the Compact 1-col card. The /what-i-do archive
 // passes `forceCompact` so the grid stays uniform.
-export function PortfolioCard({ item, forceCompact }: Props) {
-  if (forceCompact || !item.featured) return <Compact item={item} />;
-  return <Featured item={item} />;
+export function PortfolioCard({ item, forceCompact, showLesson }: Props) {
+  if (forceCompact || !item.featured)
+    return <Compact item={item} showLesson={showLesson} />;
+  return <Featured item={item} showLesson={showLesson} />;
 }
 
-function Featured({ item }: Props) {
+function Featured({ item, showLesson }: Props) {
   const accent = item.accent;
   const visualStyle: CSSProperties = {
     background: `linear-gradient(145deg, var(--bg-deep) 0%, ${hexAlpha(accent, 0.09)} 100%)`,
@@ -55,6 +59,12 @@ function Featured({ item }: Props) {
           </div>
           <h3 className="ck-card-name">{item.name}</h3>
           <p className="ck-card-desc">{item.desc}</p>
+          {showLesson && item.lesson && (
+            <div className="ck-pf-lesson">
+              <span className="ck-pf-lesson-label">▸ LESSON</span>
+              <p className="ck-pf-lesson-body">{item.lesson}</p>
+            </div>
+          )}
         </div>
 
         <div>
@@ -71,7 +81,7 @@ function Featured({ item }: Props) {
   );
 }
 
-function Compact({ item }: Props) {
+function Compact({ item, showLesson }: Props) {
   const accent = item.accent;
   return (
     <Glass
@@ -99,6 +109,13 @@ function Compact({ item }: Props) {
       </div>
 
       <p className="ck-card-compact-desc">{item.desc}</p>
+
+      {showLesson && item.lesson && (
+        <div className="ck-pf-lesson">
+          <span className="ck-pf-lesson-label">▸ LESSON</span>
+          <p className="ck-pf-lesson-body">{item.lesson}</p>
+        </div>
+      )}
 
       <div style={{ marginTop: "auto" }}>
         <div style={{ marginBottom: 12 }}>

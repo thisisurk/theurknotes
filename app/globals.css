@@ -1554,6 +1554,33 @@ a.link-gold:hover {
   line-height: 1.75;
   margin-bottom: 12px;
 }
+
+/* Per-card LESSON row · only on /what-i-do via showLesson prop. Dashed
+   top-rule sets it apart from desc above without competing with MetaBlock
+   below. F/4. */
+.ck-pf-lesson {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--accent-gold-line);
+}
+.ck-pf-lesson-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.ck-pf-lesson-body {
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+  text-wrap: pretty;
+}
+
 .ck-card-foot {
   display: flex;
   align-items: center;

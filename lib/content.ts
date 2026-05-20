@@ -685,7 +685,7 @@ export const pageHeaders = {
     eyebrow: "Proof · Archive",
     title: "What I Do",
     intro:
-      "ของที่อยากแชร์ — businesses · tools · creations. Built solo, leveraged by tech.",
+      "หลาย ventures ขนานกัน — digital ล้วน + hybrid (digital × physical). Built solo, automation-first ทุกตัว.",
     filterAllLabel: "All",
     sortLabel: "// SORT",
     countLabel: "// COUNT",
