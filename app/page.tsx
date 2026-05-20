@@ -2,7 +2,6 @@ import { Hero } from "@/components/Hero";
 import { CockpitDivider } from "@/components/CockpitDivider";
 import { WhatIDoSection } from "@/components/sections/WhatIDoSection";
 import { NotesPreview } from "@/components/sections/NotesPreview";
-import { LiveLog } from "@/components/sections/LiveLog";
 import { ActivityShowcase } from "@/components/sections/ActivityShowcase";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -55,9 +54,6 @@ export default function HomePage() {
 
         <CockpitDivider label="04 / ACTIVITY" tone="green" />
         <ActivityShowcase />
-
-        <CockpitDivider label="05 / LIVE LOG" tone="gold" />
-        <LiveLog />
       </div>
 
       {ventureJsonLd.map((data, i) => (

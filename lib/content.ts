@@ -203,18 +203,6 @@ export const sections = {
     filterAllLabel: "All",
     allLink: { label: "All activity →", href: "/activity" },
   },
-  log: {
-    label: "LIVE LOG",
-    eyebrow: "Field log",
-    title: "Live Log",
-    intro: "Field log · ของที่เพิ่งทำ ของที่กำลังคิด",
-    headerLabel: "system / log",
-    liveLabel: "live",
-    nowLabel: "NOW",
-    footerPrompt: "$_",
-    footerNote:
-      "log updates เมื่อมีอะไรน่าบันทึก — ไม่ต้อง daily",
-  },
   about: {
     label: "ABOUT",
     eyebrow: "About",
@@ -505,99 +493,6 @@ export const ACTIVITY_ITEMS: ActivityItem[] = [
     image: null,
     size: "normal",
     snippet: "Episode 28 — ทำใจ 30 นาทีหลังจบ · จะอ่านมังงะต่อ",
-  },
-];
-
-// ---------------------------------------------------------------------------
-// LIVE LOG (Home section 05 + /log page · LOG_CAT — 4 categories)
-// Per WEB-ARCHITECTURE §2: Training · Build · Read · Travel
-// Distinct from Activity: high-frequency builder signal, work-progress vocab.
-// ---------------------------------------------------------------------------
-
-export const LOG_CAT_KEYS = ["training", "build", "read", "travel"] as const;
-export type LogCategory = (typeof LOG_CAT_KEYS)[number];
-
-export type LogCatStyle = {
-  label: string;
-  accent: string;
-  gradient: string;
-  ghost: string;
-  grid: string;
-  icon: string;
-};
-
-export const LOG_CAT: Record<LogCategory, LogCatStyle> = {
-  training: {
-    label: "Training",
-    accent: "#D4A853",
-    gradient: "linear-gradient(135deg, #2A1500 0%, #6B3010 45%, #C17820 100%)",
-    ghost: "rgba(212,168,83,0.07)",
-    grid: "rgba(212,168,83,0.06)",
-    icon: "swords",
-  },
-  build: {
-    label: "Build",
-    accent: "#60A5FA",
-    gradient: "linear-gradient(135deg, #050E1F 0%, #0F2550 45%, #1D4ED8 100%)",
-    ghost: "rgba(96,165,250,0.07)",
-    grid: "rgba(96,165,250,0.06)",
-    icon: "code",
-  },
-  read: {
-    label: "Read",
-    accent: "#A78BFA",
-    gradient: "linear-gradient(135deg, #100820 0%, #2D1060 45%, #6D28D9 100%)",
-    ghost: "rgba(167,139,250,0.07)",
-    grid: "rgba(167,139,250,0.06)",
-    icon: "book-open",
-  },
-  travel: {
-    label: "Travel",
-    accent: "#4ADE80",
-    gradient: "linear-gradient(135deg, #041410 0%, #0A3020 45%, #15803D 100%)",
-    ghost: "rgba(74,222,128,0.07)",
-    grid: "rgba(74,222,128,0.06)",
-    icon: "tent-tree",
-  },
-};
-
-export type LogEntry = {
-  id: number;
-  when: string;
-  category: LogCategory;
-  image: string | null;
-  text: string;
-};
-
-// LIVE LOG entries — image: null = text-only fallback, image set = photo card.
-export const LOG_ENTRIES: LogEntry[] = [
-  {
-    id: 1,
-    when: "2d ago",
-    category: "training",
-    image: null,
-    text: "มวยไทย session — round 5 รับนานเกิน guard ต้องสูงกว่านี้ ครูมวยเตือนแล้ว",
-  },
-  {
-    id: 2,
-    when: "5d ago",
-    category: "build",
-    image: null,
-    text: "Vendo queue v0.7 — 11/13 tasks closed ที่เหลือคือ edge cases ของ LINE webhook",
-  },
-  {
-    id: 3,
-    when: "1w ago",
-    category: "read",
-    image: null,
-    text: "\"Book of Five Rings\" — re-read เล่ม Earth ตรงกับงานออกแบบระบบมากกว่าครั้งแรกที่อ่าน",
-  },
-  {
-    id: 4,
-    when: "2w ago",
-    category: "travel",
-    image: null,
-    text: "เดินป่าเขาคิชฌกูฏ — reset operating system เก็บ 3 idea กลับมา ยังไม่ได้ ship",
   },
 ];
 
