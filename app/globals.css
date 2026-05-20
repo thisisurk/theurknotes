@@ -3443,7 +3443,7 @@ a.link-gold:hover {
 /* ===== Phase F/2 — /contact page (Reach · Direct) ===== */
 .ck-contact-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
   margin-top: 8px;
   margin-bottom: 40px;

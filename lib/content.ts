@@ -283,24 +283,63 @@ export const footer = {
   },
 };
 
+// Footer socials — full social presence (broadcast + reach).
+// Order: Email · X · Threads · Facebook · Instagram · YouTube · TikTok · GitHub
+// Some entries use placeholder URLs marked with TODO — replace before
+// announcing the new platforms publicly.
 export const socials = [
+  {
+    label: "Email",
+    url: "mailto:urk@theurknotes.com",
+    icon: "Mail",
+    ariaLabel: "Email Urk",
+  },
   {
     label: "X",
     url: "https://x.com/theeark",
     icon: "Twitter",
     ariaLabel: "Urk on X",
   },
+  // TODO: confirm Threads handle (same as IG handle on Meta)
+  {
+    label: "Threads",
+    url: "https://www.threads.net/@theeark",
+    icon: "Threads",
+    ariaLabel: "Urk on Threads",
+  },
+  // TODO: replace with real Facebook page/profile URL
+  {
+    label: "Facebook",
+    url: "https://www.facebook.com/",
+    icon: "Facebook",
+    ariaLabel: "Urk on Facebook",
+  },
+  // TODO: replace with real Instagram handle URL
+  {
+    label: "Instagram",
+    url: "https://www.instagram.com/",
+    icon: "Instagram",
+    ariaLabel: "Urk on Instagram",
+  },
+  // TODO: replace with real YouTube channel URL
+  {
+    label: "YouTube",
+    url: "https://www.youtube.com/",
+    icon: "Youtube",
+    ariaLabel: "Urk on YouTube",
+  },
+  // TODO: replace with real TikTok handle URL
+  {
+    label: "TikTok",
+    url: "https://www.tiktok.com/",
+    icon: "Tiktok",
+    ariaLabel: "Urk on TikTok",
+  },
   {
     label: "GitHub",
     url: "https://github.com/thisisurk",
     icon: "Github",
     ariaLabel: "Urk on GitHub",
-  },
-  {
-    label: "Email",
-    url: "mailto:urk@theurknotes.com",
-    icon: "Mail",
-    ariaLabel: "Email Urk",
   },
 ] as const;
 
@@ -734,12 +773,23 @@ export const pageHeaders = {
         href: "https://x.com/theeark",
         note: "DM open · email = primary channel",
       },
+      // TODO: confirm Threads handle (Threads handle = IG handle on Meta).
+      // If different from @theeark, update handle + href below.
       {
-        key: "github",
-        label: "GITHUB",
-        handle: "thisisurk",
-        href: "https://github.com/thisisurk",
-        note: "Code only",
+        key: "threads",
+        label: "THREADS",
+        handle: "@theeark",
+        href: "https://www.threads.net/@theeark",
+        note: "Long-form thoughts · DM open",
+      },
+      // TODO: replace with real Facebook URL (Page or personal profile?).
+      // Placeholder currently points to facebook.com root — safe but inert.
+      {
+        key: "facebook",
+        label: "FACEBOOK",
+        handle: "TODO",
+        href: "https://www.facebook.com/",
+        note: "Public posts · TH network",
       },
     ],
     meta: [

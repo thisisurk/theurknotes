@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import type { ComponentType, SVGProps } from "react";
 import { Mail } from "lucide-react";
 import { meta, pageHeaders } from "@/lib/content";
-import { TwitterIcon, GithubIcon } from "@/components/BrandIcons";
+import {
+  TwitterIcon,
+  ThreadsIcon,
+  FacebookIcon,
+} from "@/components/BrandIcons";
 import { Glass } from "@/components/portfolio/Glass";
 
 type IconComp = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
@@ -21,7 +25,8 @@ export const metadata: Metadata = {
 const iconMap: Record<string, IconComp> = {
   email: Mail as unknown as IconComp,
   x: TwitterIcon,
-  github: GithubIcon,
+  threads: ThreadsIcon,
+  facebook: FacebookIcon,
 };
 
 export default function ContactPage() {

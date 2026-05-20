@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { footer, nav, socials } from "@/lib/content";
-import { TwitterIcon, GithubIcon } from "./BrandIcons";
+import {
+  TwitterIcon,
+  GithubIcon,
+  ThreadsIcon,
+  TiktokIcon,
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon,
+} from "./BrandIcons";
 import { FooterSystemStatus } from "./FooterSystemStatus";
 
 type IconComp = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
@@ -11,6 +19,11 @@ const iconMap: Record<string, IconComp> = {
   Twitter: TwitterIcon,
   Github: GithubIcon,
   Mail: Mail as unknown as IconComp,
+  Threads: ThreadsIcon,
+  Facebook: FacebookIcon,
+  Instagram: InstagramIcon,
+  Youtube: YoutubeIcon,
+  Tiktok: TiktokIcon,
 };
 
 function isExternal(href: string) {
