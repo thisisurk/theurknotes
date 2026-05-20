@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { hero } from "@/lib/content";
 import { Ticker } from "./Ticker";
 import { StatIcon } from "./StatIcon";
 
 // Cockpit Hero (Phase C/2 + C/4.6) — full-bleed showroom for Home only.
-// Cockpit top bar + manifesto + role rotator + parallax tilt + circuit divider
-// + 3 stat cards + ticker. Cockpit-bar restored in C/4.6 after C/4.5 cut it.
+// Cockpit top bar + parallax tilt + circuit divider + 3 stat cards + ticker.
+// Cockpit-bar restored in C/4.6 after C/4.5 cut it.
 
 export function Hero() {
   return (
@@ -75,21 +75,7 @@ export function Hero() {
 
           <div className="ck-fade ck-d4 hero-divider" aria-hidden="true" />
 
-          <ul className="ck-fade ck-d5 hero-manifesto">
-            {hero.manifesto.map((m) => (
-              <li key={m.en} className="hero-manifesto-row">
-                <span className="hero-manifesto-en">▸ {m.en}</span>
-                <span className="hero-manifesto-th">{m.th}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="ck-fade ck-d5 role-rotator">
-            <span className="role-label">{hero.roleLabel}</span>
-            <RoleRotator roles={hero.roles} />
-          </div>
-
-          <div className="ck-fade ck-d6 hero-focus">
+          <div className="ck-fade ck-d5 hero-focus">
             <span className="hero-focus-badge">
               <span className="dot" aria-hidden="true" />
               <span className="hero-focus-label">{hero.focus.label}</span>
@@ -255,21 +241,6 @@ function AvatarTilt({ children }: { children: React.ReactNode }) {
       </div>
     </div>
   );
-}
-
-// ---------- Role rotator ----------
-// Cycle every 2.2s. Pauses entirely under prefers-reduced-motion (single label).
-function RoleRotator({ roles }: { roles: readonly string[] }) {
-  const [i, setI] = useState(0);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((v) => (v + 1) % roles.length), 2200);
-    return () => clearInterval(t);
-  }, [roles.length]);
-
-  return <span className="role-word" key={i}>{roles[i]}</span>;
 }
 
 // Render a body string with a single accent fragment highlighted in gold.

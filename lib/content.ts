@@ -99,17 +99,6 @@ export const hero = {
     accent: "AI Agents",
   },
 
-  // Role rotator — 4 facets cycle every 2.2s. Reduced-motion safe.
-  roleLabel: "ROLE_",
-  roles: ["ARCHITECT", "OPERATOR", "BUILDER", "OBSERVER"] as const,
-
-  // 3 bilingual operating principles, shown vertically below identity.
-  manifesto: [
-    { en: "ARCHITECT FIRST", th: "ออกแบบระบบก่อนลงมือ" },
-    { en: "SYSTEMS > EFFORT", th: "ระบบสำคัญกว่าแรงงาน" },
-    { en: "COMPOUND > RUSH", th: "สะสมสำคัญกว่าเร่งรีบ" },
-  ],
-
   // CTA pair below identity stack.
   ctas: [
     { label: "EXPLORE PROJECTS", href: "/what-i-do", primary: true },
