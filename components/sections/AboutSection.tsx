@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ABOUT_PRINCIPLES,
-  RUNTIME_CONFIG,
   SOLO_TIMELINE,
   aboutPreview,
   pageHeaders,
@@ -10,9 +9,9 @@ import {
 import { Glass } from "../portfolio/Glass";
 import { HologramPanelClient } from "../HologramPanelClient";
 
-// Phase C/4.6 — Home About section, full v6 mockup parity.
-// 2-col grid (bio Glass + HologramPanel video) + Solo Timeline strip.
-// Replaces AboutPreview. /about page (AboutFull) still hosts the long bio.
+// Home About section — 2-col grid (bio Glass + HologramPanel video) +
+// Solo Timeline strip. Slim version: 2 essence principles only; full 4
+// principles + RUNTIME_CONFIG live on /about (AboutFull).
 export function AboutSection() {
   const c = sections.about;
   const labels = pageHeaders.about;
@@ -74,7 +73,7 @@ export function AboutSection() {
                 {labels.principlesLabel}
               </div>
               <div className="ck-about-principles">
-                {ABOUT_PRINCIPLES.map((p) => (
+                {ABOUT_PRINCIPLES.slice(0, 2).map((p) => (
                   <div key={p.en} className="ck-about-ap-row">
                     <span className="ck-about-ap-en">▸ {p.en}</span>
                     <span className="ck-about-ap-th">{p.th}</span>
@@ -85,18 +84,6 @@ export function AboutSection() {
           </div>
 
           <div className="ck-about-glass-bot">
-            <div className="ck-about-block ck-about-block-runtime">
-              <div className="ck-about-block-label">{labels.runtimeLabel}</div>
-              <div className="ck-about-runtime">
-                {RUNTIME_CONFIG.map((r) => (
-                  <div key={r.label} className="ck-about-rc-card">
-                    <div className="ck-about-rc-label">{r.label}</div>
-                    <div className="ck-about-rc-value">{r.value}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <div className="ck-about-foot">
               <Link className="ck-btn" href={c.allLink.href}>
                 {c.allLink.label}
