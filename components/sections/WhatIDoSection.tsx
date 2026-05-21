@@ -1,16 +1,13 @@
 import { businesses, tools, creations } from "@/lib/portfolio";
 import { sections } from "@/lib/content";
-import { PortfolioCard } from "../portfolio/PortfolioCard";
-import { CreationGrid } from "../portfolio/CreationGrid";
+import { PortfolioHomeCard } from "../portfolio/PortfolioHomeCard";
 
-// Section 02 · What I Do — 3 pillars × cards.
-// Businesses leads with the featured Mongtam card, then a compact grid for the
-// rest. Tools is compact-only. Creations uses CreationGrid (client) for the
-// video lightbox state.
+// Section 02 · What I Do — 3 pillars × uniform home cards.
+// Home renders the image-led teaser (PortfolioHomeCard) across all 3 kinds;
+// /what-i-do archive keeps the dense Featured/Compact PortfolioCard layout
+// and the CreationGrid video lightbox.
 export function WhatIDoSection() {
   const c = sections.whatido;
-  const featured = businesses.filter((b) => b.featured);
-  const rest = businesses.filter((b) => !b.featured);
 
   return (
     <section
@@ -31,35 +28,31 @@ export function WhatIDoSection() {
         </a>
       </header>
 
-      {/* PILLAR 01 · BUSINESSES */}
       <div className="ck-pillar">
         <PillarRule pillar={c.pillars.business} />
-        {featured.map((item) => (
-          <PortfolioCard key={item.id} item={item} />
-        ))}
-        {rest.length > 0 && (
-          <div className="ck-card-grid">
-            {rest.map((item) => (
-              <PortfolioCard key={item.id} item={item} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* PILLAR 02 · TOOLS */}
-      <div className="ck-pillar">
-        <PillarRule pillar={c.pillars.tool} />
         <div className="ck-card-grid">
-          {tools.map((item) => (
-            <PortfolioCard key={item.id} item={item} />
+          {businesses.map((item) => (
+            <PortfolioHomeCard key={item.id} item={item} />
           ))}
         </div>
       </div>
 
-      {/* PILLAR 03 · CREATIONS */}
+      <div className="ck-pillar">
+        <PillarRule pillar={c.pillars.tool} />
+        <div className="ck-card-grid">
+          {tools.map((item) => (
+            <PortfolioHomeCard key={item.id} item={item} />
+          ))}
+        </div>
+      </div>
+
       <div className="ck-pillar">
         <PillarRule pillar={c.pillars.creation} />
-        <CreationGrid items={creations} />
+        <div className="ck-card-grid">
+          {creations.map((item) => (
+            <PortfolioHomeCard key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   );
