@@ -345,7 +345,7 @@ export const LIFE_CAT_KEYS = [
 export type LifeCategory = (typeof LIFE_CAT_KEYS)[number];
 
 export type LifeCatStyle = {
-  label: string;     // Audience-friendly Thai label
+  label: string;     // Mono-caps filter label (matches card category badge)
   accent: string;
   gradient: string;
   ghost: string;
@@ -355,7 +355,7 @@ export type LifeCatStyle = {
 
 export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
   longevity: {
-    label: "สุขภาพ + การออกกำลัง",
+    label: "LONGEVITY",
     accent: "#34D399",
     gradient: "linear-gradient(135deg, #04140C 0%, #0A3020 45%, #10B981 100%)",
     ghost: "rgba(52,211,153,0.07)",
@@ -363,7 +363,7 @@ export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
     icon: "activity",
   },
   mind: {
-    label: "ความคิด + หนังสือ",
+    label: "MIND",
     accent: "#A78BFA",
     gradient: "linear-gradient(135deg, #100820 0%, #2D1060 45%, #6D28D9 100%)",
     ghost: "rgba(167,139,250,0.07)",
@@ -371,7 +371,7 @@ export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
     icon: "brain",
   },
   food: {
-    label: "อาหาร + กาแฟ",
+    label: "FOOD",
     accent: "#FB923C",
     gradient: "linear-gradient(135deg, #1F0A02 0%, #4A1F08 45%, #C2410C 100%)",
     ghost: "rgba(251,146,60,0.07)",
@@ -379,7 +379,7 @@ export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
     icon: "utensils",
   },
   travel: {
-    label: "ท่องเที่ยว",
+    label: "TRAVEL",
     accent: "#60A5FA",
     gradient: "linear-gradient(135deg, #050E1F 0%, #0F2550 45%, #1D4ED8 100%)",
     ghost: "rgba(96,165,250,0.07)",
@@ -387,7 +387,7 @@ export const LIFE_CAT: Record<LifeCategory, LifeCatStyle> = {
     icon: "compass",
   },
   events: {
-    label: "งาน + community",
+    label: "EVENTS",
     accent: "#D4A853",
     gradient: "linear-gradient(135deg, #2A1500 0%, #6B3010 45%, #C17820 100%)",
     ghost: "rgba(212,168,83,0.07)",
