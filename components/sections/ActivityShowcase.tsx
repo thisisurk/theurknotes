@@ -12,12 +12,16 @@ import {
 
 type Filter = "all" | LifeCategory;
 
+const HOME_PREVIEW_COUNT = 5;
+
 // Section 05 · Activity — magazine grid + filter pills.
 // Filter dims non-matching cards (visual cue, not removal) so the grid
 // keeps its rhythm even when one category is highlighted.
+// Home shows first 5 (one per LIFE_CAT category) — full archive on /activity.
 export function ActivityShowcase() {
   const c = sections.activity;
   const [active, setActive] = useState<Filter>("all");
+  const items = ACTIVITY_ITEMS.slice(0, HOME_PREVIEW_COUNT);
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: c.filterAllLabel },
@@ -60,7 +64,7 @@ export function ActivityShowcase() {
       </div>
 
       <div className="ck-activity-grid">
-        {ACTIVITY_ITEMS.map((item) => {
+        {items.map((item) => {
           const cat = LIFE_CAT[item.category];
           const dimmed = active !== "all" && item.category !== active;
           const isTall = item.size === "tall";
