@@ -16,7 +16,9 @@
 
 ## Architecture rule (non-negotiable)
 
-All human-editable copy lives in `lib/content.ts` and `lib/ventures.ts`. Components import from there — never inline strings in JSX. Editing copy should never require JSX changes.
+All human-editable copy lives in `lib/content.ts` and `lib/portfolio.ts` (the SSoT for ventures/tools/creations; `lib/ventures.ts` is a deprecated backwards-compat shim that adapts from `portfolio.ts`). Components import from there — never inline strings in JSX. Editing copy should never require JSX changes.
+
+For non-coder edit recipes (write notes, edit activity items, swap hero ticker, etc.), see `EDIT-GUIDE.md`.
 
 ## Content flow
 
