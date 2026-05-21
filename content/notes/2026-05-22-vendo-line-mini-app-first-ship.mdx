@@ -1,0 +1,48 @@
+---
+title: "Vendo · LINE Mini App ส่งของจริงครั้งแรกให้ร้านแฟน"
+slug: "vendo-line-mini-app-first-ship"
+date: "2026-05-22"
+tag: "building"
+summary: "First real customer คือร้านน้ำเต้าหู้ปั่นของแฟน. Stack: LINE LIFF + Stripe PromptPay + Supabase. Lesson ที่เจอตอน ship จริง — ออกแบบ flow ก่อน schema เสมอ"
+draft: false
+---
+
+11 จาก 13 tasks เสร็จเมื่ออาทิตย์ที่แล้ว. วันนี้ deploy รอบจริงให้แฟนใช้ที่ร้าน — ไม่ใช่ demo, ไม่ใช่ pilot กับเพื่อน, ลูกค้าจริงสแกน QR สั่งน้ำเต้าหู้ปั่นและจ่ายผ่าน PromptPay ใน LINE.
+
+## ทำไม LINE Mini App ไม่ใช่ standalone web
+
+ตลาด F&B ไทยอยู่ใน LINE. การพา user ออกไป browser ใหม่ = friction ที่ตายตั้งแต่ก้าวแรก. LIFF (LINE Front-end Framework) ให้ผม:
+
+- Auto-login จาก LINE ID — ไม่ต้องสมัคร / OTP / password
+- Profile + display name ติดมาเลย — order history bind ได้ทันที
+- Share menu link กลับเข้า chat ของลูกค้าที่เคยสั่ง = repeat customer แทบฟรี
+
+trade-off: dev experience ห่วยกว่า web ปกติ (debug บน mobile-only, scope จำกัด). แต่ user friction = 0 → ชนะ.
+
+## Lesson ที่เจ็บที่สุด
+
+ตอนต้นผมออกแบบ schema ก่อน flow. ตั้ง `orders`, `order_items`, `payments` ตาราง relations สวยงาม. พอเอามาใช้จริง — แฟนถามว่า "ถ้าลูกค้าเปลี่ยนใจจาก ไม่หวาน เป็น หวานน้อย หลังกดสั่งแล้วแต่ก่อนจ่ายล่ะ?"
+
+ผมไม่ได้คิด state นี้. ต้องรื้อ schema เพิ่ม `order_status` enum + transition rules + UI confirm flow ใหม่ทั้งชุด. เสียเวลาไป 2 วัน.
+
+ถ้าออกแบบ user flow ก่อน — เปิด Figma วาด state diagram ของทุก decision point — แล้วค่อย design schema = จะเจอ edge case นี้ก่อน implement.
+
+## Stack สรุป
+
+```
+Frontend  → Next.js 16 + LIFF SDK
+Auth      → LINE Login (built-in to LIFF)
+Backend   → Supabase (Postgres + RLS + Edge Functions)
+Payment   → Stripe PromptPay (Thailand-native)
+Hosting   → Vercel (web) + Supabase (data)
+```
+
+ทุก service มี free tier ที่ใช้ได้ระยะนึง. cost ที่ร้านแบกตอนนี้ = 0 บาท/เดือนจนกว่าจะข้าม threshold.
+
+## Next
+
+- เก็บ data 2 สัปดาห์แรก — order patterns, repeat rate, drop-off points
+- ถ้า unit economics ผ่าน → ลองชวนร้านที่ 2 ในตราด
+- Pattern ที่ทำงานแล้วก็ค่อย package เป็น Vendo สำหรับร้าน F&B ทั่วไป
+
+build-in-public ของ Vendo จะอัพเดตที่นี่เรื่อยๆ. ไม่ได้ pitch ตัว product — แค่จดสิ่งที่ผ่านมือผมจริง.

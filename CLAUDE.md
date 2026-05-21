@@ -23,7 +23,7 @@ All human-editable copy lives in `lib/content.ts` and `lib/ventures.ts`. Compone
 - Write a note: `content/notes/YYYY-MM-DD-slug.mdx` with frontmatter `title / slug / date / tag / summary / draft`
 - Tags: `building | trat | thoughts | life` (defined in `lib/content.ts` TAGS)
 - Drafts (`draft: true`) render in dev, filtered out in prod by `lib/notes.ts`
-- Nav "Notes" link only appears when ≥3 non-draft notes exist (`getPublishedCount()`)
+- Nav is always 5 items (no count gate) — `getPublishedCount()` is kept in `lib/notes.ts` for future use but Nav doesn't consume it
 - Images: `public/images/notes/[slug]/filename.jpg`, reference as `/images/notes/[slug]/filename.jpg`
 
 ## Deploy
