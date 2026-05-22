@@ -73,9 +73,8 @@ export const hero = {
   tagline: "ARCHITECT",
   microLine: "Architect ไม่ใช่ Builder",
 
-  // Avatar — temporary asset per consolidation decision (replace later).
   avatar: {
-    src: "/avatars/PB1_9757.jpg",
+    src: "/avatars/ronin-sao1-660.webp",
     alt: "Urk",
   },
 

@@ -49,7 +49,7 @@ Edit `app/icon.svg` (a 32×32 inline SVG). Next.js will hash and serve it as the
 
 1. Replace `[TODO]` GitHub URL in `lib/content.ts` → `socials[1].url`
 2. Replace `[TODO]` email in `lib/content.ts` → `socials[2].url`
-3. Drop real `avatar.png` (≥512×512) at `/public/avatar.png`
+3. Hero avatar lives at `/public/avatars/` and is referenced via `hero.avatar.src` in `lib/content.ts`. Current asset: `ronin-sao1-660.webp` (660 wide, portrait).
 4. (Optional) override OG image via `app/opengraph-image.png`
 5. DNS migration to point `theurknotes.com` at Vercel — see `MIGRATION-PLAN.md`
 6. Delete sample draft note at `/content/notes/2026-04-19-sample.mdx` (or keep as reference)

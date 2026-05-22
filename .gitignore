@@ -40,6 +40,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# visual mockup / design reference (kept local, not a deliverable)
+/index-gemini-v6.html
+
+# brand asset source files (kept local — only optimized variants committed)
+/public/logo/logo-*.png
+/public/logo/favicon-512.png
+/public/logo/AI-GEN-PROMPTS.md
+/public/avatars/Ronin-SAO*.png
+
 # strategy / identity reference docs (kept local, never published)
 /BRAND-DNA.md
 /BRAND-STRATEGY.md
