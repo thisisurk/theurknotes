@@ -75,7 +75,7 @@
   category: "longevity",             // longevity | mind | food | travel | events
   label: "วิ่ง 10K ครั้งแรก",
   when: "1d ago",                    // free-form text — "2d ago", "1w ago", "ก่อนหน้านี้"
-  image: null,                       // null = ไม่มีรูป, หรือ "/images/activity/10-run-10k.jpg"
+  image: null,                       // null = fallback gradient, หรือ "/images/activity/10-run-10k/cover.webp" (ดู Recipe I)
   size: "normal",                    // "tall" | "wide" | "normal"
   snippet: "10K ที่เนินสนามจันท์ — เข่าซ้ายยังไม่เสีย",
   recent: false,                     // true = ใส่ dot ถัดจาก category badge (มี item นึงต่อ home preview)
@@ -131,6 +131,34 @@ ticker: [
 ### Recipe H · แก้ social links
 
 เปิด `lib/content.ts` หา `socials`. แก้ url ของแต่ละช่องตรงๆ. **อย่าลบ entry** — ลบ icon จะหายไปจาก footer + /contact.
+
+### Recipe I · เปลี่ยน / เพิ่มรูป activity card
+
+**Convention:** ทุก activity item มี folder ของตัวเองที่ `public/images/activity/{id}-{slug}/cover.webp`:
+
+```
+public/images/activity/
+├── 1-yec-opening/cover.webp
+├── 2-muay-thai/cover.webp
+├── 3-cafe-chan/cover.webp
+└── ...
+```
+
+**เปลี่ยนรูปที่มีอยู่ (id 1-9):**
+1. ลากรูปใหม่ลง folder ที่ตรง · ตั้งชื่อ `cover.jpg` (ทับของเก่าได้)
+2. บอก AI: *"optimize activity image folder X"* — AI run sharp resize + convert เป็น `cover.webp` + ลบ `cover.jpg`
+3. AI commit + push
+
+**เพิ่ม activity ใหม่ที่มีรูป:**
+1. เพิ่ม item ใน `ACTIVITY_ITEMS` ตาม Recipe D · `image: "/images/activity/{id}-{slug}/cover.webp"`
+2. สร้าง folder `public/images/activity/{id}-{slug}/`
+3. drop `cover.jpg` ลงไป · บอก AI optimize
+
+**กฎ:**
+- path ใน `image:` ต้องตรงกับ folder name pixel-by-pixel (typo → fallback gradient โชว์แทน)
+- ถ้ารูปยังไม่มี ใส่ `image: null` ไปก่อน — fallback gradient ตามสีของ category
+- ขนาดที่แนะนำ: max 1200px ฝั่งกว้าง · WebP q80 · target <300KB ต่อรูป
+- ทุก aspect ratio ใช้ได้ — CSS `background-size: cover` จะ crop ตรงกลาง
 
 ---
 
@@ -229,4 +257,4 @@ specific = AI ทำได้เร็ว · vague = ใช้เวลา clari
 
 ---
 
-*Last updated: 2026-05-22 · Phase J/4. ถ้าโครงสร้างเปลี่ยน (เพิ่ม section ใหม่, เปลี่ยน SSoT) — กลับมาอัพเดตไฟล์นี้ด้วย.*
+*Last updated: 2026-05-23 · Phase L (added Recipe I · activity cover image workflow). ถ้าโครงสร้างเปลี่ยน (เพิ่ม section ใหม่, เปลี่ยน SSoT) — กลับมาอัพเดตไฟล์นี้ด้วย.*
