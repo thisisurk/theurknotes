@@ -2126,6 +2126,13 @@ a.link-gold:hover {
   position: absolute;
   inset: 0;
 }
+.ck-activity-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .ck-activity-fade {
   position: absolute;
   inset: 0;

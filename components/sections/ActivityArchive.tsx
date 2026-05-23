@@ -95,6 +95,13 @@ export function ActivityArchive({ items }: Props) {
                   style={{ background: cat.gradient }}
                   aria-hidden="true"
                 />
+                {item.image && (
+                  <div
+                    className="ck-activity-img"
+                    style={{ backgroundImage: `url(${item.image})` }}
+                    aria-hidden="true"
+                  />
+                )}
                 <div className="ck-activity-fade" aria-hidden="true" />
 
                 <div className="ck-activity-when">{item.when}</div>
