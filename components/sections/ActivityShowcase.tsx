@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import {
   ACTIVITY_ITEMS,
   LIFE_CAT,
@@ -86,9 +87,10 @@ export function ActivityShowcase() {
             borderTopColor: cat.accent,
           };
           return (
-            <article
+            <Link
               key={item.id}
-              className="ck-activity-card"
+              href="/activity"
+              className="ck-activity-card block"
               data-tall={isTall}
               data-dimmed={dimmed}
               style={cardStyle}
@@ -129,7 +131,7 @@ export function ActivityShowcase() {
                 </div>
                 <p className="ck-activity-snippet-text">{item.snippet}</p>
               </div>
-            </article>
+            </Link>
           );
         })}
       </div>

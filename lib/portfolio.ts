@@ -35,6 +35,8 @@ export type PortfolioItem = {
   image?: string | null;
   channels?: Channel[];
   video?: string | null;   // creation-specific
+  href?: string | null;    // Home card click target. https://… → opens in new tab.
+                           //   /… → client-side nav. null/omitted → /what-i-do archive fallback.
   ctaLabel?: string;       // creation-specific · WATCH · PLAY · LISTEN · VIEW · READ
   lesson?: string;         // F/4: 1-line specific learning/outcome · only rendered on /what-i-do (showLesson prop), hidden on home
 };
@@ -64,6 +66,7 @@ export const businesses: PortfolioItem[] = [
       { type: "facebook", label: "Mongtaam", href: "https://facebook.com/Mongtaam" },
       { type: "web", label: "OTOP 5-star", href: null },
     ],
+    href: "https://facebook.com/Mongtaam",
     lesson: "ครอบครัวทำมานาน · รุ่นผมเข้ามาในบทบาท digital + automation lead. Heritage scale ได้โดยไม่เสีย craft — automation จัดการหลังบ้าน ผู้ก่อตั้งทำของไป",
   },
   {
@@ -124,6 +127,7 @@ export const tools: PortfolioItem[] = [
     tag: "Journal · Built",
     image: "/portfolio/goldlog/cover.webp",
     channels: [{ type: "web", label: "goldlog.app", href: "https://goldlog.app" }],
+    href: "https://goldlog.app",
     lesson: "เครื่องมือที่ผมใช้ทุกวัน — discipline ใน trading เริ่มที่บันทึก ไม่ใช่ที่ strategy. Build for self first ก็พอ",
   },
   {
