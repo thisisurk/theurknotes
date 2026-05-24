@@ -1046,11 +1046,24 @@ a.link-gold:hover {
   background: var(--bg-glass-medium);
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
-.footer-social-btn:hover {
-  border-color: var(--accent-gold-soft);
-  color: var(--accent-gold);
-  background: rgba(212, 168, 83, 0.08);
+.footer-social-btn:hover,
+.footer-social-btn:focus-visible {
+  color: var(--brand, var(--accent-gold));
+  border-color: var(--brand, var(--accent-gold-soft));
+  background: color-mix(in srgb, var(--brand, var(--accent-gold)) 8%, transparent);
 }
+
+/* Brand-color shift on hover/focus — calm mono baseline + recognition pop
+   on interact. --brand is set per platform via [data-brand="..."] below
+   and read by .footer-social-btn:hover + .ck-contact-card-link:hover. */
+[data-brand="x"]         { --brand: #1DA1F2; }
+[data-brand="threads"]   { --brand: #FFFFFF; }
+[data-brand="facebook"]  { --brand: #1877F2; }
+[data-brand="instagram"] { --brand: #E4405F; }
+[data-brand="youtube"]   { --brand: #FF0000; }
+[data-brand="tiktok"]    { --brand: #FF0050; }
+[data-brand="github"]    { --brand: #FFFFFF; }
+[data-brand="email"]     { --brand: var(--accent-gold); }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -3295,6 +3308,12 @@ a.link-gold:hover {
   height: 22px;
   border: 1px solid color-mix(in srgb, var(--accent-gold) 35%, transparent);
   border-radius: 3px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ck-contact-card-link:hover .ck-contact-card-icon,
+.ck-contact-card-link:focus-visible .ck-contact-card-icon {
+  color: var(--brand, var(--accent-gold));
+  border-color: color-mix(in srgb, var(--brand, var(--accent-gold)) 55%, transparent);
 }
 .ck-contact-card-label {
   font-family: var(--font-mono);

@@ -57,6 +57,7 @@ export default function ContactPage() {
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
                 className="ck-contact-card-link"
+                data-brand={ch.key}
                 aria-label={`${ch.label} · ${ch.handle}`}
               >
                 <div className="ck-contact-card-head">

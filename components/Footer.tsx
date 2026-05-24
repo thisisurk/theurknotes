@@ -26,6 +26,19 @@ const iconMap: Record<string, IconComp> = {
   Tiktok: TiktokIcon,
 };
 
+// Maps socials.icon → data-brand attr value for CSS hover color tinting.
+// Twitter → "x" because the brand identifier in CSS uses the current name.
+const brandKey: Record<string, string> = {
+  Mail: "email",
+  Twitter: "x",
+  Threads: "threads",
+  Facebook: "facebook",
+  Instagram: "instagram",
+  Youtube: "youtube",
+  Tiktok: "tiktok",
+  Github: "github",
+};
+
 function isExternal(href: string) {
   return href.startsWith("mailto:") || href.startsWith("http");
 }
@@ -79,6 +92,7 @@ export function Footer() {
                     href={s.url}
                     aria-label={s.ariaLabel}
                     className="footer-social-btn"
+                    data-brand={brandKey[s.icon]}
                     target={external ? "_blank" : undefined}
                     rel={external ? "noopener noreferrer" : undefined}
                   >
