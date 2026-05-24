@@ -296,10 +296,9 @@ export const socials = [
     icon: "Instagram",
     ariaLabel: "Urk on Instagram",
   },
-  // TODO: replace with real YouTube channel URL
   {
     label: "YouTube",
-    url: "https://www.youtube.com/",
+    url: "https://www.youtube.com/@thisisurk",
     icon: "Youtube",
     ariaLabel: "Urk on YouTube",
   },
