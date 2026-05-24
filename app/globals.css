@@ -2418,14 +2418,22 @@ a.link-gold:hover {
    No backdrop scene · no scanlines · static motion.
    ============================================================ */
 
-/* Page wrapper — narrower than Home cockpit (980 vs 1080) so prose breathes */
+/* Page wrapper — 980 default so prose breathes (45–75ch measure).
+   .ck-page--wide bumps to 1080 for grid-heavy archives
+   (/what-i-do, /activity) — matches Home cockpit + footer edge.
+   width:100% + min-width:0 matches the hero/footer pattern (see line 115)
+   — without them, the section is a flex item with margin:auto that collapses
+   to min-content (intro text width) instead of stretching to max-width. */
 .ck-page {
+  width: 100%;
+  min-width: 0;
   max-width: 980px;
   margin: 0 auto;
   padding: 96px 40px 120px;
   position: relative;
   z-index: 1;
 }
+.ck-page--wide { max-width: 1080px; }
 @media (max-width: 768px) {
   .ck-page { padding: 80px 24px 96px; }
 }

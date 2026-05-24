@@ -19,7 +19,7 @@ export default function ActivityPage() {
   return (
     <section
       id="activity"
-      className="ck-page"
+      className="ck-page ck-page--wide"
       aria-labelledby="activity-page-title"
     >
       <header className="ck-page-header">

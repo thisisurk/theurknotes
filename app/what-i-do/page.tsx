@@ -20,7 +20,7 @@ export default function WhatIDoPage() {
   return (
     <section
       id="what-i-do"
-      className="ck-page"
+      className="ck-page ck-page--wide"
       aria-labelledby="whatido-page-title"
     >
       <header className="ck-page-header">
