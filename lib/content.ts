@@ -283,10 +283,9 @@ export const socials = [
     icon: "Threads",
     ariaLabel: "Urk on Threads",
   },
-  // TODO: replace with real Facebook page/profile URL
   {
     label: "Facebook",
-    url: "https://www.facebook.com/",
+    url: "https://www.facebook.com/theurknotes",
     icon: "Facebook",
     ariaLabel: "Urk on Facebook",
   },
@@ -665,13 +664,11 @@ export const pageHeaders = {
         href: "https://www.threads.net/@theeark",
         note: "Essays · half-baked welcome · experimental",
       },
-      // TODO: replace with real Facebook URL (Page or personal profile?).
-      // Placeholder currently points to facebook.com root — safe but inert.
       {
         key: "facebook",
         label: "FACEBOOK",
-        handle: "TODO",
-        href: "https://www.facebook.com/",
+        handle: "@theurknotes",
+        href: "https://www.facebook.com/theurknotes",
         note: "TH network · YEC · public posts",
       },
     ],
