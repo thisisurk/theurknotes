@@ -647,14 +647,14 @@ export const pageHeaders = {
         label: "EMAIL",
         handle: "urk@theurknotes.com",
         href: "mailto:urk@theurknotes.com",
-        note: "Reply ภายใน 1-3 วัน · Thai-first",
+        note: "Long-form · context-heavy · always replies",
       },
       {
         key: "x",
         label: "X",
         handle: "@theeark",
         href: "https://x.com/theeark",
-        note: "DM open · email = primary channel",
+        note: "Public reactions · DM open · short-form",
       },
       // TODO: confirm Threads handle (Threads handle = IG handle on Meta).
       // If different from @theeark, update handle + href below.
@@ -663,7 +663,7 @@ export const pageHeaders = {
         label: "THREADS",
         handle: "@theeark",
         href: "https://www.threads.net/@theeark",
-        note: "Long-form thoughts · DM open",
+        note: "Essays · half-baked welcome · experimental",
       },
       // TODO: replace with real Facebook URL (Page or personal profile?).
       // Placeholder currently points to facebook.com root — safe but inert.
@@ -672,7 +672,7 @@ export const pageHeaders = {
         label: "FACEBOOK",
         handle: "TODO",
         href: "https://www.facebook.com/",
-        note: "Public posts · TH network",
+        note: "TH network · YEC · public posts",
       },
     ],
     meta: [
