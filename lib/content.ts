@@ -289,10 +289,9 @@ export const socials = [
     icon: "Facebook",
     ariaLabel: "Urk on Facebook",
   },
-  // TODO: replace with real Instagram handle URL
   {
     label: "Instagram",
-    url: "https://www.instagram.com/",
+    url: "https://www.instagram.com/theeark",
     icon: "Instagram",
     ariaLabel: "Urk on Instagram",
   },
@@ -302,10 +301,9 @@ export const socials = [
     icon: "Youtube",
     ariaLabel: "Urk on YouTube",
   },
-  // TODO: replace with real TikTok handle URL
   {
     label: "TikTok",
-    url: "https://www.tiktok.com/",
+    url: "https://www.tiktok.com/@theeark",
     icon: "Tiktok",
     ariaLabel: "Urk on TikTok",
   },
