@@ -2,10 +2,10 @@ import { businesses, tools, creations } from "@/lib/portfolio";
 import { sections } from "@/lib/content";
 import { PortfolioHomeCard } from "../portfolio/PortfolioHomeCard";
 
-// Section 02 · What I Do — 3 pillars × uniform home cards.
-// Home renders the image-led teaser (PortfolioHomeCard) across all 3 kinds;
-// /what-i-do archive keeps the dense Featured/Compact PortfolioCard layout
-// and the CreationGrid video lightbox.
+// Section 02 · What I Do — 3 pillars × home-curated cards.
+// Home filters each kind by `featured: true` so the editor controls which
+// subset surfaces on the landing page; /what-i-do archive shows everything.
+// PortfolioHomeCard renders the image-led teaser across all 3 kinds.
 export function WhatIDoSection() {
   const c = sections.whatido;
 
@@ -31,7 +31,7 @@ export function WhatIDoSection() {
       <div className="ck-pillar">
         <PillarRule pillar={c.pillars.business} />
         <div className="ck-card-grid">
-          {businesses.map((item) => (
+          {businesses.filter((item) => item.featured).map((item) => (
             <PortfolioHomeCard key={item.id} item={item} />
           ))}
         </div>
@@ -40,7 +40,7 @@ export function WhatIDoSection() {
       <div className="ck-pillar">
         <PillarRule pillar={c.pillars.tool} />
         <div className="ck-card-grid">
-          {tools.map((item) => (
+          {tools.filter((item) => item.featured).map((item) => (
             <PortfolioHomeCard key={item.id} item={item} />
           ))}
         </div>
@@ -49,7 +49,7 @@ export function WhatIDoSection() {
       <div className="ck-pillar">
         <PillarRule pillar={c.pillars.creation} />
         <div className="ck-card-grid">
-          {creations.map((item) => (
+          {creations.filter((item) => item.featured).map((item) => (
             <PortfolioHomeCard key={item.id} item={item} />
           ))}
         </div>
