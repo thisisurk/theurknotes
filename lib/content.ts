@@ -132,8 +132,8 @@ export const hero = {
     },
     {
       lbl: "Beyond Code",
-      val: "Bujinkan 1st Dan",
-      sub: "Muay Thai semi-pro · BJJ",
+      val: "Black Belt",
+      sub: "Bujinkan · Muay Thai semi-pro · BJJ",
       accent: "#A78BFA",
       icon: "mesh" as const,
       tag: "MARTIAL_BB",
