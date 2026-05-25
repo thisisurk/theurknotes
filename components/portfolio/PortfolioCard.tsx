@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import type { PortfolioItem } from "@/lib/portfolio";
 import { Glass } from "./Glass";
 import { Pill } from "./Pill";
@@ -7,81 +6,16 @@ import { ChannelPills } from "./ChannelPills";
 
 type Props = {
   item: PortfolioItem;
-  // Archive view forces every card to render compact for visual rhythm.
-  forceCompact?: boolean;
   // /what-i-do passes true to surface the per-item `lesson` line.
-  // Home WhatIDoSection omits the prop so home cards stay teaser-only.
+  // Home uses PortfolioHomeCard so the prop only matters in the archive.
   showLesson?: boolean;
 };
 
-// PortfolioCard — `featured: true` items get the 2-col Featured layout,
-// everything else renders as the Compact 1-col card. The /what-i-do archive
-// passes `forceCompact` so the grid stays uniform.
-export function PortfolioCard({ item, forceCompact, showLesson }: Props) {
-  if (forceCompact || !item.featured)
-    return <Compact item={item} showLesson={showLesson} />;
-  return <Featured item={item} showLesson={showLesson} />;
-}
-
-function Featured({ item, showLesson }: Props) {
-  const accent = item.accent;
-  const visualStyle: CSSProperties = {
-    background: `linear-gradient(145deg, var(--bg-deep) 0%, ${hexAlpha(accent, 0.09)} 100%)`,
-  };
-  const dotsStyle: CSSProperties = {
-    backgroundImage: `radial-gradient(${hexAlpha(accent, 0.15)} 1px, transparent 1px)`,
-    backgroundSize: "18px 18px",
-  };
-
-  return (
-    <Glass
-      hover
-      className="ck-card-featured"
-      style={{ padding: 0, overflow: "hidden", borderTop: `2px solid ${accent}` }}
-    >
-      <div className="ck-card-featured-visual" style={visualStyle}>
-        <div className="ck-card-featured-visual-grid" style={dotsStyle} />
-        <span
-          className="ck-card-featured-visual-mono"
-          style={{ color: accent, textShadow: `0 0 20px ${hexAlpha(accent, 0.33)}` }}
-        >
-          {item.name[0]}
-        </span>
-        <div className="ck-card-pill">
-          <Pill kind={item.statusKind}>{item.status}</Pill>
-        </div>
-      </div>
-
-      <div className="ck-card-featured-body">
-        <div>
-          <div className="ck-card-featured-eyebrow" style={{ color: accent }}>
-            ★ FEATURED
-          </div>
-          <h3 className="ck-card-name">{item.name}</h3>
-          <p className="ck-card-desc">{item.desc}</p>
-          {showLesson && item.lesson && (
-            <div className="ck-pf-lesson">
-              <span className="ck-pf-lesson-label">▸ LESSON</span>
-              <p className="ck-pf-lesson-body">{item.lesson}</p>
-            </div>
-          )}
-        </div>
-
-        <div>
-          <div style={{ marginBottom: 14 }}>
-            <MetaBlock rows={item.meta} accent={accent} />
-          </div>
-          <ChannelPills channels={item.channels} accent={accent} />
-          <div className="ck-card-foot">
-            <span className="ck-tag">{item.tag}</span>
-          </div>
-        </div>
-      </div>
-    </Glass>
-  );
-}
-
-function Compact({ item, showLesson }: Props) {
+// PortfolioCard — uniform compact card for /what-i-do archive.
+// Home uses PortfolioHomeCard (image-led teaser); `featured: true` on
+// PortfolioItem is the curation flag for "show on home", not a layout
+// switch — every archive card renders the same compact treatment.
+export function PortfolioCard({ item, showLesson }: Props) {
   const accent = item.accent;
   return (
     <Glass

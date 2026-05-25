@@ -1447,48 +1447,6 @@ a.link-gold:hover {
   background: linear-gradient(90deg, var(--accent-gold-soft), transparent);
 }
 
-/* Featured (Mongtam) — 2-column layout */
-.ck-card-featured {
-  display: grid;
-  grid-template-columns: 210px 1fr;
-  margin-bottom: 14px;
-}
-.ck-card-featured-visual {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 170px;
-  overflow: hidden;
-  border-right: 1px solid var(--border);
-}
-.ck-card-featured-visual-mono {
-  font-family: var(--font-mono);
-  font-size: 2.6rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  position: relative;
-  z-index: 1;
-}
-.ck-card-featured-visual-grid {
-  position: absolute;
-  inset: 0;
-}
-.ck-card-featured-body {
-  padding: 22px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-}
-.ck-card-featured-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.48rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  opacity: 0.85;
-}
 .ck-card-name {
   font-size: 1.2rem;
   font-weight: 700;
@@ -1508,12 +1466,7 @@ a.link-gold:hover {
   right: 14px;
   z-index: 2;
 }
-@media (max-width: 640px) {
-  .ck-card-featured { grid-template-columns: 1fr; }
-  .ck-card-featured-visual { min-height: 110px; border-right: none; border-bottom: 1px solid var(--border); }
-}
-
-/* Compact card (Vendo / AYU / GoldLog / Solo Stack) */
+/* Compact card — uniform layout (archive + creation cards) */
 .ck-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
