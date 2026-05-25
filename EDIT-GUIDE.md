@@ -121,7 +121,7 @@ ticker: [
 
 เพิ่ม object ใหม่ตาม template ของตัวอื่นใน array เดียวกัน. ฟิลด์สำคัญ:
 - `id` — slug-style ห้ามซ้ำ
-- `status` + `statusKind` — `FLAGSHIP` (gold) · `BUILDING` (blue) · `NEAR LAUNCH` (gold) · `LIVE` (green) · `WIP` (amber) · `PERSONAL` (neutral)
+- `status` + `statusKind` — `LIVE` (green) · `BUILDING` (blue) · `CONCEPT` (amber)
 - `accent` — hex color ที่ขับ gradient/glow
 - `desc` — ใช้ `—` (em dash) คั่น subtitle กับ body
 - `meta` — 3 rows · convention: Business=SCOPE/TRACTION/STACK · Tool=PURPOSE/USE/STACK · Creation=MEDIUM/YEAR/MADE WITH
