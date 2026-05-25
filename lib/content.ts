@@ -132,8 +132,8 @@ export const hero = {
     },
     {
       lbl: "Beyond Code",
-      val: "Black Belt",
-      sub: "Bujinkan · Muay Thai · BJJ",
+      val: "Bujinkan 1st Dan",
+      sub: "Muay Thai semi-pro · BJJ",
       accent: "#A78BFA",
       icon: "mesh" as const,
       tag: "MARTIAL_BB",
@@ -529,10 +529,11 @@ export type ExperienceRow = {
   body: string;  // 1-2 sentence story line (Thai)
 };
 
-// EXPERIENCE — 3-row narrative arc: origin → mistake → present.
+// EXPERIENCE — 4-row narrative arc: origin → mistake → present + parallel depth.
 // Public version of PERSONAL-IDENTITY §3 — curated for credibility moat,
-// not exhaustive CV. "เจ๊งหมดตัว" stays direct (Casual Ronin self-deprecation
-// = failure as credibility).
+// not exhaustive CV. BEYOND_CODE row echoes Hero proof[2] (cross-Hero brand
+// integration — embodied practice as AI-hedge per Identity §4). "เจ๊งหมดตัว"
+// stays direct (Casual Ronin self-deprecation = failure as credibility).
 export const EXPERIENCE_ROWS: ExperienceRow[] = [
   {
     label: "FAMILY_BUSINESS",
@@ -548,6 +549,11 @@ export const EXPERIENCE_ROWS: ExperienceRow[] = [
     label: "CURRENT_VENTURES",
     when: "2026 → ",
     body: "หลาย ventures ขนานกัน — digital ล้วน + hybrid (digital × physical). Vehicle เลือกตามโอกาส · automation-first ทุกตัว. First ship: Vendo/TofuQ — LINE Mini App + ร้านน้ำเต้าหู้ปั่นของแฟน (first real customer)",
+  },
+  {
+    label: "BEYOND_CODE",
+    when: "20+ ปี · ต่อเนื่อง",
+    body: "Bujinkan 1st Dan · Muay Thai semi-pro · BJJ. ฝึกตั้งแต่เด็ก — discipline ที่สะสมจากร่างกาย ไม่ใช่จากหนังสือ. Edge ที่ AI ทำแทนไม่ได้",
   },
 ];
 
