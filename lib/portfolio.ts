@@ -1,8 +1,8 @@
 // Portfolio schema (Phase C foundation)
 // Single source of truth for what TheUrk is doing — three kinds:
-//   - business  → commercial ventures (FLAGSHIP / BUILDING / NEAR LAUNCH …)
-//   - tool      → personal-use stacks (LIVE / PERSONAL)
-//   - creation  → output without commercial intent (videos, indie game)
+//   - business  → commercial ventures (LIVE / BUILDING / CONCEPT)
+//   - tool      → personal-use stacks (LIVE / BUILDING)
+//   - creation  → output without commercial intent (LIVE / BUILDING)
 //
 // Mirrors v6 mockup (test-gemini/index-gemini-v6.html lines 1189-1313)
 // and the meta-block convention in WEB-ARCHITECTURE.md §2 / BRAND-DNA §3.
@@ -25,7 +25,7 @@ export type PortfolioItem = {
   id: string;
   kind: PortfolioKind;
   name: string;
-  status: string;          // free-form label e.g. "FLAGSHIP", "NEAR LAUNCH"
+  status: string;          // 3 labels: "LIVE" · "BUILDING" · "CONCEPT"
   statusKind: StatusKind;
   accent: string;          // hex — drives gradient/glow per card
   desc: string;
@@ -50,8 +50,8 @@ export const businesses: PortfolioItem[] = [
     id: "mongtam",
     kind: "business",
     name: "พระมองตาม",
-    status: "FLAGSHIP",
-    statusKind: "gold",
+    status: "LIVE",
+    statusKind: "green",
     accent: "#A78BFA",
     desc: "ธุรกิจครอบครัวสระแก้ว — หล่อพระพุทธรูปจากหินทรายธรรมชาติบดละเอียด ด้วยเทคนิคเฉพาะ ลิขสิทธิ์เจ้าเดียวในโลก",
     meta: [
@@ -79,10 +79,11 @@ export const businesses: PortfolioItem[] = [
     desc: "LINE Mini App SaaS สำหรับร้าน F&B — ระบบจัดการร้านอัตโนมัติ (Order · Queue · CRM)",
     meta: [
       { label: "SCOPE", value: "Solo · LINE Mini App SaaS" },
-      { label: "TRACTION", value: "First customer live · TofuQ" },
+      { label: "TRACTION", value: "First customer · ร้านน้ำเต้าหู้ปั่น" },
       { label: "STACK", value: "LIFF · Stripe · Supabase" },
     ],
-    tag: "SaaS · Track 2",
+    tag: "SaaS · Track 1",
+    featured: true,
     image: "/portfolio/vendo/cover.webp",
     channels: [{ type: "web", label: "vendo.app", href: null }],
     lesson: "First real customer = ร้านน้ำเต้าหู้ปั่นของแฟน. Build → ship → ใช้จริง → iterate. ไม่ทำ POC สำหรับ market ที่สมมติขึ้น",
@@ -91,16 +92,17 @@ export const businesses: PortfolioItem[] = [
     id: "ayu",
     kind: "business",
     name: "AYU",
-    status: "NEAR LAUNCH",
-    statusKind: "gold",
+    status: "CONCEPT",
+    statusKind: "amber",
     accent: "#D4A853",
     desc: "แบรนด์น้ำเต้าหู้ปั่นเพื่อสุขภาพ — physical business ที่ออกแบบหลังบ้านให้รัน solo + automation ได้",
     meta: [
       { label: "SCOPE", value: "Solo · F&B brand" },
-      { label: "TRACTION", value: "Q3 2026 launch" },
+      { label: "STAGE", value: "Concept · Naming" },
       { label: "MODEL", value: "Brand · Franchise-ready" },
     ],
-    tag: "F&B · Track 3",
+    tag: "F&B · Track 2",
+    featured: true,
     image: "/portfolio/ayu/cover.webp",
     lesson: "ออกแบบหลังบ้านก่อนเปิดร้าน — ระบบสำคัญกว่าหน้าร้าน. Franchise-ready ตั้งแต่ store แรก ไม่ retrofit ทีหลัง",
   },
@@ -125,6 +127,7 @@ export const tools: PortfolioItem[] = [
       { label: "STACK", value: "Next.js · Supabase · Vercel" },
     ],
     tag: "Journal · Built",
+    featured: true,
     image: "/portfolio/goldlog/cover.webp",
     channels: [{ type: "web", label: "goldlog.app", href: "https://goldlog.app" }],
     href: "https://goldlog.app",
@@ -134,8 +137,8 @@ export const tools: PortfolioItem[] = [
     id: "agents",
     kind: "tool",
     name: "Solo Operating Stack",
-    status: "PERSONAL",
-    statusKind: "neutral",
+    status: "LIVE",
+    statusKind: "green",
     accent: "#94A3B8",
     desc: "Execution stack ที่ใช้รัน ventures ทั้งหมดด้วยตัวคนเดียว — AI agents เป็นแรงงานหลัก",
     meta: [
@@ -144,6 +147,7 @@ export const tools: PortfolioItem[] = [
       { label: "STACK", value: "Claude · n8n · custom" },
     ],
     tag: "Stack · Internal",
+    featured: true,
     image: "/portfolio/agents/cover.webp",
     lesson: "Stack เดียวที่รันทุก venture — Claude + n8n + custom. ของผมไม่ใช่ product · เป็น operating layer",
   },
@@ -159,8 +163,8 @@ export const creations: PortfolioItem[] = [
     id: "vote-buying",
     kind: "creation",
     name: "ซื้อเสียง",
-    status: "RELEASED",
-    statusKind: "gold",
+    status: "LIVE",
+    statusKind: "green",
     accent: "#F472B6",
     desc: "AI-generated short film — สะท้อนภาพการเมืองไทย",
     meta: [
@@ -179,8 +183,8 @@ export const creations: PortfolioItem[] = [
     id: "thai-no-war",
     kind: "creation",
     name: "ยึดไทย ไม่ต้องรบ",
-    status: "RELEASED",
-    statusKind: "gold",
+    status: "LIVE",
+    statusKind: "green",
     accent: "#C084FC",
     desc: "AI-generated short film — แนวคิดและภาพสะท้อนเชิงสังคม",
     meta: [
@@ -189,6 +193,7 @@ export const creations: PortfolioItem[] = [
       { label: "MADE WITH", value: "Banana Pro · VEO3" },
     ],
     tag: "Short film · 2026",
+    featured: true,
     image: "/portfolio/thai-no-war/cover.webp",
     video: null,
     ctaLabel: "WATCH",
@@ -198,8 +203,8 @@ export const creations: PortfolioItem[] = [
     id: "next-drop",
     kind: "creation",
     name: "Next Drop",
-    status: "WIP",
-    statusKind: "neutral",
+    status: "BUILDING",
+    statusKind: "blue",
     accent: "#A78BFA",
     desc: "Indie game prototype — solo experiment in procedural narrative",
     meta: [
@@ -208,6 +213,7 @@ export const creations: PortfolioItem[] = [
       { label: "MADE WITH", value: "Godot · Aseprite" },
     ],
     tag: "Game · Prototype",
+    featured: true,
     image: "/portfolio/next-drop/cover.webp",
     video: null,
     ctaLabel: "PLAY",

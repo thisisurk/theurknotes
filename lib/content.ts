@@ -697,13 +697,9 @@ export const WHAT_I_DO_SORTS: Array<{ id: WhatIDoSort; label: string }> = [
 ];
 
 // Status sort priority — drives "sort by status" on /what-i-do.
-// FLAGSHIP first, then live/near-launch, then internal/wip.
+// LIVE first (running), then BUILDING (active dev), then CONCEPT (early stage).
 export const STATUS_PRIORITY: Record<string, number> = {
-  FLAGSHIP: 0,
-  "NEAR LAUNCH": 1,
-  BUILDING: 2,
-  LIVE: 3,
-  RELEASED: 4,
-  PERSONAL: 5,
-  WIP: 6,
+  LIVE: 0,
+  BUILDING: 1,
+  CONCEPT: 2,
 };
