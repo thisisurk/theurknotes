@@ -107,7 +107,7 @@ export const hero = {
   // Cockpit top bar — three segments above the avatar/name stack.
   cockpitBar: {
     location: "14°N · 102°E · TRAT, TH",
-    fy: "FY2026 · OPUS·SOLO",
+    fy: "FY2026 · OPUS·HYBRID",
     status: "SYSTEM ACTIVE",
   },
 
@@ -123,20 +123,20 @@ export const hero = {
       tag: "TIMELINE_001",
     },
     {
-      lbl: "Active Projects",
+      lbl: "Active Ventures",
       val: "3",
-      sub: "physical & digital",
+      sub: "1 live · 1 building · 1 concept",
       accent: "#60A5FA",
       icon: "stack" as const,
       tag: "PORTFOLIO_03",
     },
     {
-      lbl: "Team Size",
-      val: "1+AI",
-      sub: "solo + agents",
+      lbl: "Beyond Code",
+      val: "Black Belt",
+      sub: "Bujinkan · Muay Thai · BJJ",
       accent: "#A78BFA",
       icon: "mesh" as const,
-      tag: "AGENTS_INF",
+      tag: "MARTIAL_BB",
     },
   ],
 
