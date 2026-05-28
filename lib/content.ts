@@ -507,11 +507,17 @@ export const ABOUT_PRINCIPLES: AboutPrinciple[] = [
 
 export type RuntimeConfigRow = { label: string; value: string };
 
+// NORTH_STAR — direction-of-travel snapshot (was RUNTIME_CONFIG virtue claims).
+// Reframed phase O/1: identity contradiction fix — "RUNTIME 24/7" mis-read
+// as grind, but TheUrk's actual intent = Naval-style passive income aspiration
+// (earning while sleeping). New 4 cards = 4 distinct facets: end-state (TARGET)
+// · mechanism (INCOME) · venture-model (THESIS) · place anchor (BASE).
+// Matches PERSONAL-IDENTITY §1 "Ultimate Goal — North Star".
 export const RUNTIME_CONFIG: RuntimeConfigRow[] = [
-  { label: "MODE",     value: "AUTONOMOUS" },
-  { label: "TARGET",   value: "FREEDOM" },
-  { label: "RUNTIME",  value: "24 / 7" },
-  { label: "PROTOCOL", value: "DIRECT" },
+  { label: "TARGET", value: "FREEDOM" },
+  { label: "INCOME", value: "24/7 passive" },
+  { label: "THESIS", value: "Physical + Digital" },
+  { label: "BASE",   value: "ตราด · UTC+7" },
 ];
 
 export type SoloPhaseState = "done" | "partial" | "active";
@@ -600,7 +606,7 @@ export const pageHeaders = {
       "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
     principlesLabel: "// OPERATING_PRINCIPLES",
     experienceLabel: "// EXPERIENCE",
-    runtimeLabel: "// RUNTIME_CONFIG",
+    runtimeLabel: "// NORTH_STAR",
     timelineLabel: "▸ SOLO_TIMELINE",
     timelineMeta: "solo by nature → solo + tech",
   },
