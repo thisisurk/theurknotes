@@ -86,9 +86,9 @@ export const hero = {
 
   // Headline punch — lead Thai sentence with one gold-accented fragment.
   punch: {
-    before: "ลุยเดี่ยว. ",
-    accent: "สร้างอิสรภาพ",
-    after: "ด้วยเทคโนโลยี.",
+    before: "ผมไม่ได้สร้างเร็วที่สุด — แต่เลือกว่า ",
+    accent: "ควรสร้างอะไร",
+    after: ".",
   },
 
   // Focus block — annual theme (Layer B subtitle, current era).
@@ -98,10 +98,13 @@ export const hero = {
     accent: "AI Agents",
   },
 
+  // Quiet invitation — renders as a muted line beneath the punch (Hero.tsx).
+  invite: "บันทึกสิ่งที่สร้างและเรียนรู้ระหว่างทาง เผื่อแนวทางตรงกัน",
+
   // CTA pair below identity stack.
   ctas: [
     { label: "EXPLORE PROJECTS", href: "/what-i-do", primary: true },
-    { label: "READ NOTES", href: "/notes", primary: false },
+    { label: "ABOUT", href: "/about", primary: false },
   ],
 
   // Cockpit top bar — three segments above the avatar/name stack.

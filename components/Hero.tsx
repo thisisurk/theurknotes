@@ -73,9 +73,11 @@ export function Hero() {
             {hero.punch.after}
           </p>
 
-          <div className="ck-fade ck-d4 hero-divider" aria-hidden="true" />
+          <p className="ck-fade ck-d5 hero-invite">{hero.invite}</p>
 
-          <div className="ck-fade ck-d5 hero-focus">
+          <div className="ck-fade ck-d5 hero-divider" aria-hidden="true" />
+
+          <div className="ck-fade ck-d6 hero-focus">
             <span className="hero-focus-badge">
               <span className="dot" aria-hidden="true" />
               <span className="hero-focus-label">{hero.focus.label}</span>
