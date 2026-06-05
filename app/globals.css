@@ -2583,49 +2583,27 @@ a.link-gold:hover {
 }
 
 /* About — Experience (3-row narrative · origin → mistake → present) */
-.ck-about-experience { display: flex; flex-direction: column; gap: 14px; }
-.ck-about-exp-row {
-  padding: 14px 0 14px 14px;
-  border-left: 2px solid var(--accent-gold-line);
-  transition: border-color 0.3s ease, padding-left 0.3s ease;
-}
-.ck-about-exp-row:hover {
-  border-left-color: var(--accent-gold);
-  padding-left: 18px;
-}
-.ck-about-exp-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-.ck-about-exp-label {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  color: var(--accent-gold);
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.ck-about-exp-when {
+/* Journey timeline — full-mode extras (/about): duration + story body per phase.
+   (Replaces old Experience rows — narrative merged into the timeline spine.) */
+.ck-about-st-when {
   font-family: var(--font-mono);
   font-size: 0.55rem;
   letter-spacing: 0.18em;
   color: var(--text-muted);
   text-transform: uppercase;
+  margin-bottom: 8px;
 }
-.ck-about-exp-body {
+.ck-about-st-body {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.75;
   margin: 0;
   text-wrap: pretty;
 }
-@media (max-width: 600px) {
-  .ck-about-exp-head { gap: 4px; flex-direction: column; align-items: flex-start; }
-  .ck-about-exp-body { font-size: 0.88rem; }
-}
+.ck-about-st-phase[data-state="active"] .ck-about-st-body { color: var(--text-primary); }
+
+/* Closing CTA row (/about) — funnel buttons reuse .ck-btn */
+.ck-about-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* About — Runtime Config (4 stat-mini cards · top-accent rule) */
 .ck-about-runtime {
@@ -2795,6 +2773,16 @@ a.link-gold:hover {
 }
 .ck-about-st-phase[data-state="active"] .ck-about-st-th { color: var(--text-secondary); }
 
+/* ongoing — continuous practice (e.g. martial arts): gold but calm, no pulse.
+   Distinct from active (current focus, pulses) and done (finished, muted). */
+.ck-about-st-phase[data-state="ongoing"] .ck-about-st-dot {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+.ck-about-st-phase[data-state="ongoing"] .ck-about-st-tag { color: var(--accent-gold); }
+.ck-about-st-phase[data-state="ongoing"] .ck-about-st-en { color: var(--accent-gold); }
+.ck-about-st-phase[data-state="ongoing"] .ck-about-st-body { color: var(--text-primary); }
+
 @media (max-width: 768px) {
   .ck-about-st-track {
     grid-template-columns: 1fr;
@@ -2813,6 +2801,24 @@ a.link-gold:hover {
   }
   .ck-about-st-dot { top: 4px; left: -22px; }
 }
+
+/* Journey timeline — full mode: vertical spine so the story body has room.
+   Applies at all breakpoints (overrides the horizontal 4-col base + mobile). */
+.ck-about-st-track--full {
+  grid-template-columns: 1fr;
+  gap: 30px;
+  padding: 4px 0 0 28px;
+}
+.ck-about-st-track--full::before {
+  top: 8px;
+  left: 11px;
+  right: auto;
+  bottom: 8px;
+  width: 1px;
+  height: auto;
+  background: linear-gradient(180deg, var(--border) 0%, var(--accent-gold-soft) 55%, var(--accent-gold) 95%);
+}
+.ck-about-st-track--full .ck-about-st-dot { top: 4px; left: -22px; }
 
 /* ===== /what-i-do · archive grid ===== */
 .ck-archive-grid {

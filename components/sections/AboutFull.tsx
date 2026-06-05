@@ -1,18 +1,20 @@
+import Link from "next/link";
 import {
   ABOUT_PRINCIPLES,
-  EXPERIENCE_ROWS,
   RUNTIME_CONFIG,
   SOLO_TIMELINE,
   about,
   pageHeaders,
 } from "@/lib/content";
 import { Glass } from "../portfolio/Glass";
+import { JourneyTimeline } from "./JourneyTimeline";
 
 // /about · full long-form. Utility-density chrome — no hero backdrop, no
-// scanlines. Five blocks: bio · operating principles · experience · solo
-// timeline · runtime config. Phase F/3 — Runtime moved to closing,
-// Experience added between Principles and Timeline (narrative arc:
-// identity → operating system → origins → arc → current state).
+// scanlines. Phase P/1 narrative arc (who → proof → how → where → next):
+//   bio → journey timeline (proof) → principles → north star → CTA.
+// Journey = old Experience + Solo Timeline merged (one arc, told once).
+// Proof moved ahead of Principles (show before tell); closing CTA added
+// so the page funnels out instead of dead-ending on North Star.
 export function AboutFull() {
   const c = pageHeaders.about;
 
@@ -31,7 +33,7 @@ export function AboutFull() {
         <p className="ck-page-intro">{c.intro}</p>
       </header>
 
-      {/* Block 01 · Bio paragraphs */}
+      {/* Block 01 · Bio paragraphs — who I am */}
       <Glass className="ck-about-bio">
         {about.map((para, i) => (
           <p key={i} className="ck-about-bio-para">
@@ -40,7 +42,15 @@ export function AboutFull() {
         ))}
       </Glass>
 
-      {/* Block 02 · Operating Principles */}
+      {/* Block 02 · Journey timeline (proof) — show before tell */}
+      <JourneyTimeline
+        items={SOLO_TIMELINE}
+        mode="full"
+        label={c.timelineLabel}
+        meta={c.timelineMeta}
+      />
+
+      {/* Block 03 · Operating Principles — how I think, after the proof */}
       <div className="ck-about-block">
         <div className="ck-about-block-label">{c.principlesLabel}</div>
         <div className="ck-about-principles">
@@ -53,46 +63,7 @@ export function AboutFull() {
         </div>
       </div>
 
-      {/* Block 03 · Experience — origin → mistake → present */}
-      <div className="ck-about-block">
-        <div className="ck-about-block-label">{c.experienceLabel}</div>
-        <div className="ck-about-experience">
-          {EXPERIENCE_ROWS.map((row) => (
-            <div key={row.label} className="ck-about-exp-row">
-              <div className="ck-about-exp-head">
-                <span className="ck-about-exp-label">▸ {row.label}</span>
-                <span className="ck-about-exp-when">{row.when}</span>
-              </div>
-              <p className="ck-about-exp-body">{row.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Block 04 · Solo Timeline */}
-      <div className="ck-about-block">
-        <div className="ck-about-st-header">
-          <span className="ck-about-st-label">{c.timelineLabel}</span>
-          <span className="ck-about-st-rule" aria-hidden="true" />
-          <span className="ck-about-st-meta">{c.timelineMeta}</span>
-        </div>
-        <ol className="ck-about-st-track">
-          {SOLO_TIMELINE.map((p) => (
-            <li
-              key={p.tag}
-              className="ck-about-st-phase"
-              data-state={p.state}
-            >
-              <span className="ck-about-st-dot" aria-hidden="true" />
-              <div className="ck-about-st-tag">{p.tag}</div>
-              <div className="ck-about-st-en">{p.en}</div>
-              <div className="ck-about-st-th">{p.th}</div>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* Block 05 · Runtime Config — closing punch (current state) */}
+      {/* Block 04 · North Star — where I'm going (closing direction) */}
       <div className="ck-about-block">
         <div className="ck-about-block-label">{c.runtimeLabel}</div>
         <div className="ck-about-runtime">
@@ -101,6 +72,18 @@ export function AboutFull() {
               <div className="ck-about-rc-label">{r.label}</div>
               <div className="ck-about-rc-value">{r.value}</div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Block 05 · CTA — funnel out (was a dead-end) */}
+      <div className="ck-about-block">
+        <div className="ck-about-block-label">{c.ctaLabel}</div>
+        <div className="ck-about-cta-row">
+          {c.ctas.map((cta) => (
+            <Link key={cta.href} className="ck-btn" href={cta.href}>
+              {cta.label}
+            </Link>
           ))}
         </div>
       </div>

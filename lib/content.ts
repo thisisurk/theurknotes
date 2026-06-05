@@ -220,13 +220,15 @@ export const sections = {
   },
 };
 
-// About — full bio used by /about (Phase C/5). Each element = one paragraph.
+// About — Bio for /about. Phase P/1: scoped to VOICE / identity only
+// (who I am, why) — NOT a fact-list. Facts moved to their owners:
+// timeline (history, martial arts, crypto), principles (how I think),
+// north star (goals), header (Casual persona). Kills the old overlap.
+// PLACEHOLDER showing the pattern (short, a voice — no fact-listing).
+// TheUrk rewrites the real voice over this.
 export const about: string[] = [
   "ผมชื่อเอิ๊ก (ไม่ใช่เอิร์ก เอิร์ธ 555)",
-  "Solo Founder จากตราด ที่ออกแบบระบบให้ AI ทำงานแทน ไม่ได้เขียน code เองทุกบรรทัด — แต่ออกแบบทั้งระบบให้มันเดินได้ คิด 70% Build 30%",
-  "ในยุคที่ AI build ได้ทุกอย่าง สิ่งที่หายากจริงๆ คือ judgment — รู้ว่าควรสร้างอะไร ออกแบบยังไง ตัดสินใจยังไง AI build ได้ แต่ไม่รู้ว่าควรออกแบบอะไร นั่นคือ edge ที่ผมเลือกจะพัฒนา",
-  "นอกจอ — เป็นประธาน YEC ตราด (หอการค้ารุ่นใหม่) ฝึก Bujinkan สายดำและมวยไทยมาหลายปี สนใจฟิสิกส์ ดาราศาสตร์ และพุทธปรัชญาแบบแก่นแท้ เวลาว่างเล่นเกม ดูคลิปหมาแมว ไม่ได้ลึกซึ้งตลอดเวลา 555",
-  "ที่นี่คือที่ที่ผมบันทึก journey — ของที่สร้าง ระบบที่ออกแบบ และสิ่งที่เรียนรู้ระหว่างทาง ถ้าแนวทางตรงกัน ยินดีต้อนรับ",
+  "ชอบอยู่คนเดียวมาตั้งแต่จำความได้ เลยเลือกทางที่ลุยเดี่ยวได้จริง — ออกแบบระบบให้ AI ลงมือแทน แล้วเก็บแรงไว้กับการตัดสินใจว่าควรสร้างอะไร. สำหรับผม นั่นคือสิ่งที่ทำให้คนๆ นึงยังต่างจากเครื่องมือที่เขาใช้",
 ];
 
 // About preview — 2 short paragraphs shown on Home (slim version of `about`).
@@ -523,72 +525,58 @@ export const RUNTIME_CONFIG: RuntimeConfigRow[] = [
   { label: "BASE",   value: "ตราด · UTC+7" },
 ];
 
-export type SoloPhaseState = "done" | "partial" | "active";
+// done = finished/past. ongoing = continuous, still going (calm gold, no pulse).
+// active = current focus (pulses). partial = reserved.
+export type SoloPhaseState = "done" | "partial" | "ongoing" | "active";
 
 export type SoloPhase = {
   tag: string;
   en: string;
-  th: string;
+  th: string;          // short line — teaser (home) shows this
+  when?: string;       // duration / era — full mode (/about) only
+  body?: string;       // rich story line — full mode (/about) only
   state: SoloPhaseState;
 };
 
-export type ExperienceRow = {
-  label: string; // mono tag — e.g. "FAMILY_BUSINESS"
-  when: string;  // duration / era — e.g. "50 ปี · หยุดแล้ว"
-  body: string;  // 1-2 sentence story line (Thai)
-};
+// EXPERIENCE_ROWS removed (phase P/1) — narrative merged into SOLO_TIMELINE
+// via `when` + `body` (full mode). Rendered by <JourneyTimeline mode="full">.
 
-// EXPERIENCE — 4-row narrative arc: origin → mistake → present + parallel depth.
-// Public version of PERSONAL-IDENTITY §3 — curated for credibility moat,
-// not exhaustive CV. BEYOND_CODE row echoes Hero proof[2] (cross-Hero brand
-// integration — embodied practice as AI-hedge per Identity §4). "เจ๊งหมดตัว"
-// stays direct (Casual Ronin self-deprecation = failure as credibility).
-export const EXPERIENCE_ROWS: ExperienceRow[] = [
-  {
-    label: "FAMILY_BUSINESS",
-    when: "50 ปี · หยุดแล้ว",
-    body: "\"อัครเค็ม\" — ปลาอินทรีเค็มของครอบครัว end-to-end (หั่น ทอด แพ็ค ส่ง). ทำเองตั้งแต่เด็ก ก่อน \"founder\" จะเป็นคำ trendy",
-  },
-  {
-    label: "CRYPTO_WEB3",
-    when: "~3 ปี · ออกแล้ว ~2 ปี",
-    body: "Martingale bot · NFT 50x · airdrop farming · private rounds. เจ๊งหมดตัวจาก futures ที่ไม่มีหลักการ — บทเรียนที่ทำให้ discipline > opportunity",
-  },
-  {
-    label: "CURRENT_VENTURES",
-    when: "2026 → ",
-    body: "หลาย ventures ขนานกัน — digital ล้วน + hybrid (digital × physical). Vehicle เลือกตามโอกาส · automation-first ทุกตัว. First ship: Vendo/TofuQ — LINE Mini App + ร้านน้ำเต้าหู้ปั่นของแฟน (first real customer)",
-  },
-  {
-    label: "BEYOND_CODE",
-    when: "20+ ปี · ต่อเนื่อง",
-    body: "Bujinkan 1st Dan · Muay Thai semi-pro · BJJ. ฝึกตั้งแต่เด็ก — discipline ที่สะสมจากร่างกาย ไม่ใช่จากหนังสือ. Edge ที่ AI ทำแทนไม่ได้",
-  },
-];
-
+// SOLO_TIMELINE — single journey, two depths (SSoT + progressive disclosure):
+//   home  → <JourneyTimeline mode="teaser"> renders tag/en/th (slim strip)
+//   /about → <JourneyTimeline mode="full">   renders tag/en/when/body (proof block)
+// 4 phases merge the old EXPERIENCE_ROWS narrative into the timeline spine.
+// `body`/`when` are placeholder (reuse of prior copy) — TheUrk rewrites voice.
 export const SOLO_TIMELINE: SoloPhase[] = [
   {
     tag: "PHASE_00",
-    en: "SOLO_NATURE",
-    th: "ชอบอยู่คนเดียว ตั้งแต่จำความได้ — solo by default",
+    en: "ORIGIN",
+    th: "solo by nature + ธุรกิจครอบครัวตั้งแต่เด็ก",
+    when: "ตั้งแต่เด็ก",
+    body: "ชอบอยู่คนเดียวตั้งแต่จำความได้. \"อัครเค็ม\" ปลาอินทรีเค็มของครอบครัว — ทำ end-to-end (หั่น ทอด แพ็ค ส่ง) เองตั้งแต่เด็ก ก่อน \"founder\" จะเป็นคำ trendy",
     state: "done",
   },
   {
     tag: "PHASE_01",
     en: "DISCIPLINE",
-    th: "20+ ปี · running · gaming · martial arts · travel",
-    state: "done",
+    th: "martial arts 20+ ปี — discipline จากร่างกาย",
+    when: "20+ ปี · ต่อเนื่อง",
+    body: "Bujinkan 1st Dan · Muay Thai semi-pro · BJJ. ฝึกตั้งแต่เด็ก — discipline ที่สะสมจากร่างกาย ไม่ใช่จากหนังสือ. Edge ที่ AI ทำแทนไม่ได้",
+    state: "ongoing",
   },
   {
     tag: "PHASE_02",
     en: "EXPERIMENTS",
-    th: "ลอง SaaS, trading เป็น side — ยังไม่ได้เป็นอาชีพหลัก",
-    state: "partial",
+    th: "crypto/web3 เจ๊งหมดตัว → บทเรียน discipline",
+    when: "~3 ปี · ออกแล้ว",
+    body: "Martingale bot · NFT 50x · airdrop farming · private rounds. เจ๊งหมดตัวจาก futures ที่ไม่มีหลักการ — บทเรียนที่ทำให้ discipline > opportunity",
+    state: "done",
   },
   {
     tag: "PHASE_03 · NOW",
     en: "SOLO + AI",
-    th: "solo เป็นหลัก + tech (AI · automation · IoT) เป็นเครื่องมือ",
+    th: "solo + AI/automation — หลาย ventures ขนาน",
+    when: "2026 → ",
+    body: "หลาย ventures ขนานกัน — digital ล้วน + hybrid (digital × physical). automation-first ทุกตัว. First ship: Vendo/TofuQ — LINE Mini App + ร้านน้ำเต้าหู้ปั่นของแฟน (first real customer)",
     state: "active",
   },
 ];
@@ -608,10 +596,15 @@ export const pageHeaders = {
     intro:
       "Ronin = ลุยเดี่ยว ไร้สังกัด · Casual = ชิลๆ สบายๆ คุยได้กับทุกคน โดยเฉพาะหมาแมว",
     principlesLabel: "// OPERATING_PRINCIPLES",
-    experienceLabel: "// EXPERIENCE",
     runtimeLabel: "// NORTH_STAR",
     timelineLabel: "▸ SOLO_TIMELINE",
     timelineMeta: "solo by nature → solo + tech",
+    // Closing CTA — funnel out of /about (was dead-end). Labels = placeholder.
+    ctaLabel: "// NEXT",
+    ctas: [
+      { label: "Explore work →", href: "/what-i-do" },
+      { label: "Get in touch →", href: "/contact" },
+    ],
   },
   whatIDo: {
     label: "WHAT I DO",

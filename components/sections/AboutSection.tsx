@@ -8,6 +8,7 @@ import {
 } from "@/lib/content";
 import { Glass } from "../portfolio/Glass";
 import { HologramPanelClient } from "../HologramPanelClient";
+import { JourneyTimeline } from "./JourneyTimeline";
 
 // Home About section — 2-col grid (bio Glass + HologramPanel video) +
 // Solo Timeline strip. Slim version: 2 essence principles only; full 4
@@ -95,27 +96,13 @@ export function AboutSection() {
         <HologramPanelClient videoSrc="/videos/ronin-transition.mp4" />
       </div>
 
-      <div className="ck-about-block ck-about-timeline-block">
-        <div className="ck-about-st-header">
-          <span className="ck-about-st-label">{labels.timelineLabel}</span>
-          <span className="ck-about-st-rule" aria-hidden="true" />
-          <span className="ck-about-st-meta">{labels.timelineMeta}</span>
-        </div>
-        <ol className="ck-about-st-track">
-          {SOLO_TIMELINE.map((p) => (
-            <li
-              key={p.tag}
-              className="ck-about-st-phase"
-              data-state={p.state}
-            >
-              <span className="ck-about-st-dot" aria-hidden="true" />
-              <div className="ck-about-st-tag">{p.tag}</div>
-              <div className="ck-about-st-en">{p.en}</div>
-              <div className="ck-about-st-th">{p.th}</div>
-            </li>
-          ))}
-        </ol>
-      </div>
+      <JourneyTimeline
+        items={SOLO_TIMELINE}
+        mode="teaser"
+        label={labels.timelineLabel}
+        meta={labels.timelineMeta}
+        outerClassName="ck-about-block ck-about-timeline-block"
+      />
     </section>
   );
 }
